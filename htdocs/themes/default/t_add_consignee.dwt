@@ -1,0 +1,72 @@
+<link href="themes/default/css/front.css" rel="stylesheet" type="text/css" />
+<div class="layer layerSize hide" id="addressd">
+
+<h5>使用新收货地址</h5>
+<form action="user.php" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+  <dl class="newAddress">
+    <dt><em>*</em>{$lang.country_province}：</dt>
+    <dd>
+        <select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')">
+        <option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+        <!-- {foreach from=$country_list item=country} -->
+        <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')">
+        <option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+        <!-- {foreach from=$province_list.$sn item=province} -->
+        <option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')">
+        <option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+        <!-- {foreach from=$city_list.$sn item=city} -->
+        <option value="{$city.region_id}" {if $consignee.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+        <option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+        <!-- {foreach from=$district_list.$sn item=district} -->
+        <option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+    {$lang.require_field} 
+    </dd>
+
+
+    <dt>{$lang.consignee_name}：</dt>
+    <dd><input name="consignee" type="text" class="inputBg" id="consignee_0" value="" />
+    {$lang.require_field} </dd>
+    <dt>{$lang.email_address}：</dt>
+    <dd><input name="email" type="text" class="inputBg" id="email_{$sn}" value="" />
+    {$lang.require_field}</dd>
+  
+ 
+    <dt>{$lang.detailed_address}：</dt>
+    <dd><input name="address" type="text" class="inputBg" id="address_{$sn}" value="" />
+    {$lang.require_field}</dd>
+    <dt>{$lang.postalcode}：</dt>
+    <dd><input name="zipcode" type="text" class="inputBg" id="zipcode_{$sn}" value="" /></dd>
+    
+   
+      <dt>{$lang.phone}：</dt>
+      <dd><input name="tel" type="text" class="inputBg" id="tel_{$sn}" value="" />
+      {$lang.require_field}</dd>
+      <dt">{$lang.backup_phone}：</dt>
+      <dd><input name="mobile" type="text" class="inputBg" id="mobile_{$sn}" value="" /></dd>
+  
+      <dt>{$lang.sign_building}：</dt>
+      <dd><input name="sign_building" type="text" class="inputBg" id="sign_building_{$sn}" value="" /></dd>
+      <dt>{$lang.deliver_goods_time}：</dt>
+      <dd><input name="best_time" type="text"  class="inputBg" id="best_time_{$sn}" value="" /></dd>
+  
+      <dt>&nbsp;</dt>
+      <dd>
+        <input type="submit" name="submit" class="bnt_blue_2"  value="{$lang.add_address}"/>
+        <input type="hidden" name="act" value="act_edit_address" />
+        <input name="address_id" type="hidden" value="{$consignee.address_id}" />
+      </dd>
+    
+  </dl>
+</form>
+</div>

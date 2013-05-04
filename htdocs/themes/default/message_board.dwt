@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="{$keywords}" />
+    <meta name="Description" content="{$description}" />
+    <meta name="Description" content="{$description}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    {if $auto_redirect}
+    <meta http-equiv="refresh" content="3;URL={$message.href}" />
+    {/if}
+    <!-- TemplateBeginEditable name="doctitle" -->
+    <title>发起活动</title>
+    <!-- TemplateEndEditable -->
+    <!-- TemplateBeginEditable name="head" -->
+    <!-- TemplateEndEditable -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+    <link href="/{$ecs_css_path}" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.10.2.js"></script>
+    <style type="text/css">
+        input, textarea, select, button {
+            font-size: 12px;
+        }
+        img {
+            border-style: none;
+        }
+        em {
+            font-style: normal;
+        }
+        cite, small, address {
+            font-size: 12px;
+            font-style: normal;
+            color: #999;
+        }
+        a {
+            color: #00f;
+            text-decoration: underline;
+        }
+        #box {
+            padding: 10px;
+            margin: 10px 20px 10px 20px;
+            font-size: 14px;
+            position: relative;
+        }
+        /*演示内容*/
+        #imgBox {
+            float: left;
+            border: #CCC 1px solid;
+            width: 400px;
+            height: 400px;
+        }
+        #imgBoard {
+            position: absolute;
+            border: #CCC 1px dashed;
+            width: 200px;
+            height: 280px;
+            top: 85px;
+            left: 108px;
+        }
+        #imgCut {
+            margin: 0;
+        }
+        #faceImg {
+            width: 400px;
+            height: 400px;
+        }
+        #imgBox_pre strong {
+            display: block;
+            font-size: 12px;
+            text-align: center;
+        }
+        #data {
+            clear: both;
+            padding-top: 20px;
+        }
+        #dobutton {
+            clear: both;
+            margin-top: 8px;
+        }
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+    
+    <!-- uploadify -->
+    <link href="/js/uploadify/uploadify.css" rel="stylesheet" type="text/css"></link>
+    <link href="/css/jquery-ui.css" rel="stylesheet" type="text/css"></link>
+    <script type="text/javascript" src="/js/uploadify/jquery.uploadify.js"></script>
+    <script type="text/javascript" src="/js/t-du.js"></script>
+    <script type="text/javascript">
+        var scale2, scale3, imgH, imgW, imgsrc, scale, temp_top, temp_left;
+        var sysW = 100;
+        var sysH = 140;
+        var cleared = false;
+        function RecordImageCss() {
+            var css = '{' + 'left:' + $("#left").val() + ';top:' + $("#top").val() + ';width:' + $("#width").val() + ';height:' + $("#height").val() + ';}';
+            $('#imgCss').val(css);
+        }
+        function SmartPos(pos) {
+            var frame = $("#imgBoard");
+            var design = $("#imgCut");
+		
+            var css = SmartPosition.pos(pos, design, frame);
+            if (css.top < 0) {
+                css = { left: css.left };
+                design.css(css);
+            } else if (css.left < 0) {
+                css = { top: css.top };
+                design.css(css);
+            } else {
+                design.css(css);
+            }
+		
+            temp_top = design.offset().top - frame.offset().top;
+            temp_left = design.offset().left - frame.offset().left;
+		
+            $("#left").val(temp_left);
+            $("#top").val(temp_top);
+            RecordImageCss();
+        }
+        function SetPostImage(file, sf, w, h) {
+            $('#clearColor').hide();
+            $('#imgUrl').val(sf);
+		
+            $('#imgTarget').attr('src', sf);
+            var rate = w / h;
+            var width = $("#imgBoard").width() / 4 * 3;
+            var height = $("#imgBoard").height() / 4 * 3;
+            if (w < width && h < height) {
+                width = w;
+                height = h;
+            }
+            if (rate > 1) {
+                height = Math.round(width / rate);
+            } else {
+                width = Math.round(height * rate);
+            }
+		
+            $("#imgCut").width(width).height(height);
+            $("#width").val(width);
+            $("#height").val(height);
+            SmartPos("center");
+			
+            $('#fup').find('#fup-button').css("background-image", "url(" + UploadWrapper.ButtonImage2 + ")");
+            RecordImageCss();
+		
+            $.ajax({
+                data: {FilePath: sf, ColorNum: 2},
+                url: '/imagehandler.php',
+                type: 'POST',
+                success: function(data) {
+                    if (data) {
+                        var splits = data.split('|');
+                        if (splits.length == 2) {
+                            var num = splits[0];
+                            var info = splits[1];
+                            $('#color').show();
+                            $('#colorNum').html(num);
+                            if (num != 0 && !cleared) {
+                                $('#colorInfo').html(info);
+                                $('.colorBlock').click(function() {
+                                    var color = $(this).css('background-color');
+                                    $('#clearTarget').css('background-color', color);
+                                    $('#clearColor').show();
+                                });
+                            } else {
+                                $('#colorInfo').html('系统检测不到您的图案的背景颜色');
+                            }
+                        }
+                    }
+                }
+            });
+        }
+		function RGB2Hex(rgb){
+			var re = rgb.replace(/(?:\(|\)|rgb|RGB)*/g,"").split(",");//利用正则表达式去掉多余的部分
+			var hexColor = "#";
+			var hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+			for (var i = 0; i < 3; i++) {
+				var r = null;
+				var c = re[i];
+				var hexAr = [];
+				while (c > 16) {
+					r = c % 16;
+					c = (c / 16) >> 0;
+					hexAr.push(hex[r]);
+				}
+				hexAr.push(hex[c]);
+				hexColor += hexAr.reverse().join('');
+			}
+			return hexColor;
+		}
+        function clearPictureBg() {
+			var sf = $('#imgUrl').val();
+            var color = RGB2Hex($('#clearTarget').css("background-color"));
+            $.ajax({
+                data: {FilePath: sf, Color: color},
+                url: '/imagehandler3.php',
+                type: 'POST',
+                success: function(data) {
+                    if (data == "0") {
+                        // fail
+                        return;
+                    }
+                    cleared = true;
+					var splits = data.split(":");
+					if (splits.length >= 2 && splits[0] == "1") {
+					  $('#imgTarget').attr('src', splits[1]);
+					  $('#imgUrl').val(splits[1]);
+					}
+                }
+            });
+        }
+        $(function() {
+            var uploader = new UploadWrapper("fup", "fqa", SetPostImage);
+            uploader.init();
+		
+            $("#imgCut").draggable({
+                containment : $("#imgBoard"), 
+                drag : function () {
+                    $("#width").val($("#imgCut").width());
+                    $("#height").val($("#imgCut").height());
+				
+                    temp_top = $(this).offset().top - $("#imgBoard").offset().top;
+                    temp_left = $(this).offset().left - $("#imgBoard").offset().left;
+				
+                    $("#left").val(temp_left);
+                    $("#top").val(temp_top);
+                    RecordImageCss();
+                }, 
+                stop : function () {
+                }
+            });
+		
+            $("#imgCut").resizable({
+                containment : $("#imgBoard"), 
+                aspectRatio : true, 
+                minWidth : 50, 
+                minHeight : 50, 
+                resize : function () {
+                    $("#width").val($("#imgCut").width());
+                    $("#height").val($("#imgCut").height());
+				
+                    temp_top = $(this).offset().top - $("#imgBoard").offset().top;
+                    temp_left = $(this).offset().left - $("#imgBoard").offset().left;
+				
+                    $("#left").val(temp_left);
+                    $("#top").val(temp_top);
+                    RecordImageCss();
+                }, 
+                stop : function (e, ui) {
+                }
+            });
+        });
+	
+        function changeImg(url) {
+            var bigimg = document.getElementById("faceImg"); 
+            if (bigimg)
+                bigimg.src = url;
+        }
+    </script>
+
+</head>
+<body>
+    <!-- #BeginLibraryItem "/library/page_header1.lbi" --><!-- #EndLibraryItem -->
+    <!--当前位置 start-->
+    <div class="block box">
+        <div id="ur_here">发起活动</div>
+    </div>
+    <!--当前位置 end-->
+    <div class="blank"></div>
+    <div class="block clearfix">
+        <!--left start-->
+        <!--left end-->
+        <!--right start-->
+        <div class="AreaR" style="width: 960px;">
+            <div class="blank5"></div>
+            <div class="box">
+                <div class="box_1">
+                    <div class="boxCenterList">
+                        <table width="100%" border="0" cellpadding="3">
+                            <tr>
+                                <td width="178" align="right"></td>
+                                <td width="322"></td>
+                                <td width="434" rowspan="9" align="right" valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td>
+                                                <img src="/images/q1.jpg" alt="" class="pointer" onclick="changeImg(this.src)" width="100" />
+                                                <img src="/images/q2.jpg" alt="" class="pointer" onclick="changeImg(this.src)" width="100" />
+                                                <img src="/images/q3.jpg" alt="" class="pointer" onclick="changeImg(this.src)" width="100" />
+                                                <img src="/images/q4.jpg" alt="" class="pointer" onclick="changeImg(this.src)" width="100" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div id="box">
+                                                    <div id="imgBox">
+                                                        <img id="faceImg" src="/images/q2.jpg" border="0" />
+                                                        <div id="imgBoard">
+                                                            <div id="imgCut">
+                                                                <img id="imgTarget" src="" width="100%" height="100%" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="bit">
+                                                        <span>智能选位</span>
+                                                        <span class="location"><a title="中心" onclick="javascript:SmartPos('center');">中心</a></span>
+                                                        <span class="location1"><a title="左胸" onclick="javascript:SmartPos('chest');">左胸</a></span>
+                                                        <span class="marLet18">居中</span>
+                                                        <span class="location2"><a title="水平居中" onclick="javascript:SmartPos('hmiddle');">水平居中</a></span>
+                                                        <span class="location3"><a title="垂直居中" onclick="javascript:SmartPos('vmiddle');">垂直居中</a></span>
+                                                    </p>
+                                                    <p id="color" class="bit" style="display: none;">
+                                                        <span>系统检测到您的图案中共有<span id="colorNum"></span>个颜色：
+															<span id="colorInfo"></span>
+														</span>
+                                                    </p>
+													<br />
+													<div id="clearColor" style="display: none;">
+														<span>需要清除您选择的背景色<li id="clearTarget" style="width: 20px; height: 20px; margin: 0 5px;"></li>吗？
+                                                            <a onclick="javascript:clearPictureBg();">清除背景色</a></span>
+													</div>
+                                                    <div id="data">
+                                                        左<input name="left" type="text" id="left" size="3" readonly="readonly" />
+                                                        上<input name="top" type="text" id="top" size="3" readonly="readonly" />
+                                                        宽<input name="width" type="text" id="width" size="3" readonly="readonly" />
+                                                        高<input name="height" type="text" id="height" size="3" readonly="readonly" />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input type="file" name="fup" id="fup" />
+                                    <div id="fqa"></div>
+                                </td>
+                            </tr>
+                            <form action="message.php?act=add_new_product" method="POST" enctype="multipart/form-data" name="good_data">
+                                <!-- {if $n==''} -->
+                                    <tr>
+                                        <td align="right">活动名称</td>
+                                        <td>
+                                            <input name="goods_name" type="text" class="inputBg" size="30" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="right">预计征订量</td>
+                                        <td>
+                                            <input name="goods_number" type="text" class="inputBg" size="30" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="right">预计价格</td>
+                                        <td>
+                                            <input name="shop_price" type="text" class="inputBg" size="30" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="right" valign="middle">活动简介</td>
+                                        <td>
+                                            <textarea name="goods_desc" cols="50" rows="10" wrap="virtual" style="border:1px solid #ccc;"></textarea>
+                                        </td>
+                                    </tr> 
+                                <!--{/if}-->
+                                <tr>
+                                    <td align="right">&nbsp;</td>
+                                    <td>
+                                        <input type="hidden" id="imgUrl" name="imgUrl" value="" />
+                                        <input type="hidden" id="imgCss" name="imgCss" value="" />
+
+                                        <input type="submit" value="提交" class="bnt_blue_1" />
+
+                                    </td>
+                                </tr>
+                            </form>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+
+                        <script type="text/javascript">
+                            {foreach from=$lang.message_board_js item=item key=key}
+                            var {$key} = "{$item}";
+                            {/foreach}
+                                {literal}
+                                /**
+                                 * 提交留言信息
+                                */
+                                function submitMsgBoard(frm)
+                                {
+                                    var msg = new Object;
+
+                                    msg.user_email  = frm.elements['user_email'].value;
+                                    msg.msg_title   = frm.elements['msg_title'].value;
+                                    msg.msg_content = frm.elements['msg_content'].value;
+                                    msg.captcha     = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+
+                                    var msg_err = '';
+
+                                    if (msg.user_email.length > 0)
+                                    {
+                                        if (!(Utils.isEmail(msg.user_email)))
+                                        {
+                                            msg_err += msg_error_email + '\n';
+                                        }
+                                    }
+                                    else
+                                    {
+                                        msg_err += msg_empty_email + '\n';
+                                    }
+                                    if (msg.msg_title.length == 0)
+                                    {
+                                        msg_err += "请输入标题" + '\n';
+                                    }
+                                    if (frm.elements['captcha'] && msg.captcha.length==0)
+                                    {
+                                        msg_err += msg_captcha_empty + '\n'
+                                    }
+                                    if (msg.msg_content.length == 0)
+                                    {
+                                        msg_err += "请输入内容" + '\n'
+                                    }
+                                    if (msg.msg_title.length > 200)
+                                    {
+                                        msg_err += msg_title_limit + '\n';
+                                    }
+
+                                    if (msg_err.length > 0)
+                                    {
+                                        alert(msg_err);
+                                        return false;
+                                    }
+                                    else
+                                    {
+                                        return true;
+                                    }
+                                }
+                                {/literal}
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--right end-->
+    </div>
+    <div class="blank5"></div>
+    <!--帮助-->
+    <div class="block">
+        <div class="box">
+            <div class="helpTitBg clearfix">
+                <!-- #BeginLibraryItem "/library/help.lbi" -->
+                <!-- #EndLibraryItem -->
+            </div>
+        </div>
+    </div>
+    <div class="blank"></div>
+    <!--帮助-->
+    <!--友情链接 start-->
+    <!--{if $img_links  or $txt_links }-->
+    <div id="bottomNav" class="box">
+        <div class="box_1">
+            <div class="links clearfix">
+                <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+                <a href="{$link.url}" target="_blank" title="{$link.name}">
+                    <img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+                <!--结束图片类型的友情链接{/foreach}-->
+                <!-- {if $txt_links} -->
+                <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+                [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+                <!-- {/if} -->
+            </div>
+        </div>
+    </div>
+    <!--{/if}-->
+    <!--友情链接 end-->
+    <div class="blank"></div>
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+    <!-- #EndLibraryItem -->
+</body>
+</html>

@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="Keywords" content="{$keywords}" />
+        <meta name="Description" content="{$description}" />
+        <title>{$page_title}</title>
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link href="/assets/css/bootstrap.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                padding-top: 20px;
+                padding-bottom: 60px;
+            }
+            /* Custom container */
+            .container {
+                margin: 0 auto;
+                max-width: 1000px;
+            }
+            .container > hr {
+                margin: 60px 0;
+            }
+            /* Main marketing message and sign up button */
+            .jumbotron {
+                margin: 20px 0;
+                text-align: center;
+            }
+            .jumbotron h1 {
+                font-size: 100px;
+                line-height: 1;
+            }
+            .jumbotron .lead {
+                font-size: 24px;
+                line-height: 1.25;
+            }
+            .jumbotron .btn {
+                font-size: 21px;
+                padding: 14px 24px;
+            }
+            /* Supporting marketing content */
+            .marketing {
+                margin: 40px 0;
+            }
+            .marketing p + h4 {
+                margin-top: 28px;
+            }
+            .thumbnail {
+                min-height: 410px;
+            }
+            /* Customize the navbar links to be fill the entire space of the .navbar */
+            .navbar .navbar-inner {
+                padding: 0;
+            }
+            .navbar .nav {
+                margin: 0;
+                display: table;
+                width: 100%;
+            }
+            .navbar .nav li {
+                display: table-cell;
+                width: 1%;
+                float: none;
+            }
+            .navbar .nav li a {
+                font-weight: bold;
+                text-align: center;
+                border-left: 1px solid rgba(255, 255, 255, .75);
+                border-right: 1px solid rgba(0, 0, 0, .1);
+            }
+            .navbar .nav li:first-child a {
+                border-left: 0;
+                border-radius: 3px 0 0 3px;
+            }
+            .navbar .nav li:last-child a {
+                border-right: 0;
+                border-radius: 0 3px 3px 0;
+            }
+
+            .row-fluid .span4 {
+                width: 30.8%;
+                *width: 31.861702127659576%;
+            }
+
+            .row-fluid [class*="span"]:first-child {
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <ul class="nav nav-pills pull-right">
+                <li>{$denglu_top_logo}</li>
+                <li>{insert_scripts files='transport.js,utils.js'} <font id="ECS_MEMBERZONE">{* 根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+
+                    <!--{if $navigator_list.top}-->
+                    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} --> <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+
+                    <!-- {if !$smarty.foreach.nav_top_list.last} -->|
+                    <!-- {/if} -->
+                    <!-- {/foreach} -->
+                    <div class="topNavR"></div>
+                    <!-- {/if} -->
+                </li>
+            </ul>
+            <div class="masthead">
+                 <h2>T-DU </h2> <h4 class="muted">- 来自清华的个性定制品平台！</h4>
+
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul class="nav">
+                                <li><a href="/">首页</a>
+
+                                </li>
+                                <li><a href="/t_about.php">关于T-du</a>
+                                </li>
+                                
+                                <li class="active"><a href="/category.php?id=1">T-du活动</a>
+
+                                </li>
+                                <li><a href="/goodsVote.php?id=3">班衫评选</a>
+
+                                </li>
+                                <li><a href="/message.php">发布</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row-fluid">
+                <ul class="thumbnails">
+                    <!--{foreach from=$goods_list item=goods}-->
+                    <li class="span4">
+                        <div class="thumbnail">
+                            <a href="{$goods.url}">
+                                <img data-src="holder.js/280x276" style="width: 280px; height: 276px;" src="{$goods.goods_thumb}">
+                            </a>
+                            <div class="caption">
+                                <h3>{$goods.name}</h3>
+                                <p>特价：<span class="label label-important">{$goods.shop_price}</span></p>
+                                <p>截至：<span class="label">{$goods.promote_end_date}</span></p>
+                            </div>
+                        </div>
+                    </li>
+                    <!--{/foreach}-->
+                </ul>
+            </div>
+            
+            <!-- #BeginLibraryItem "/library/pages.lbi" -->
+            <form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+              <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+                <!--{foreach from=$pager.search key=key item=item}-->
+                <input type="hidden" name="{$key}" value="{$item}" />
+                <!--{/foreach}-->
+                <select name="page" id="page" onchange="selectPage(this)">
+                {html_options options=$pager.array selected=$pager.page}
+                </select>
+              </div>
+            </form>
+            <script type="Text/Javascript" language="JavaScript">
+            <!--
+            {literal}
+            function selectPage(sel)
+            {
+              sel.form.submit();
+            }
+            {/literal}
+            //-->
+            </script>
+             <!-- #EndLibraryItem -->
+
+            <hr>
+            <div class="footer">
+                <p>&copy; t-du.com 2013</p>
+            </div>
+        </div>
+    </body>
+</html>

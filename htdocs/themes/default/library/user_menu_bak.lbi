@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="userMenu">
+<a href="user.php" {if $action eq 'default'}class="curs"{/if}><img src="../images/u1.gif"> 会员首页</a>
+<a href="user.php?act=profile"{if $action eq 'profile'}class="curs"{/if}><img src="../images/u2.gif"> 会员信息</a>
+<a href="user.php?act=order_list"{if $action eq 'order_list'|| $action eq 'order_detail'}class="curs"{/if}><img src="../images/u3.gif"> 我参加的活动</a>
+<a href="user.php?act=address_list"{if $action eq 'address_list'}class="curs"{/if}><img src="../images/u4.gif"> 收货地址</a>
+<a href="user.php?act=faqi"{if $action eq 'faqi'}class="curs"{/if}><img src="../images/u6.gif"> 我发起的活动</a>
+<a href="user.php?act=comment_list"{if $action eq 'comment_list'}class="curs"{/if}><img src="../images/u11.gif"> 我的评论</a>
+<!--<a href="user.php?act=group_buy">{$lang.label_group_buy}</a>-->
+<a href="user.php?act=account_log"{if $action eq 'account_log'}class="curs"{/if}><img src="../images/u13.gif"> 会员账户</a>
+<!--{if $show_transform_points}-->
+<a href="user.php?act=transform_points"{if $action eq 'transform_points'}class="curs"{/if}><img src="../images/u14.gif"> {$lang.label_transform_points}</a>
+<!--{/if}-->
+<a href="user.php?act=logout" style="background:none; text-align:right; margin-right:10px;"><img src="../images/bnt_sign.gif"></a>
+</div>

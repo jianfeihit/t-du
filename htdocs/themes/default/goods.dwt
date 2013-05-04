@@ -1,0 +1,498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<style>
+#goodImg{ 
+border:0; 
+margin:0; 
+padding:0; 
+max-width:235px; 
+width:expression(this.width>235?"235px":this.width); 
+max-height:590px; 
+height:expression(this.height>590?"590px":this.height); 
+}
+</style>
+<script type="text/javascript" src="/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/json2.js"></script>
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+
+</script>
+
+<script src="js/jqzoom_ev/js/jquery-1.6.js" type="text/javascript"></script>
+<script src="js/jqzoom_ev/js/jquery.jqzoom-core-pack.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="js/jqzoom_ev/css/jquery.jqzoom.css" type="text/css">
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('.jqzoom').jqzoom({
+            zoomType: 'standard',
+            lens:true,
+            preloadImages: false,
+            alwaysOn:false,
+			zoomWidth:400,
+			zoomHeight:350,
+			title:false
+        });
+	//$('.jqzoom').jqzoom();
+});
+</script>
+
+<script src="js/lhgdialog/lhgdialog.min.js?skin=iblue"></script>
+<script type="text/javascript">
+
+//url添加时间戳
+function addTimeStamp(url){  
+  var timstamp = (new Date()).valueOf();  
+  if (url.indexOf("?")>=0){  
+     url = url + "&t=" + timstamp;   
+  }else {  
+     url = url + "?t=" + timstamp;  
+  };  
+  return url;  
+};  
+
+function cartOpen(url,goodsId){
+  var goods        = new Object();
+  var spec_arr     = new Array();
+  var fittings_arr = new Array();
+  var number       = 1;
+  var formBuy      = document.forms['ECS_FORMBUY'];
+  var quick        = 0;
+  // 检查是否有商品规格 
+  if (formBuy){
+    spec_arr = getSelectedAttributes(formBuy);
+    if (formBuy.elements['number']){
+      number = formBuy.elements['number'].value;
+    }
+    quick = 1;
+  }
+  goods.quick    = quick;
+  goods.spec     = spec_arr;
+
+  goods.goods_id = goodsId;
+
+  goods.number   = number;
+
+  goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
+
+  //Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
+  var datas={"goods":JSON.stringify(goods)};
+
+  $.ajax({
+   type: "POST",
+   url: "flow.php?step=add_to_cart",
+   data: datas,
+   datatype:"json",
+   success: function(res){	
+		$.dialog({content: 'url:'+addTimeStamp(url),title: '购物车',width:'750px',height:'350px'});
+	   }
+	});
+
+}
+
+
+
+</script>
+
+
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header1.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here" style="font-size:14px; font-weight:bold">
+   <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<div style="font-size:14px;margin-bottom:10px">&nbsp;&nbsp;&nbsp;
+  <strong>&nbsp;{$goods.goods_name}&nbsp;&nbsp;&nbsp;</strong><strong>剩余时间</strong>：&nbsp;<font class="f4" id="leftTime">{$lang.please_waiting}</font>&nbsp;&nbsp;&nbsp;&nbsp;
+</div></div>
+<!--当前位置 end-->
+<div class="blank"></div>
+
+<div class="block clearfix">
+  <!--left start-->
+
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+   <!--商品详情start-->
+   <div id="goodsInfo" class="clearfix">
+     <!--商品图片和相册 start-->
+     <div style="width:230px; float:left; margin-right:10px; ">
+	 	<a href="{$goods.original_img}" class="jqzoom"  title="triumph" >
+            <img id="goodImg" src="{$goods.goods_img}"  title="triumph" >
+        </a>
+     <div class="blank5"></div>
+     <!--相册 START-->
+     <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+     <!--相册 END-->
+         <div class="blank5"></div>
+         <!-- TemplateBeginEditable name="商品相册下广告（宽230px）" -->
+<!-- TemplateEndEditable -->
+     </div>
+     <!--商品图片和相册 end-->
+     <div class="textInfo" style="font-size:14px">
+     <form action="javascript:addToCart({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+  	   	 <li class="padd">  		 
+			<strong>商品品牌:<font style="font-size:18px">&nbsp;{$goods.goods_brand}</font></strong>
+	    </li>
+       <!-- {if $cfg.show_marketprice} 市场价格-->
+	   	 <li class="padd ">
+       <strong>市场价格:</strong><font class="market">&nbsp;{$goods.market_price}</font>
+	    </li>
+       <!-- {/if} -->
+	    <li class="padd ">
+      <strong>本店价格:</strong><font class="shop" id="ECS_SHOPPRICE"> {$goods.shop_price_formated}</font>
+	  </li>
+
+	    <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
+      <li class="padd" >
+     <strong>促销价格:</strong><font class="shop">&nbsp;{$goods.promote_price}</font>
+      </li>
+      <!--{/if}-->
+	  <br />
+<table width="500" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td>&nbsp;分享到人人，新浪<strong>9</strong>折优惠</td>
+    <td width="80">
+<script type="text/javascript" charset="utf-8">
+(function(){
+  var _w = 90 , _h = 24;
+  var param = {
+    url:location.href,
+    type:'2',
+    count:'1', /**是否显示分享数，1显示(可选)*/
+    appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
+    title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
+    pic:'', /**分享图片的路径(可选)*/
+    ralateUid:'', /**关联用户的UID，分享微博会@该用户(可选)*/
+	language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+    rnd:new Date().valueOf()
+  }
+  var temp = [];
+  for( var p in param ){
+    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+  }
+  document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
+})();
+</script>
+
+
+    </td>
+    <td><a name="xn_share" type="button" href="#">分享到人人</a><script src="http://static.connect.renren.com/js/share.js" type="text/javascript"></script>
+</td>
+  </tr>
+</table>  
+<li class="padd " />    
+      <p class="f_r">
+     
+      </p>
+       <!-- {if $promotion} -->
+     
+      <!-- {/if} -->
+      <br />
+
+ <!-- {* 开始循环所有可选属性 *} -->
+      <!-- {foreach from=$specification item=spec key=spec_key} -->
+      <li class="padd ">
+      <strong>{$spec.name}:</strong><br />
+        <!-- {* 判断属性是复选还是单选 *} -->
+                    <!-- {if $spec.attr_type eq 1} -->
+                      <!-- {if $cfg.goodsattr_style eq 1} -->
+                        <!-- {foreach from=$spec.values item=value key=key} -->
+                        <label for="spec_value_{$value.id}">
+                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
+                        {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                        <!-- {/foreach} -->
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                        <!-- {else} -->
+                        <select name="spec_{$spec_key}" onchange="changePrice()">
+                          <!-- {foreach from=$spec.values item=value key=key} -->
+                          <option label="{$value.label}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+                          <!-- {/foreach} -->
+                        </select>
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                      <!-- {/if} -->
+                    <!-- {else} -->
+                      <!-- {foreach from=$spec.values item=value key=key} -->
+                      <label for="spec_value_{$value.id}">
+                      <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+                      {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                      <!-- {/foreach} -->
+                      <input type="hidden" name="spec_list" value="{$key}" />
+                    <!-- {/if} -->
+      </li>
+      <!-- {/foreach} -->
+      <li class="clearfix">
+       
+      
+      </li>
+      <!-- {if $goods.bonus_money} 红包-->
+     
+      <!-- {/if} -->
+      <li class="clearfix" >
+       <dd>
+       <strong>{$lang.number}：</strong>
+        <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/>
+       </dd>
+       
+      </li>
+      <!-- {if $goods.is_shipping} 为免运费商品则显示-->
+      <li style="height:30px;padding-top:4px;">
+      {$lang.goods_free_shipping}<br />
+      </li>
+      <!-- {/if} -->
+
+      <li class="padd">
+      <a href="#" onclick="cartOpen('flow.php?step=cart',{$goods.goods_id})"  title="T-DU3"><img src="images/bnt_cat.gif" /></a>
+      <a href="javascript:collect({$goods.goods_id})"><img src="images/bnt_colles.gif" /></a>
+      <!-- {if $affiliate.on} -->
+      <a href="user.php?act=affiliate&goodsid={$goods.goods_id}"><img src='images/bnt_recommend.gif'></a>
+      <!-- {/if} -->
+      </li>
+      </form>
+     
+     </div>
+      
+   </div>
+   <div class="blank"></div>
+   <!--商品详情end-->
+   <!--商品描述，商品属性 START-->
+     <div class="box">
+     <div class="box_1">
+      <h3 style="padding:0 5px;">
+        <div id="com_b" class="history clearfix">
+        <h2>活动介绍</h2>
+        <h2 class="h2bg">产品介绍</h2>
+        <!-- {if $package_goods_list} -->
+        <h2 class="h2bg" style="color:red;">{$lang.remark_package}</h2>
+        <!-- {/if} -->
+        </div>
+      </h3>
+      <div id="com_v" class="boxCenterList RelaArticle"></div>
+      <div id="com_h">
+       <blockquote>
+        {$goods.goods_desc}
+       </blockquote>
+
+     <blockquote>
+      <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#dddddd">
+        <!-- {foreach from=$properties item=property_group key=key} -->
+        <tr>
+          <th colspan="2" bgcolor="#FFFFFF">{$key|escape}</th>
+        </tr>
+        <!-- {foreach from=$property_group item=property} -->
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" width="30%" class="f1">[{$property.name|escape:html}]</td>
+          <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value}</td>
+        </tr>
+        <!-- {/foreach}-->
+        <!-- {/foreach}-->
+      </table>
+     </blockquote>
+
+     <!-- {if $package_goods_list} -->
+     <blockquote>
+       <!-- {foreach from=$package_goods_list item=package_goods} -->
+        <strong>{$package_goods.act_name}</strong><br />
+        <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#dddddd">
+        <tr>
+        <td bgcolor="#FFFFFF">
+          <!-- {foreach from=$package_goods.goods_list item=goods_list} -->
+          <a href="goods.php?id={$goods_list.goods_id}" target="_blank"><font class="f1">{$goods_list.goods_name}{$goods_list.goods_attr_str}</font></a> &nbsp;&nbsp;X {$goods_list.goods_number}<br />
+          <!-- {/foreach} -->
+          </td>
+          <td bgcolor="#FFFFFF">
+          <strong>{$lang.old_price}</strong><font class="market">{$package_goods.subtotal}</font><br />
+          <strong>{$lang.package_price}</strong><font class="shop">{$package_goods.package_price}</font><br />
+          <strong>{$lang.then_old_price}</strong><font class="shop">{$package_goods.saving}</font><br />
+          </td>
+          <td bgcolor="#FFFFFF">
+          <a href="javascript:addPackageToCart({$package_goods.act_id})" style="background:transparent"><img src="images/bnt_buy_1.gif" alt="{$lang.add_to_cart}" /></a>
+          </td>
+        </tr>
+       </table>
+       <!-- {/foreach} -->
+     </blockquote>
+     <!-- {/if} -->
+
+      </div>
+     </div>
+    </div>
+    <script type="text/javascript">
+    <!--
+    reg("com");
+    //-->
+    </script>
+  <div class="blank"></div>
+  <!--商品描述，商品属性 END--></div>
+  
+  <div style="float:left">
+  
+  <table  width="98%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="center"><img src="/images/475_8d4eb3c6c8c7d03d888ac1b604e27639_120x120.png" width="200" height="200" /></td>
+              </tr>
+			  <tr>
+                <td align="left">&nbsp</td>
+              </tr>
+			  <!-- {if $goods.msn} -->
+              <tr>
+                <td align="left"><span style="margin-left:40px"></span>发起人:{$goods.user_name}</td>
+              </tr>
+			  <!-- {/if} -->
+			  <!-- {if $goods.msn} -->
+              <tr>
+                <td align="left"><span style="margin-left:40px"></span>MSN:{$goods.msn}</td>
+              </tr>
+			  <!-- {/if} -->
+			  <!-- {if $goods.qq} -->
+              <tr>
+                <td align="left"><span style="margin-left:40px"></span>QQ：{$goods.qq}</td>
+              </tr>
+			  <!-- {/if} -->
+			  <!-- {if $goods.office_phone} -->
+              <tr>
+                <td align="left"><span style="margin-left:40px"></span>办公电话：{$goods.office_phone}</td>
+              </tr>
+			  <!-- {/if} -->
+			  			  <!-- {if $goods.mobile_phone} -->
+              <tr>
+                <td align="left"><span style="margin-left:40px"></span>手机：{$goods.mobile_phone}</td>
+              </tr>
+			  <!-- {/if} -->
+            </table>
+  
+  
+  </div>
+  
+  
+  <!--right end-->
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+var goods_id = {$goods_id};
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var gmt_end_time = {$promote_end_time|default:0};
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var goodsId = {$goods_id};
+var now_time = {$now_time};
+
+<!-- {literal} -->
+onload = function(){
+  changePrice();
+  fixpng();
+  try { onload_leftTime(); }
+  catch (e) {}
+}
+
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+
+  //Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+  var datas='act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty;
+  $.ajax({
+   type: "GET",
+   url: "goods.php",
+   data: datas,
+   dataType:"json",
+   success: function(res){
+		//var obj=jQuery.parseJSON(res);
+		changePriceResponse(res);
+	   }
+	});
+}
+
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+<!-- {/literal} -->
+</script>
+</html>

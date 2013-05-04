@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+
+<style>
+.like {background:url(../images/heart.png) no-repeat 0 center;padding-left:20px;margin-left:12px; text-decoration: none;color:#7e7e7e;}
+
+</style>
+
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<table width="980" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center"><a href="#"><img src="/images/3.png" width="950" height="300" hspace="2" vspace="11" border="0" /></a></td>
+  </tr>
+</table>
+<div class="block clearfix" style="margin-top:10px;">
+  <!--left start-->
+  
+  <!--left end-->
+  <!--right start-->
+ <div class="AreaR"  style=" width:960px;">
+	 <!--组合搜索 开始-->
+	  <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+	  
+		<div class="blank5"></div>
+	  <!-- {/if} -->
+	 <!--组合搜索 结束-->
+   <!-- TemplateBeginEditable name="右边区域" -->
+  <!-- #BeginLibraryItem "/library/goodsVote_list.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+
+  </div>  
+  <!--right end-->
+</div>
+<!--帮助-->
+
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>  
+</div>
+<!--友情链接 end-->
+<div class="blank"></div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

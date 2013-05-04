@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--底部导航 start-->
+<div class="borTopBox"></div>
+<div id="footer">
+    <!--  <div class="search"><input name="" type="text" /><a href="#">搜索</a></div> -->
+    <ul>
+        <li class="help">
+            <a href="http://www.teeker.com/help/shopping_process">帮助中心</a>
+        </li>
+        <li class="wb">
+            <a href="http://weibo.com/tdegree">官方微博</a>
+        </li>
+        <li class="qq">
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=11592810759&amp;site=qq&amp;menu=yes">在线咨询</a>
+        </li>
+        <li class="tel"><span>18001178418</span>
+        </li>
+    </ul>
+    <p>
+        ©2006 - 2013 T-DU. All Rights Reserved. 京ICP备12001769号
+    </p>
+</div>
+ 

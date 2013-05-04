@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="Description" content="{$description}" />
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.back_url}" />
+{/if}
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<style type="text/css">
+p a{color:#006acd; text-decoration:underline;}
+</style>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="blank"></div>
+<div class="block">
+  <div class="box">
+   <div class="box_1">
+    <h3><span>发起活动</span></h3>
+    
+	
+	
+	
+	 <table width="100%" border="0" cellpadding="3">
+       <form action="faqi0.php?ac=add" id="form1"  enctype="multipart/form-data" method="post">
+      
+             
+             
+              <tr>
+                <td height="35" align="right">活动主题</td>
+                <td height="35"><input name="msg_title" type="text" class="inputBg" size="30" /></td>
+              </tr>
+                          <tr>
+                <td height="80" align="right" valign="top">活动内容</td>
+                <td height="80"><textarea name="msg_content" cols="50" rows="4" wrap="virtual" style="border:1px solid #ccc;"></textarea></td>
+              </tr>
+			  <tr>
+                <td height="140" align="right" valign="top">选择样式</td>
+                <td>
+				<table width="60%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><input name="" type="radio" value="" /><img src="/tu/m1.jpg" width="120"  /></td>
+    <td><input name="" type="radio" value="" /><img src="/tu/m2.jpg" width="120"  /></td>
+  </tr>
+</table>
+
+				
+				</td>
+              </tr>
+			  
+              <tr>
+                <td height="35" align="right">上传图案</td>
+                <td height="30"><input type="file" name="fileField" id="fileField" /></td>
+              </tr>
+              <tr>
+                <td height="100" align="right">选择图案位置</td>
+                <td><table width="300" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="33%"><input class="np" type="radio" name="get_photo_waterpos"  value="1">
+          顶部居左</td>
+        <td width="33%">&nbsp;</td>
+        <td><input class="np" type="radio" name="get_photo_waterpos"  value="3">
+          顶部居右</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td><input class="np" type="radio" name="get_photo_waterpos"  value="5">
+          图片中心</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><input class="np" type="radio" name="get_photo_waterpos"  value="7">
+          底部居左</td>
+        <td>&nbsp;</td>
+        <td><input name="get_photo_waterpos" type="radio" class="np"  value="9">
+          底部居右</td>
+      </tr>
+    </table></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><input type="hidden" name="act" value="act_add_message" />
+                  <input type="submit" value="提交" class="bnt_blue_1" />
+                </td>
+              </tr>
+			  </form>
+      </table>
+			
+			
+			
+			
+			
+   </div>
+  </div>
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

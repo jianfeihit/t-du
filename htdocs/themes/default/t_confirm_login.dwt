@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<title>{$page_title}</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="./themes/default/css/front.css"/>
+</head>
+<body>
+<div class="layer layerSize2 logindig hide ui-dialog-content ui-widget-content" style="display: block; width: auto; min-height: 150px; height: auto;margin: 0px auto 0;" scrolltop="0" scrollleft="0">
+  <span class="close"></span>
+  <div class="loginBox clearfix">
+          <div class="tipslogin">
+        <strong>您还没有登录</strong>
+        <p>您可以选择<a href="#" class="butLarge notLoginBut">非登录下单</a>提醒：未登录下单不方便您后续跟踪订单状态</p>
+      </div>
+          <div class="left">
+      <ul class="clearfix tabs">
+        <li><a href="mylogin" class="current">登录</a></li>
+        <li><a href="myregister">注册</a></li>
+      </ul>
+      <dl class="clearfix mylogin" style="display: block;">
+        <dt>帐号：</dt>
+        <dd><input type="text" autocomplete="off" value="用户名 或 邮箱" name="user" class="userSytle"><em></em></dd>
+        <dt>密码：</dt>
+        <dd><input type="password" autocomplete="off" name="pwd" class="userSytle"><em></em></dd>
+        <dt class="hide">验证码：</dt>
+        <dd class="hide"><input type="text" autocomplete="off" value="验证码" name="verify_code" class="yzmSytle"><img width="129" height="46" src="/commons/verify_image"><a id="newverify" href="#" class="blue">看不清？换一张</a><em></em></dd>
+        <dt>&nbsp;</dt>
+        <dd class="marTop18"><input type="checkbox" value="1" name="auto_login">下次自动登录</dd>
+        <dt>&nbsp;</dt>
+        <dd><a href="#" class="butLarge loginb">登录</a><a id="forgotpwd" href="/users/retrieve_password/getcode/">忘记密码，找回？</a></dd>
+      </dl>
+      <dl class="clearfix myregister" style="display: none;">
+        <dt>邮箱：</dt>
+        <dd><input type="text" autocomplete="off" name="email" class="userSytle"><em></em></dd>
+        <dt>用户名：</dt>
+        <dd><input type="text" autocomplete="off" value="2-30个字符，支持中文" name="username" class="userSytle"><em></em></dd>
+        <dt>密码：</dt>
+        <dd><input type="password" autocomplete="off" value="" name="pwd" class="userSytle"><em></em></dd>
+        <dt>确认密码：</dt>
+        <dd><input type="password" autocomplete="off" name="repwd" class="userSytle"><em></em></dd>
+        <dt class="hide">验证码：</dt>
+        <dd class="hide"><input type="text" autocomplete="off" name="verify_code" class="yzmSytle"><img width="129" height="46" src="/commons/verify_image"><a id="newverify" href="#" class="blue">看不清？换一张</a><em></em></dd>
+        <dt>&nbsp;</dt>
+        <dd class="marTop18"><input type="checkbox" checked="checked" name="agreement">同意<a href="/help/user_agreement" target="_blank" class="blue">注册协议</a></dd>
+        <dt>&nbsp;</dt>
+        <dd><a href="#" class="butLarge registerb">注册</a></dd>
+      </dl>
+    </div>
+    <div class="right">
+      <p class="font14">您也可以使用合作网站账号登录</p>
+      <p style="margin-top:20px;"><a href="/users/connect/weibo"><img src="/v2/connect_weibo_logo.png"></a></p>
+      <p style="margin-top:20px;"><a href="/users/connect/renren"><img src="/v2/connect_renren_logo.png"></a></p>
+      <p style="margin-top:20px;"><a href="/users/connect/tencent"><img src="/v2/connect_tqq_logo.png"></a></p>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+
+
+
+
+
+<style type="text/css">
+  body { background-color:#f3f0e9;}
+.pic_show { WIDTH: 717px;  HEIGHT: 320px; float:left; margin-left:2px;}
+.huihongkuang {
+	BORDER-BOTTOM: #e7e7e7 1px solid; BORDER-LEFT: #e7e7e7 1px solid; BORDER-TOP: #e7e7e7 1px solid; BORDER-RIGHT: #e7e7e7 1px solid
+}
+.huihongkuang:link {
+	BORDER-BOTTOM: #e7e7e7 1px solid; BORDER-LEFT: #e7e7e7 1px solid; BORDER-TOP: #e7e7e7 1px solid; BORDER-RIGHT: #e7e7e7 1px solid
+}
+.huihongkuang:visited {
+	BORDER-BOTTOM: #e7e7e7 1px solid; BORDER-LEFT: #e7e7e7 1px solid; BORDER-TOP: #e7e7e7 1px solid; BORDER-RIGHT: #e7e7e7 1px solid
+}
+.huihongkuang:hover {
+	BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid
+}
+
+
+</style>
+<link rel="stylesheet" type="text/css" href="/images/style.css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+
+<SCRIPT language=javascript src="/js/changimages.js"></SCRIPT>
+
+<link rel="stylesheet" href="/css/boxy.css" type="text/css" />
+<script type="text/javascript" src="/js/jquery-1.2.6.pack.js"></script>
+<script type="text/javascript" src="/js/jquery.boxy.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".boxy").boxy();
+});
+</script>
+
+
+
+</head>
+<body>
+
+
+
+
+
+<!-- #BeginLibraryItem "/library/page_header1.lbi" --><!-- #EndLibraryItem -->
+
+
+
+
+
+
+
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+    
+    <div id="content">
+      <div class="activitytit">
+    <h2>T-DU3</h2>
+    <ul>
+      <li><em>发起人：T-DU3</em></li>
+      <li><strong>1</strong>图案<strong>5</strong>款色可选</li>
+            <li id="left_time">剩余时间：<strong id="d">21</strong>天<strong id="h">1</strong>小时<strong id="m">27</strong>分钟<strong id="s">59</strong>秒<input type="hidden" id="act_diff_time" value="1819679"/></li>
+            <li>
+        <em>预计送货：2013-03-20</em>
+      </li>
+    </ul>
+    <script type="text/javascript">
+        var g_left_time = [21, 1, 27, 59];
+        var g_is_ordering = true;
+    </script>
+    <div id="share">
+      <!-- JiaThis Button BEGIN -->
+      <div id="ckepop">
+        <span class="jiathis_txt">分享到：</span>
+        <a class="jiathis_button_tsina"></a>
+        <a class="jiathis_button_tqq"></a>
+        <a class="jiathis_button_renren"></a>
+        <a class="jiathis_button_kaixin001"></a>
+        <a class="jiathis_button_douban"></a>
+        <a href="http://www.jiathis.com/share?uid=1579833" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+        <a class="jiathis_counter_style"></a>
+      </div>
+      <!-- JiaThis Button END -->
+    </div>
+</div>
+    <div class="activitytitTips">本活动共有<strong>1</strong>个设计图案，您可以点击下面左侧栏中的图案查看不同的搭配效果。<span class="close">关闭</span><span class="icon"></span></div>
+    </div>
+</td>
+  </tr>
+</table>
+<table width="960" border="0" align="center" cellpadding="0" cellspacing="0" style="border-style: dotted; border-width:2px; border-color: #BACEA8; background-color:#FFF; ">
+  <tr>
+    <td height="600" valign="top"><table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="220" align="center"><img src="/images/layer_img2.gif" width="198" height="198" /></td>
+        <td width="700"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="73%"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="28">款式：</td>
+              </tr>
+              <tr>
+                <td height="28">排序：</td>
+              </tr>
+              <tr>
+                <td height="28">活动介绍：</td>
+              </tr>
+            </table></td>
+            <td width="27%"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="center"><img src="/images/475_8d4eb3c6c8c7d03d888ac1b604e27639_120x120.png" width="120" height="120" /></td>
+              </tr>
+              <tr>
+                <td align="center">活动发起者</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td align="center">&nbsp;</td>
+        <td><table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center" class="huihongkuang">
+            
+            
+            <a href="/t1.html" class="boxy" title="T-DU3"><img src="/images/201211/thumb_img/3_thumb_G_1354172853602.jpg" width="200" height="200" border="0" /></a>
+            
+            
+            
+            
+            
+            </td>
+            <td width="200" align="center" class="huihongkuang">&nbsp;</td>
+            <td width="200" align="center" class="huihongkuang">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+    
+    
+    
+    
+    
+    
+    
+
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

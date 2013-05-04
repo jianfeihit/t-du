@@ -1,0 +1,267 @@
+.cf:after {
+content: '';
+display: block;
+clear: both;
+height: 0;
+overflow: hidden;
+visibility: hidden;
+}
+
+.cf {
+zoom: 1;
+}
+
+
+
+/*body {
+font: normal 14px/1.5 Tahoma,Helvetica,arial,sans-serif;
+color: #000;
+}*/
+
+a {
+color: #399;
+text-decoration: none;
+}
+
+fieldset, img {
+border: 0;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+font-size: 100%;
+}
+
+
+
+#content {
+/*float: left;*/
+/*width: 702px;*/
+_display: inline;
+padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+.normal-deal-list .item {
+float: left;
+position: relative;
+width: 306px;
+padding: 6px;
+margin-bottom: 14px;
+margin-right: 10px;
+background: #FFF;
+border: 1px #d4d4d4 solid;
+box-shadow: 1px 2px 2px rgba(222,222,222,.6);
+}
+
+.normal-deal-list .right{
+	margin-right: 0;
+}
+
+.normal-deal-list .item h3 .xtitle {
+display: block;
+_width: 312px;
+font-size: 18px;
+color: #000;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+/*text-indent: -0.5em;*/
+}
+
+.normal-deal-list .item h3 .xtitle, .normal-deal-list .item h3 .short-title {
+-webkit-transition: color .2s;
+-moz-transition: color .2s;
+transition: color .2s;
+}
+
+
+.normal-deal-list .item h3 .short-title {
+display: block;
+font-size: 16px;
+font-weight: normal;
+line-height: 22px;
+color: #666;
+}
+
+
+.normal-deal-list .item h3 .xtitle, .normal-deal-list .item h3 .short-title {
+-webkit-transition: color .2s;
+-moz-transition: color .2s;
+transition: color .2s;
+}
+
+
+.normal-deal-list .item .buy {
+float: right;
+width: 83px;
+height: 33px;
+overflow: hidden;
+text-indent: -999px;
+_text-indent: 0;
+_font-size: 0;
+background: url(http://s0.meituan.net/www/css/i/sp-deal.png?v=3) no-repeat;
+}
+
+
+.normal-deal-list .item .price {
+margin-right: 6px;
+line-height: 40px;
+font-size: 26px;
+color: #ee5238;
+}
+.normal-deal-list .item .num {
+font-family: arial;
+}
+address, caption, cite, code, dfn, em, var {
+font-style: normal;
+font-weight: normal;
+}
+
+
+.normal-deal-list .item .bypast {
+vertical-align: 2px;
+font-size: 12px;
+color: #949494;
+}
+
+
+.normal-deal-list .item .bypast .num {
+font-size: 14px;
+}
+.normal-deal-list .item .num {
+font-family: arial;
+}
+Inherited from span.bypast
+.normal-deal-list .item .bypast {
+font-size: 12px;
+color: #949494;
+}
+
+
+
+.normal-deal-list .item .bypast .num {
+font-size: 14px;
+}
+.normal-deal-list .item .num {
+font-family: arial;
+}
+Inherited from span.bypast
+.normal-deal-list .item .bypast {
+font-size: 12px;
+color: #949494;
+}
+
+
+
+.normal-deal-list .item .total {
+margin-right: 5px;
+line-height: 18px;
+color: #949494;
+overflow: hidden;
+text-align: right;
+font-size: 12px;
+}
+
+
+.normal-deal-list .item .total strong {
+margin-right: 2px;
+color: #ee5238;
+font-size: 14px;
+}
+.normal-deal-list .item .num {
+font-family: arial;
+}
+
+.normal-deal-list .item .total {
+line-height: 18px;
+color: #949494;
+text-align: right;
+font-size: 12px;
+}
+
+
+
+.normal-deal-list .item .new-nnbooking-tag {
+width: 80px;
+background-position: 0 -14px;
+}
+.normal-deal-list .item .new-nnbooking-tag, .normal-deal-list .item .nnbooking-tag, .normal-deal-list .item .new-tag {
+position: absolute;
+top: -4px;
+left: 10px;
+z-index: 9;
+width: 42px;
+height: 40px;
+background: url(http://s1.meituan.net/www/css/i/sp-main-24.png) no-repeat;
+_background: url(http://s0.meituan.net/www/css/i/sp-main.png?v=4) no-repeat;
+}
+
+.normal-deal-list .item .new-tag a, .normal-deal-list .item .new-nnbooking-tag a, .normal-deal-list .item .nnbooking-tag a {
+display: block;
+height: 100%;
+width: 100%;
+text-indent: -9999px;
+overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+.normal-deal-list .item .cover {
+position: relative;
+width: 312px;
+height: 189px;
+overflow: hidden;
+}
+
+
+
+.normal-deal-list .item .cover img {
+display: block;
+}
+
+
+
+.normal-deal-list .item h3 {
+margin: 10px 0 5px;
+width: 312px;
+height: 71px;
+overflow: hidden;
+}
+
+
+.like, .comment {
+background: url(../v2/icon_2.png) no-repeat 0 center;
+padding-left: 20px;
+margin-left: 12px;
+float: left;
+color: #7e7e7e;
+}
+
+/*分享按钮*/
+.item .share {
+overflow: hidden;
+float: left;
+margin-left: 10px;
+}
+.item #bdshare {
+margin-left: -20px;
+margin-top: -5px;
+
+}
+
+

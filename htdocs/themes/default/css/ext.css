@@ -1,0 +1,136 @@
+@charset "utf-8";
+/* CSS Document */
+.hide{display:none;}
+.dialogc{padding:0px;border:0px;font-size:12px;font-family:"微软雅黑",Arial;color:black;}
+.dialogc .layer{margin:0px;padding:0px}
+.dialogc .ui-dialog-titlebar{display:none}
+.dialogc .ui-widget-content .blue{color:#0CACEB;}
+.zoomWrapper{border:1px solid #E2E2E2;}
+.layer .hidefile{cursor:pointer;position:absolute;width:30px;margin:0px;padding:0px;filter:alpha(opacity=0);opacity:0;-moz-opacity:0;-khtml-opacity:0;}
+.ui-slider-horizontal .ui-slider-handle{cursor:pointer;background:#1bc0d7;width:10px;height:10px;display:block;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;margin-top:-2px;margin-left:-8px;}
+.layer .picShow .blocks{margin-top:0px;cursor:pointer;}
+.itMyStyle .listbox li{cursor:pointer;}
+.itMyStyle .listbox input{cursor:pointer;}
+.layer .itMyStylel li{cursor:pointer;border:1px solid #FFF;}
+.layer .itMyStylel input{cursor:pointer;}
+#header .subNav li a{z-index:999;}
+.itMyStyle .color{border:1px solid #E7E7E7;}
+.layer .itMyStylel .color{border:1px solid #E7E7E7;}
+.layer .modifyInfor li{margin-left:5px;margin-top:5px;}
+.layer .modifyInfor .borAll{margin-left:5px;margin-top:5px;padding:0px;}
+.layer .modifyInfor ul{height:28px;}
+.layer .modifyInfor .yellow, .layer .modifyInfor .red, .layer .modifyInfor .blue{border:1px solid #E7E7E7;}
+.layer .loginBox{padding:30px 0px 20px;}
+.ui-widget-overlay{opacity:0.8}
+.myShopSure .sureOrderInfor dl{padding:0px;}
+.myShopSure .bank li{cursor: pointer;}
+.userCenter .pictureArea{border:1px solid #D7D7D7;height:78px;width:78px;}
+.layer .picFile{height: 400px;}
+.itMySetmore li{display:inline;}
+.layer .openSales li img{cursor:pointer;}
+.layer .openSales dd .inputStyle{cursor:pointer;}
+.productList .incBox3rows .att{top:272px;}
+.productList .incBox4rows .att{top:200px;}
+.productListOne .shopkeeperPro .vertical{border-bottom:0px;}
+.productListOne .shopkeeperPro .transverse{border-bottom:0px;margin-bottom:5px;}
+.productListOne .shopkeeperPro .vertical li{height:398px;}
+.productListOne .shopkeeperPro .vertical dl{height:25px;}
+.productListOne .shopkeeperPro .vertical dd{float:left;width:auto;}
+.productListOne .shopkeeperPro .userReviews{width:auto;border-top:1px solid #E7E7E7;margin-right:12px;}
+.productListOne .shopkeeperPro .expSay dl{width:auto;}
+.layer .modifyInfor dd textarea{width:650px;height:75px;}
+.layer .modifyInfor dl{padding-bottom:0px;}
+.textareaHei{width:660px;}
+.productList{border-bottom:0px;}
+.productList .history li{position:relative;}
+.productList .history .pictureArea a{display:block;height:236px;width:236px;}
+.productList .history .att{background:#f1f1f1;height:30px;line-height:30px;position:absolute;left:0;top:206px;width:100%;}
+.productList .history .att .like ,.productList .history .att .comment{background:url(../v2/icon_2.png) no-repeat 0 center;padding-left:20px;margin-left:12px;float:left;color:#7e7e7e;}
+.productList .history .att .comment{background:url(../v2/icon_3.png) no-repeat 0 center;}
+.productList .history .att .like:hover ,.productList .history .att .comment:hover{color:#7e7e7e;}
+.layer .SingleSett dd input{margin:5px;}
+.layer .SingleSett .borcolr{border:1px solid #ffc691;background:#fff6ed;color:#fd8d26;padding:6px 13px;text-align:left;}
+.layer .incomeSettings li .borcolr{border:1px solid #ffc691;background:#fff6ed;color:#fd8d26;padding:6px 13px;text-align:left;}
+.layer .openSalesshowHei{min-height:inherit}
+.layer .picShow .tabBoxR{padding-right:3px;padding-left:3px;}
+.uploadify-button{border:0px;border-radius:0px}
+.uploadify .swfupload{left:0px}
+.uploadify-queue-item .cancel, .uploadify-queue-item .data{display:none}
+.uploadify-queue-item{padding:0px 20px;background-color:#FFF;}
+.layer .personality .homeTemplate li{cursor:pointer;}
+.menu .share {float:right;padding-right:15px;margin-right:0px;}
+.productList .incBoxTran dt{margin-top:18px;}
+.itMyPicShow .blocks{margin-top:0px;cursor:pointer;}
+.productListOne .shopkeeperPro .vertical .move{background:#afc6e9;height:20px;position:absolute;left:0;top:0px;width:100%;cursor:move;opacity:0.7;text-align:center;font-size:11px;}
+.layer .rightDe .number li{margin-right:4px;width:112px;padding-right:3px;}
+.layer .colorCom li{height:35px;}
+
+/*home banner*/
+.uniBannerBackground {background: #ececec}
+.homeBanner .window{width:1020px;height:400px;margin:0 auto;position:relative;display:block;overflow:hidden;}
+.homeBanner .windowLine{width:100000px; height:400px; margin:0;padding:0;}
+.homeBanner .continusBox{width:1020px;height:400px;margin:0 auto;position:relative;float:left;display:inline;}
+.homeBanner .continusBox .superiority{width:440px;position:absolute;top:128px;right:0;color:#7e7e7e;font-size:14px;}
+.homeBanner .continusBox .moveDown {margin-top:110px;left:550px}
+.homeBanner .continusBox .superiority h3{font-size:38px;color:#000;line-height:43px;}
+.homeBanner .continusBox .superiority h4{font-size:22px;color:#000;line-height:27px;}
+.homeBanner .continusBox .superiority img{margin-top:12px;display:block;}
+.homeBanner .window .iconPage{position:absolute;right:30px;bottom:32px;}
+.homeBanner .window .iconPage li{float:left;margin-right:5px;background:url(../v2/icon.png) no-repeat -16px -325px;}
+.homeBanner .window .iconPage li a{width:11px;height:11px;display:block;text-indent:-9999px;}
+.homeBanner .window .iconPage .current{background:url(../v2/icon.png) no-repeat 1px -325px;}
+.homeBanner .box1{background:url(../v2/home_banner.jpg) #ececec no-repeat center center;}
+.homeBanner .box2{background:url(../v2/home_banner1.jpg) #ececec no-repeat center center;}
+.homeBanner .box3{background:url(../v2/home_banner2.jpg) #ececec no-repeat center center;}
+.homeBanner .box4{background:url(../v2/home_banner3.jpg) #ececec no-repeat center center;}
+
+/*品牌介绍*/
+.brandIntroduction{width:100%;background:url(../v2/brand_banner.jpg) #fff no-repeat center top;padding-bottom: 20px}
+.brandIntroduction .aboutdetail{width:980px;margin:0 auto 60px}
+.brandIntroduction .youteeker{height:366px;position:relative;line-height:20px;}
+.brandIntroduction .youteeker h3 {width:300px;float:left;top:120px;left:10px;font-size:14px;color:#0caceb;position:absolute;}
+.brandIntroduction .youteeker p{width:300px;float:left;font-size:12px;color:#b0b0b0;top:182px;left:10px;position:absolute;}
+.brandIntroduction .ifnumber{padding:40px 0 25px;border-bottom:1px solid #e7e7e7;width:980px;overflow:hidden;position:relative;}
+.brandIntroduction .ifnumber h5{font-size:16px;color:#0caceb;font-weight:bold;}
+.brandIntroduction .ifnumber dl{width:980px;}
+.brandIntroduction .ifnumber dt{width:6px;float:left;}
+.brandIntroduction .ifnumber dd{width:910px;float:right;}
+.brandIntroduction .ifnumber dd h4{font-size:20px;margin:5px 0 12px;font-weight:bold;}
+.brandIntroduction .ifnumber dd p{background:#5ec4ec;color:#fff;line-height:23px;padding-left:10px;font-size:14px;}
+.brandIntroduction .ifnumber ul{width:1000px;margin:33px 0 25px;color:#8f8f8f;}
+.brandIntroduction .ifnumber ul a ,.brandIntroduction .ifnumber ul a:hover{color:#8f8f8f;}
+.brandIntroduction .ifnumber li{width:212px;border:1px solid #eee;background:#f9f9f9;padding:9px;text-align:right;margin-right:17px;float:left;display:inline;}
+.brandIntroduction .ifnumber li img{display:block;margin-bottom:5px;}
+a.lookbut{width:209px;height:34px;padding-right:15px;line-height:30px;text-align:center;font-size:14px;background:url(../v2/brand_but.jpg) no-repeat 0 0;display:block;color:#fff;}
+a.lookbut:hover{color:#fff;}
+.brandIntroduction .jiathis_style{float:right;margin-top:5px;}
+.brandIntroduction .bigpicsu{border:1px solid #eee;background:#f9f9f9;padding:9px;margin:33px 0 25px;}
+.brandIntroduction .bigpicsu img{display:block;margin:0 auto 16px;}
+.brandIntroduction .borbotoff{border-bottom:none;}
+.brandIntroduction .padlr10{padding:0 10px;}
+.brandIntroduction .link{color:#0caceb}
+
+/*teeker热店*/
+.hotshopteeker{width:980px;overflow:hidden;position:relative;padding-bottom:20px;}
+.hotshopteeker .hottab{height:47px;line-height:40px;font-size:16px;}
+.hotshopteeker .hottab li{width:111px;float:left;margin-right:2px;text-align:center;}
+.hotshopteeker .hottab li a{display:block;height:47px;background:url(../v2/hot_tab.gif) no-repeat -111px 0;color:#000;}
+.hotshopteeker .hottab li a:hover{color:#000;}
+.hotshopteeker .hottab li .current{background:url(../v2/hot_tab.gif) no-repeat 0 0;font-size:18px;color:#fff;line-height:34px;}
+.hotshopteeker .hottab li .current:hover{color:#fff;}
+.hotshopteeker .fluidBox{width:1015px;zoom:1;}
+.hotshopteeker .detaBox{width:304px;float:left;margin-right:31px;background:#fafafa;border:1px solid #f1f1f1;margin-top:10px;}
+.hotshopteeker .detaBox a.design{width:304px;height:304px;display: block}
+.hotshopteeker .detaBox img{width:304px;height:304px;display:block;}
+.hotshopteeker .titleName{padding:12px 75px 12px 10px;position:relative;background:#ececec;}
+.hotshopteeker .titleName h5{font-size:16px;margin-bottom:2px;}
+.hotshopteeker .titleName h5 a{color:#000;}
+.hotshopteeker .titleName h5 a:hover{color:#ffb400;}
+.hotshopteeker .titleName p{font-size:14px;}
+.hotshopteeker .titleName .like ,.hotshopteeker .titleName .pls{background:url(../v2/icon_xin.gif) no-repeat right center;padding-right:18px;position:absolute;right:10px;top:12px;display:block; cursor:pointer;color:#7e7e7e;}
+.hotshopteeker .titleName .pls{background:url(../v2/icon_pls.gif) no-repeat right center;right:10px;top:32px;}
+.hotshopteeker .plsList{padding:0 10px;}
+.hotshopteeker .plsList dt{display:block;padding:8px 10px 0;}
+.hotshopteeker .plsList dd{display:block;border-bottom:1px solid #f7f7f7;padding:0 10px 8px;}
+.hotshopteeker .morePls{font-size:14px;text-align:right;padding:15px 12px;}
+.incContent .hotMore{background:#fff;height:52px;line-height:52px;text-align:center;color:#7e7e7e;font-size:14px;}

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<title>{$page_title}</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="./themes/default/css/front.css"/>
+</head>
+<body>
+<div id="acsd" class="layer layerSmall hide ui-dialog-content ui-widget-content" style="display: block; width: auto; min-height: 150px; height: auto;margin: 0px auto 0;" scrolltop="0" scrollleft="0">
+  <div class="shoppingCart">
+    <h6>商品已成功加入购物车</h6>
+    <strong>您选择了：</strong>
+    {foreach from=$goods_list item=goods}
+    <dl>
+      <dt><img width="66" height="66" src="http://pic.teeker.com/products/1794_577_front_130424160210_70x70.jpg" class="yourimg"/></dt>
+      <dd class="yourp">
+      {foreach from=$goods key=k item=value}
+        <span>key={$k}:value={$value}</span><br/>
+        {/foreach} 
+        <span>{$goods.goods_name}</span>
+        <ul>
+        <li>订单数量:{$goods.goods_number}</li>
+        </ul>
+      </dd>
+    </dl>
+    {/foreach}
+    <p><a href="flow.php?step=checkout" class="but settle">去购物车结算</a><a href="./" class="blue continue">&lt;&lt;继续购物</a></p>
+  </div>
+</div>
+<script type="text/javascript">
+</script>
+</body>
+</html>
