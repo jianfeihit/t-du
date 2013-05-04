@@ -1,0 +1,55 @@
+<?php
+ $pic_name = array (
+  4 => 'denglu_second_1.gif',
+  6 => 'denglu_second_12.gif',
+  8 => 'denglu_second_13.gif',
+
+  12 => 'denglu_second_16.gif',
+  14 => 'denglu_second_2.gif',
+  16 => 'denglu_second_3.gif',
+  18 => 'denglu_second_4.gif',
+  20 => 'denglu_second_5.gif',
+
+  22 => 'denglu_second_6.gif',
+  24 => 'denglu_second_7.gif',
+  26 => 'denglu_second_8.gif',
+  28 => 'denglu_second_9.gif',
+  30 => 'denglu_second_icon_1.gif',
+  32 => 'denglu_second_icon_12.gif',
+  34 => 'denglu_second_icon_13.gif',
+
+  38 => 'denglu_second_icon_16.gif',
+  40 => 'denglu_second_icon_2.gif',
+  42 => 'denglu_second_icon_3.gif',
+  44 => 'denglu_second_icon_4.gif',
+  46 => 'denglu_second_icon_5.gif',
+  48 => 'denglu_second_icon_6.gif',
+  50 => 'denglu_second_icon_7.gif',
+  52 => 'denglu_second_icon_8.gif',
+  54 => 'denglu_second_icon_9.gif',
+  56 => 'denglu_second_icon_no_1.gif',
+  58 => 'denglu_second_icon_no_12.gif',
+  60 => 'denglu_second_icon_no_13.gif',
+
+  64 => 'denglu_second_icon_no_16.gif',
+  66 => 'denglu_second_icon_no_2.gif',
+  68 => 'denglu_second_icon_no_3.gif',
+  70 => 'denglu_second_icon_no_4.gif',
+  72 => 'denglu_second_icon_no_5.gif',
+  74 => 'denglu_second_icon_no_6.gif',
+  76 => 'denglu_second_icon_no_7.gif',
+  78 => 'denglu_second_icon_no_8.gif',
+  80 => 'denglu_second_icon_no_9.gif',
+
+  82 => 'denglu_second_17.gif',
+  83 => 'denglu_second_icon_17.gif',
+  84 => 'denglu_second_icon_no_17.gif',
+  85 => 'denglu_second_19.gif',
+  86 => 'denglu_second_icon_19.gif',
+  87 => 'denglu_second_icon_no_19.gif',
+  88 => 'denglu_second_18.gif',
+  89 => 'denglu_second_icon_18.gif',
+  90 => 'denglu_second_icon_no_18.gif',
+)
+
+?>

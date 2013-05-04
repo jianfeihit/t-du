@@ -1,0 +1,139 @@
+<?php
+    include('header.html');
+?>
+<script type='text/javascript'>
+function doAjax(url, param, callback, type) {
+	function createAjax() {
+		var xhr;
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+			if(xhr.overrideMimeType){
+				xhr.overrideMimeType("text/html");
+			}
+		} else if (window.ActiveXObject) {
+			try {
+				xhr = new ActiveXObject("Xsxml2.XMLHTTP");
+			} catch(e) {
+				try {
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch(e) {}
+			}
+		}
+		return xhr; //返回XMLHTTP对象实例
+	}
+
+	var dl_xhr = createAjax();
+	dl_xhr.onreadystatechange = function(){
+		if (dl_xhr.readyState == 4) {
+			if (dl_xhr.status == 200) {
+				var data = dl_xhr.responseText;
+				if (callback && typeof callback == "function") {
+					callback(data);
+				}
+				dl_xhr = null;
+			}
+		}
+	};
+	var pstr = "_t=" + new Date().getTime();
+	for (var i = 0; i < param.length; i++) {
+		var pitem = param[i];
+		pstr += "&" + pitem.name + "=" + encodeURI(pitem.value);
+	}
+	dl_xhr.open("POST", url, type ? type : true);
+	dl_xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+	dl_xhr.send(pstr);
+}
+
+function ID(id) {
+    return document.getElementById(id);
+}
+function updateImg(){
+	 ID('key_notice').innerHTML = '<img src="./themes/install/install/images/top_loader.gif" />正在更新，请稍后.....';
+	doAjax('install_test.php?action=updateImg', '', updateImg_callback, false) ;
+}
+function updateImg_callback(result)
+{	
+	if ( result == 1){
+		window.location.href="install_test.php?action=three";
+	}
+
+}
+</script>
+<div class="setup step3">
+<h2>3.验证文件</h2>
+</div>
+<div class="stepstat">
+<ul>
+<li class="unactivated">1</li>
+<li class="unactivated">2</li>
+<li class="current">3</li>
+<li class="unactivated last">4</li>
+</ul>
+<div class="stepstatbg stepstat3"></div>
+</div>
+</div> 
+<form action="?mod=install&code=config&op=save" method="post">
+<div class="main">
+<h2 class="title">灯鹭插件关键文件验证</h2>
+<table class="tb" style="margin:20px 0 20px 55px;">
+
+<tr> 
+<td>网站根目录下是否存在denglu.php,dl_receiver.php文件</td>
+<?php if($val = 'w'){ ?>
+<td class="w pdleft1" >
+<?php echo '已确定所需文件存在'; ?>
+</td>
+<?php
+}elseif($val = "nw"){ ?>
+<td class="nw pdleft1" style="color:red">
+<?php echo '请检查网站目录下，确定denglu.php,dl_receiver.php 文件是否存在，\n 如果不存在，请您手动拷贝到跟目录。'?>
+</td>
+<?php
+}?>
+
+</tr>
+
+<tr> 
+<td>社会化平台素材图片验证</td>
+<?php if($tb){ ?>
+<td class="w pdleft1">
+<?php echo '素材图片完整'; ?>
+</td>
+<?php
+}else{ ?>
+<td class="<?php echo $tb?w:nw?> pdleft1" style="color:red">
+<?php echo $tb ?'':'素材图片缺失，点击按钮更新<input type="button" onclick="javascript:updateImg()" value="更新"/>'?>
+</td>
+<td id="key_notice"></td>
+<?php
+} ?>
+
+</tr>
+ 
+</table>
+
+<h2 class="title">需要修改的文件</h2>
+<table class="tb" style="margin:20px 0 20px 55px;">
+<?php
+foreach($modify_file as $v){
+?>
+<tr> 
+<td><?php echo $v?></td>
+<td class="padleft">
+准备修改
+</td>
+</tr>
+<?php
+}
+?>
+</table>
+
+<div class="btnbox marginbot">
+<input type="button" onclick="history.back();" value="上一步" />
+<input type="button" value="下一步" onclick="javascript:window.location='?action=four';"/>
+</div>
+</div>
+</form>
+<?php
+    include('footer.html');
+?>

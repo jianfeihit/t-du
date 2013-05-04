@@ -1,0 +1,136 @@
+<?php
+    include('header.html');
+?>
+<script type='text/javascript'>
+function doAjax(url, param, callback, type) {
+	function createAjax() {
+		var xhr;
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+			if(xhr.overrideMimeType){
+				xhr.overrideMimeType("text/html");
+			}
+		} else if (window.ActiveXObject) {
+			try {
+				xhr = new ActiveXObject("Xsxml2.XMLHTTP");
+			} catch(e) {
+				try {
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch(e) {}
+			}
+		}
+		return xhr; //返回XMLHTTP对象实例
+	}
+
+	var dl_xhr = createAjax();
+	dl_xhr.onreadystatechange = function(){
+		if (dl_xhr.readyState == 4) {
+			if (dl_xhr.status == 200) {
+				var data = dl_xhr.responseText;
+				if (callback && typeof callback == "function") {
+					callback(data);
+				}
+				dl_xhr = null;
+			}
+		}
+	};
+	var pstr = "_t=" + new Date().getTime();
+	for (var i = 0; i < param.length; i++) {
+		var pitem = param[i];
+		pstr += "&" + pitem.name + "=" + encodeURI(pitem.value);
+	}
+	dl_xhr.open("POST", url, type ? type : true);
+	dl_xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+	dl_xhr.send(pstr);
+}
+
+function ID(id) {
+    return document.getElementById(id);
+}
+function auto_install(){
+	$auto = confirm('灯鹭插件自动安装');
+	if($auto){
+		var install_method = 'auto_install';
+		window.location.href="?action=auto&install_method="+install_method;
+	}
+	return false;
+	
+}
+function hand_install(){
+	$hand = confirm('灯鹭插件手动安装');
+	if($hand){
+		var install_method = 'hand_install';
+		window.location.href="?action=hand&install_method="+install_method;
+	}
+	return false;
+}
+
+</script>
+<div class="setup step4">
+<h2>4.安装完成</h2>
+</div>
+<div class="stepstat">
+<ul>
+<li class="unactivated">1</li>
+<li class="unactivated">2</li>
+<li class="unactivated">3</li>
+<li class="current last">4</li>
+</ul>
+<div class="stepstatbg stepstat4"></div>
+</div>
+</div> 
+<div class="main">
+<?php
+if($install_method=='auto_install'){
+?>
+<div class="installs">
+<h1>安装完成</h1>
+<ul>
+<?php
+$back_home = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+foreach($modify_file  as $v){
+?>
+<li><?php echo $v ?><font title="struct" class="process wait">安装成功</font></li>
+<?php
+}
+?>
+</ul>
+</div>
+<div style="color:red; padding-left:70px">完成安装，请及时删除denglu/install_test.php文件</div>
+<div class="btnbox marginbot">
+<font id="final_result">
+<input type="button" value="进入网站" onclick="javascript:window.location.href='../../'" />
+</font>
+</div>
+<?php
+}else if($install_method=='hand_install'){
+?>
+
+<div style="width:790px;height:600px;overflow:hidden;">
+<div style="margin-top:-120px;margin-left:-209px"> 
+<iframe src="http://developer.denglu.cc/index.php?title=Ecshop" frameborder=0
+height="800" marginwidth=0 marginheight=0 hspace=0 vspace=0
+width="1000"></iframe>
+</div>
+</div>
+<div class="btnbox marginbot">
+<input type="button" value="进入网站" onclick="javascript:window.location.href='?action=hand_into'" />
+</div>
+
+<?php
+}else{
+?>
+<div class="installs">
+<h1>请网站长选择手动安装方式。ecshop灯鹭插件尚且不支持自动安装。</h1>
+<input type="button" onclick="javascript:hand_install()" value="手动安装" />
+<!-- <input type="button" value="尚且没有自动安装" /> -->
+</div>
+<?php
+}
+?>
+
+</div>
+
+<?php
+    include('footer.html');
+?>

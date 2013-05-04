@@ -1,0 +1,119 @@
+{include file="dheader.htm"}
+
+<div class="tab-div">
+  <!-- tab bar -->
+  <div id="tabbar-div">
+    <p>
+      <span {if $act eq 'setting'}class="tab-front"{/if} class="tab-back" onclick='javascript:location.href="admin.php?act=setting"'>{$Dlang.denglu_setting}</span>
+      <span  {if $act eq 'user'}class="tab-front"{/if} class="tab-back"  onclick='javascript:location.href="admin.php?act=user"'>{$Dlang.denglu_user}</span>
+      <span {if $act eq 'dswitch'}class="tab-front"{/if} class="tab-back" onclick='javascript:location.href="admin.php?act=dswitch"'>{$Dlang.denglu_dswitch}</span>
+      <span {if $act eq 'mediainfo'}class="tab-front"{/if} class="tab-back" onclick='javascript:location.href="admin.php?act=mediainfo"'>{$Dlang.denglu_mediainfo}</span> 
+    </p>
+  </div>
+  
+  {if $act eq 'setting'}
+  <!-- tab body -->
+  <div id="tabbody-div">
+    <form enctype="multipart/form-data" name="theForm" action="?act=do_setting" method="post">
+    <table width="90%" >
+      {foreach from=$arr_cache item=var key=key}
+      {$var}
+      {/foreach}
+    </table>
+    <div class="button-div">
+       <input name="submit" type="submit" value="确定" class="button" />
+       <input name="reset"  type="reset"  value="重置"  class="button" />
+    </div>
+    </form>
+  </div>
+</div>
+	{/if}
+	
+	{if $act eq 'user'}	
+	<div class="form-div">
+		<form action="admin.php" name="searchForm">
+		<input type='hidden' value='user' name='act'>
+	    <img src="../images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+	    &nbsp;{$Dlang.username}:&nbsp;<input type="text" name="username" size="20" />&nbsp;<input type="submit" value="{$lang.button_search}" />
+	  </form>
+	</div>
+	<!-- tab body -->
+	<script type="text/javascript">
+		function del_user(id){
+			Ajax.call('admin.php?act=del_user','id='+id,del_callback,'GET','TEXT',true,true);
+		}
+		function del_callback(result){
+			if(result > 0){
+				document.getElementById('del_notice'+result).innerHTML = '{$Dlang.is_delete}';
+			}
+		}
+	
+	</script>
+  	<div class="list-div" id="listDiv">
+  		<table cellpadding="3" cellspacing="1">
+		  <tr>
+		    <th>UID</th>
+		    <th>{$Dlang.username}</th>
+		    <th>{$Dlang.dl_first}</th>
+		    <th>{$Dlang.bindtime}</th>
+		    <th>{$Dlang.bindother}</th>
+		    <th>{$lang.handler}</th>
+		  <tr>
+		  {foreach from=$user_list.list item=user}
+		  <tr>
+		    <td>{$user.user_id}</td>
+		    <td>{$user.user_name}</td>
+			<td><img src="{$user.is_first}"></td>
+		    <td>{$user.createtime}</td>
+		    <td>{$user.other}</td>
+			<td><a href="javascript:del_user({$user.user_id})" id='del_notice{$user.user_id}'>{$Dlang.delete}</a></td>	    
+		  </tr>
+		  {foreachelse}
+		  <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+		  {/foreach}
+		  {if $user_list.page eq true}
+		  <tr>
+		      <td colspan="2">
+		      &nbsp;
+		      <td align="right" nowrap="true" colspan="8">
+				  <a href="{$user_list.first}">{$Dlang.first_page}</a>
+				  <a href="{$user_list.prev}">{$Dlang.prev_page}</a>
+				  <a href="{$user_list.next}">{$Dlang.next_page}</a>
+				  <a href="{$user_list.last}">{$Dlang.last_page}</a>
+		      </td>
+		  </tr>
+		  {/if}
+		</table>
+	</div>
+<!-- end users list -->
+</form>
+	{/if}
+	
+	{if $act eq 'dswitch'}
+	<p>
+		<a href='admin.php?act=do_dswitch'>{$Dlang.old_switch}</a>
+	<p>
+	{/if}
+{if $act eq 'mediainfo'}
+<form method="POST" action="admin.php?act=do_mediainfo" name="listForm" >
+  	<div class="list-div" id="listDiv">
+  		<table cellpadding="3" cellspacing="1">
+		  <tr>
+		    <th>{$Dlang.media_icon}</th>
+		    <th>{$Dlang.media_name}</th>
+		    <th>APPID</th>
+		    <th>APPKEY</th>
+		  </tr> 
+		  {foreach from=$denglu_data item=var key=key}
+		  <tr>
+		  <td><img src="themes/images/denglu_second_icon_{$var.mediaID}.gif" ></td>
+		  <td>{$var.mediaName}</td>
+		  <td>{$var.apiKey}</td>
+		  <td>{$var.appSecret}</td>
+		  </tr>
+		  {/foreach}
+		</table>
+	</div>
+	<input type='submit' class='button' value={$Dlang.reload} name='update_mediainfo'>
+</form>
+{/if}

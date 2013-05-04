@@ -1,0 +1,183 @@
+<?php
+    include('header.html');
+?>
+
+
+<div class="setup step2">
+<h2>2.填写灯鹭APP密钥及验证服务器时间</h2>
+</div>
+<div class="stepstat">
+<ul>
+<li class="unactivated">1</li>
+<li class="current">2</li>
+<li class="unactivated">3</li>
+<li class="unactivated last">4</li>
+</ul>
+<div class="stepstatbg stepstat2"></div>
+</div>
+</div> 
+<script type='text/javascript'>
+function doAjax(url, param, callback, type) {
+	function createAjax() {
+		var xhr;
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+			if(xhr.overrideMimeType){
+				xhr.overrideMimeType("text/html");
+			}
+		} else if (window.ActiveXObject) {
+			try {
+				xhr = new ActiveXObject("Xsxml2.XMLHTTP");
+			} catch(e) {
+				try {
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch(e) {}
+			}
+		}
+		return xhr; //返回XMLHTTP对象实例
+	}
+
+	var dl_xhr = createAjax();
+	dl_xhr.onreadystatechange = function(){
+		if (dl_xhr.readyState == 4) {
+			if (dl_xhr.status == 200) {
+				var data = dl_xhr.responseText;
+				if (callback && typeof callback == "function") {
+					callback(data);
+				}
+				dl_xhr = null;
+			}
+		}
+	};
+	var pstr = "_t=" + new Date().getTime();
+	for (var i = 0; i < param.length; i++) {
+		var pitem = param[i];
+		pstr += "&" + pitem.name + "=" + encodeURI(pitem.value);
+	}
+	dl_xhr.open("POST", url, type ? type : true);
+	dl_xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+	dl_xhr.send(pstr);
+}
+
+function ID(id) {
+    return document.getElementById(id);
+}
+function adjust_time(){
+	var time_dif = ID('time_dif').value;
+	doAjax('install_test.php?action=adjust_time', [{name : "time_dif", value : time_dif}], dl_time_callback, false) ;
+	
+}
+function dl_time_callback(result)
+{	
+
+	if ( result == 1){
+		 window.location.href="install_test.php?action=two";
+		 return false;
+	}else {
+		 window.location.href="install_test.php?action=two";
+		 return false;
+	}
+
+}
+function testing_app(){
+	
+	var denglu_appid = ID('denglu_appid').value;
+	var denglu_appkey = ID('denglu_appkey').value;
+	
+	ID('id_notice').innerHTML = '';
+	ID('key_notice').innerHTML = '';
+	
+    if(denglu_appid==''){
+		ID('id_notice').innerHTML = '×';
+	}else if(denglu_appkey==''){
+		ID('key_notice').innerHTML = '×';
+	}else{
+		doAjax('install_test.php?action=testing_appid', [{name : "denglu_appid", value : denglu_appid},{name : "denglu_appkey", value : denglu_appkey}], dl_registed_callback, false) ;
+	}
+}
+function dl_registed_callback(result)
+{	
+	if ( result == 1){
+		 ID('id_notice').innerHTML = '×';
+		 return false;
+	}else {
+		if( result == 2){
+			 ID('id_notice').innerHTML = '√';
+			 ID('key_notice').innerHTML = '×';
+			 return false;
+		}else{
+			 ID('app_form').submit();
+			 return false;
+		}
+	}
+
+}
+</script>
+
+<div class="main">
+
+<h2 class="title">服务器时间戳验证</h2>
+<table class="tb" style="margin:20px 0 20px 55px;">
+<?php
+if($time==1){
+?>
+<tr> 
+<td>服务器时间验证通过</td>
+<td class="w pdleft1"> 
+</td>
+</tr>
+<?php
+}else{
+?>
+<tr> 
+<td>服务器时间与灯鹭服务器时间相差超过10分钟。<br/>
+	1.请您修改一下您的服务器世间，确保与北京时间一致。<br/>
+	2.我们会在插件里存储一下时间差值，来维持插件程序正常运行。<br/></td>
+<td class="nw pdleft1">
+</td>
+</tr>
+<tr>
+<td style="color:red">请调整服务器时间：调整degnlu.php文件里的time函数，time()+<input id="time_dif" style="width:60px" type="text" value="<?php echo $time_dif ?>" readonly="true"/></td>
+<td><input type="button" value="调整时间" onclick="javascript:adjust_time()"/></td>
+</tr>
+<?php
+}
+?>
+</table>
+</div>
+
+
+<div style="height:60px;line-height:60px;padding-left:500px;TEXT-DECORATION:underline"><a href="http://open.denglu.cc">申请灯鹭APP</a></div>
+<form action="install_test.php?action=put_key" method="post" id="app_form">
+<table class="tb" style="margin:20px 0 20px 55px;">
+<tr>
+<td>APP ID :</td>
+<td class="padleft">
+<input name="denglu_appid" id="denglu_appid" type="text" value="" style="width:400px;height:20px"/><label style="color:red;padding-left:10px;font-size:18px;font-weight:bolder;" id="id_notice"></label>
+</td>
+</tr>
+<tr>
+<td colspan="2"><p style="padding-left:110px">APP ID 是网站与灯鹭服务器通信的标示</p></td>
+</tr>
+
+<tr>
+<td>APP KEY :</td>
+<td class="padleft">
+<input name="denglu_appkey" id="denglu_appkey" type="text" style="width:400px;height:20px"/><label style="color:red;padding-left:10px;font-size:20px;font-weight:bolder;" id="key_notice"></label>
+</td>
+</tr>
+</tr>
+<tr>
+<td colspan="2"><p style="padding-left:110px">APP KEY 是是网站与灯鹭服务器通信的密钥</p></td>
+</tr>
+</table>
+<div class="btnbox marginbot">
+<input type="button" onclick="history.back();" value="上一步" />
+<!--  <input type="button" value="下一步" onclick="javascript:window.location='?action=three';"/>-->
+<input type="button" value="下一步" onclick="javascript:testing_app()"/>
+</div>
+</div>
+</form>
+<?php
+    include('footer.html');
+?>
