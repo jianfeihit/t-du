@@ -52,7 +52,7 @@ $importjs = (function()
 function show_flash()
 {
     var button_pos=4; //按扭位置 1左 2右 3上 4下
-    var stop_time=3000; //图片停留时间(1000为1秒钟)
+    var stop_time=8000; //图片停留时间(1000为1秒钟)
     var show_text=1; //是否显示文字标签 1显示 0不显示
     var txtcolor="000000"; //文字色
     var bgcolor="DDDDDD"; //背景色
