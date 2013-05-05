@@ -18,7 +18,6 @@
  *
  * Date: 03 May 2011 22:16:00
  */
-
 (function ($) {
     //GLOBAL VARIABLES
     var isIE6 = ($.browser.msie && $.browser.version < 7);
@@ -104,7 +103,6 @@
                 obj.init();
             },
             init: function () {
-                
                 //drag option
                 if (settings.zoomType == 'drag') {
                     $(".zoomPad", el).mousedown(function () {
@@ -169,7 +167,6 @@
                         return this;
                     }
                 });
-                
                 if (thumblist.length > 0) {
                     //getting the first to the last
                     var first = thumblist.splice(0, 1);

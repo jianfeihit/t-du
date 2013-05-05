@@ -1,4 +1,4 @@
-var UploadWrapper = function(upid, qid, succ_callback, start_callback) {
+ï»¿var UploadWrapper = function(upid, qid, succ_callback, start_callback) {
   this.uploader_id = upid;
   this.queue_id = qid; // TODO
   if (arguments.length > 2) {
@@ -32,19 +32,19 @@ UploadWrapper.prototype = {
       'removeTimeout': 0,
       'overrideEvents' : ['onDialogClose'],
       'onFallback': function() {
-        alert("ÄúµÄä¯ÀÀÆ÷Ã»ÓĞ°²×°flash£¬ÓĞĞ©¹¦ÄÜ¿ÉÄÜÎŞ·¨Õı³£Ê¹ÓÃ£¡");
+        alert("æ‚¨çš„æµè§ˆå™¨æ²¡æœ‰å®‰è£…flashï¼Œæœ‰äº›åŠŸèƒ½å¯èƒ½æ— æ³•æ­£å¸¸ä½¿ç”¨ï¼");
       },
       'onSWFReady': function() {
         _this.change_settings(settings);
       },
       'onUploadError': function(file, errorCode, errorMsg, errorString) {
-        alert(file.name + "ÉÏ´«Ê§°Ü£¬Äã¿ÉÒÔÖØÊÔ»òÕßÁªÏµ¿Í·ş£¡");
+        alert(file.name + "ä¸Šä¼ å¤±è´¥ï¼Œä½ å¯ä»¥é‡è¯•æˆ–è€…è”ç³»å®¢æœï¼");
       },
       'onSelectError': function(file, errorCode, errorMsg) {
         if (errorCode == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE) {
-          alert("ËùÑ¡ÎÄ¼ş²»ÊÇ¿ÉÖ§³ÖµÄÍ¼Æ¬ÀàĞÍ£¬ÇëÖØĞÂÑ¡Ôñ£¡");
+          alert("æ‰€é€‰æ–‡ä»¶ä¸æ˜¯å¯æ”¯æŒçš„å›¾ç‰‡ç±»å‹ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼");
         } else if (errorCode == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE) {
-          alert("ËùÑ¡ÎÄ¼ş´óĞ¡Îª0£¬ÇëÖØĞÂÑ¡Ôñ£¡");
+          alert("æ‰€é€‰æ–‡ä»¶å¤§å°ä¸º0ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼");
         } else {
         }
       },
@@ -306,65 +306,115 @@ var TeekerItConst = {
 
 var SampleShirts = {
   samples: {
-    "¶ÌĞäTĞô": [{
+    "çŸ­è¢–Tæ¤": [{
       "color": {
         "name": "white",
         "rgb": "#FFF",
         "rev_rgb": "#000",
-        "desc": "ÑÀ°×"
+        "desc": "ç‰™ç™½"
       },
       "images": [{
         "type":"front",
-        "img": "/v2/samples/6_front.jpg",
+        "img": "/tshirt/2_f.png",
         "size":[319, 319],
         "shrink": 100,
-        "frame":[380, 580, 210, 130]
+        "frame":[380, 580, 210, 130],
+        "name":2
       }, {
         "type":"back",
-        "img": "/v2/samples/6_back.jpg",
+        "img": "/tshirt/2_b.png",
         "size":[319, 319],
         "shrink": 100,
-        "frame":[380, 620, 210, 100]
+        "frame":[380, 620, 210, 100],
+        "name":2
       }]
     }, {
       "color": {
         "name": "black",
         "rgb": "#000",
         "rev_rgb": "#e7e7e7",
-        "desc": "´¿ºÚ"
+        "desc": "çº¯é»‘"
       },
       "images": [{
         "type":"front",
-        "img": "/v2/samples/1_front.jpg",
+        "img": "/tshirt/5_f.png",
         "size":[319, 319],
         "shrink": 100,
-        "frame":[380, 580, 210, 130]
+        "frame":[380, 580, 210, 130],
+        "name":5
       },{
         "type":"back",
-        "img": "/v2/samples/1_back.jpg",
+        "img": "/tshirt/5_b.png",
         "size":[319, 319],
         "shrink": 100,
-        "frame":[380, 620, 210, 100]
+        "frame":[380, 620, 210, 100],
+        "name":5
       }]
     }, {
       "color": {
-        "name": "gray",
-        "rgb": "#D0D0D0",
+        "name": "darkblue",
+        "rgb": "#2B314A",
         "rev_rgb": "#2F2F2F",
-        "desc": "Âé»Ò"
+        "desc": "å¢¨è“"
       },
       "images": [{
         "type":"front",
-        "img": "/v2/samples/7_front.jpg",
+        "img": "/tshirt/4_f.png",
         "size":[319, 319],
         "shrink": 100,
-        "frame":[380, 580, 210, 130]
+        "frame":[380, 580, 210, 130],
+        "name":4
       }, {
         "type":"back",
-        "img": "/v2/samples/7_back.jpg",
+        "img": "/tshirt/4_b.png",
         "size":[319, 319],
         "shrink": 100,
-        "frame":[380, 620, 210, 100]
+        "frame":[380, 620, 210, 100],
+        "name":4
+      }]
+    }, {
+      "color": {
+        "name": "lightblue",
+        "rgb": "#8ECDF2",
+        "rev_rgb": "#2F2F2F",
+        "desc": "äº®è“"
+      },
+      "images": [{
+        "type":"front",
+        "img": "/tshirt/1_f.png",
+        "size":[319, 319],
+        "shrink": 100,
+        "frame":[380, 580, 210, 130],
+        "name":1
+      }, {
+        "type":"back",
+        "img": "/tshirt/1_b.png",
+        "size":[319, 319],
+        "shrink": 100,
+        "frame":[380, 620, 210, 100],
+        "name":1
+      }]
+    }, {
+      "color": {
+        "name": "red",
+        "rgb": "#D62C32",
+        "rev_rgb": "#2F2F2F",
+        "desc": "é²œçº¢"
+      },
+      "images": [{
+        "type":"front",
+        "img": "/tshirt/3_f.png",
+        "size":[319, 319],
+        "shrink": 100,
+        "frame":[380, 580, 210, 130],
+        "name":3
+      }, {
+        "type":"back",
+        "img": "/tshirt/3_b.png",
+        "size":[319, 319],
+        "shrink": 100,
+        "frame":[380, 620, 210, 100],
+        "name":3
       }]
     }]
   },
@@ -413,6 +463,23 @@ var SampleShirts = {
         for (var y in samples[shirt_type][x]['images']) {
           if (side_type == samples[shirt_type][x]['images'][y].type) {
             return samples[shirt_type][x]['images'][y].img;
+          }
+        }
+      }
+    }
+    return null;
+  },
+
+  get_shirt_img_name: function(shirt_type, color_type, side_type) {
+    var samples = this.samples;
+    if (typeof(samples[shirt_type]) == "undefined") {
+      return null;
+    }
+    for (var x in samples[shirt_type]) {
+      if (color_type == samples[shirt_type][x].color.name) {
+        for (var y in samples[shirt_type][x]['images']) {
+          if (side_type == samples[shirt_type][x]['images'][y].type) {
+            return samples[shirt_type][x]['images'][y].name;
           }
         }
       }
@@ -568,7 +635,7 @@ var TeekerItDesign = function(id) {
   this.id = id;
   this.images = {};
 };
-TeekerItDesign.default_img = "/v2/d.png";
+TeekerItDesign.default_img = "about:blank";
 TeekerItDesign.default_width = 500;
 TeekerItDesign.default_height = 500;
 TeekerItDesign.NOT_DETECT = "not_detect";
@@ -780,7 +847,7 @@ DesignEditorDialog.prototype = {
     return this.get_dialog_dom().find(".shirts");
   },
   get_tabs_dom: function() {
-    return this.get_dialog_dom().find(".nav a");
+    return this.get_dialog_dom().find(".nav1 a");
   },
   get_shirt_dom: function() {
     return this.get_dialog_dom().find(".bgbox");
@@ -840,47 +907,47 @@ DesignEditorDialog.prototype = {
   init: function() {
     var _this = this;
     // init dialog
-    this.get_dialog_dom().dialog({
-      autoOpen: false,
-      modal: false,
-      show: "fade",
+    // this.get_dialog_dom().dialog({
+      // autoOpen: false,
+      // modal: false,
+      // show: "fade",
       //hide:"fade",
-      dialogClass: "dialogc",
-      draggable: false,
-      resizable: false,
-      width: 935,
-      position: ["center", "middle"],
-      open: function(e, ui) {
+      // dialogClass: "dialogc",
+      // draggable: false,
+      // resizable: false,
+      // width: 935,
+      // position: ["center", "middle"],
+      // open: function(e, ui) {
         // add shadow layer
-        var myid = _this.get_dialog_id();
-        var zi = parseInt($("#" + myid).parent().css("z-index"));
-        var dw = parseInt($("body").width())
-        + parseInt($("body").css("padding-left"))
-        + parseInt($("body").css("padding-right"));
-        var dh = parseInt($("body").height())
-        + parseInt($("body").css("padding-top"))
-        + parseInt($("body").css("padding-bottom"));
-        $('<div class="ui-widget-overlay" style="width:' + dw + 'px;height:'
-          + dh + 'px;z-index:' + zi + ';"></div>').appendTo($("body"));
-        $("#" + myid).parent().css("z-index", zi + 1);
+        // var myid = _this.get_dialog_id();
+        // var zi = parseInt($("#" + myid).parent().css("z-index"));
+        // var dw = parseInt($("body").width())
+        // + parseInt($("body").css("padding-left"))
+        // + parseInt($("body").css("padding-right"));
+        // var dh = parseInt($("body").height())
+        // + parseInt($("body").css("padding-top"))
+        // + parseInt($("body").css("padding-bottom"));
+        // $('<div class="ui-widget-overlay" style="width:' + dw + 'px;height:'
+          // + dh + 'px;z-index:' + zi + ';"></div>').appendTo($("body"));
+        // $("#" + myid).parent().css("z-index", zi + 1);
 
         // init uploader
-        _this.uploader = new UploadWrapper(_this.get_fup_id(), _this.get_fqa_id(),
-          $.proxy(_this, "after_upload"), $.proxy(_this, "waiting_upload"));
-        _this.uploader.init();
-      },
-      close: function(e, ui) {
+        // _this.uploader = new UploadWrapper(_this.get_fup_id(), _this.get_fqa_id(),
+          // $.proxy(_this, "after_upload"), $.proxy(_this, "waiting_upload"));
+        // _this.uploader.init();
+      // },
+      // close: function(e, ui) {
         // remove shadow layer
-        $(".ui-widget-overlay").remove();
+        // $(".ui-widget-overlay").remove();
 
         // destroy uploader
-        _this.get_fup_dom().uploadify("destroy");
-        _this.get_fup_dom().empty();
-        if (_this.close_callback != null) {
-          _this.close_callback(_this.design);
-        }
-      }
-    });
+        // _this.get_fup_dom().uploadify("destroy");
+        // _this.get_fup_dom().empty();
+        // if (_this.close_callback != null) {
+          // _this.close_callback(_this.design);
+        // }
+      // }
+    // });
     // bind KEY.ESC press event
     //    $(document).keypress(function(e) {
     //      if (e.which == 27) {
@@ -910,7 +977,7 @@ DesignEditorDialog.prototype = {
       wrap.before($(p));
       wrap.siblings("p").find(".blocks").click(function() {
         _this.current_color = $(this).attr("color");
-        _this.refresh();
+        _this.change_bg();
       });
       wrap.siblings("p").find(".blocks:eq(0)").click();
     });
@@ -952,7 +1019,7 @@ DesignEditorDialog.prototype = {
   },
   close: function() {
     if (this.design.is_detecting()) {
-      alert("ÑÕÉ«Ê¶±ğÕıÔÚ½øĞĞÖĞ£¬ÇëÉÔµÈÆ¬¿Ì..."); // TODO timeout...
+      alert("é¢œè‰²è¯†åˆ«æ­£åœ¨è¿›è¡Œä¸­ï¼Œè¯·ç¨ç­‰ç‰‡åˆ»..."); // TODO timeout...
       return;
     }
     this.get_dialog_dom().dialog("close");
@@ -990,16 +1057,16 @@ DesignEditorDialog.prototype = {
     this.refresh();
   },
   refresh: function() {
-    this.refresh_uploader();
+    // this.refresh_uploader();
     this.set_sample_shirt();
-    this.set_design();
-    this.set_design_colors();
-    var browser = TeekerItConst.browser();
-    if (browser.ie) {
-      if (browser.ie == "6.0" && this.get_dialog_dom().dialog("isOpen")) {
-        this.get_dialog_dom().css("height", "auto");
-      }
-    }
+    // this.set_design();
+    // this.set_design_colors();
+    // var browser = TeekerItConst.browser();
+    // if (browser.ie) {
+    //   if (browser.ie == "6.0" && this.get_dialog_dom().dialog("isOpen")) {
+    //     this.get_dialog_dom().css("height", "auto");
+    //   }
+    // }
   },
   refresh_uploader: function() {
     if (this.uploader == null) {
@@ -1039,9 +1106,9 @@ DesignEditorDialog.prototype = {
       this.printint_price().parent().show();
       this.printint_price().parents(".cost").show();
       if (bgcolor != "") {
-        this.clearbg_link().prev().text("ÕıÔÚÇå³ıÉÏ´«Í¼µÄ±³¾°É«£¬ÇëÉÔµÈ...");
+        this.clearbg_link().prev().text("æ­£åœ¨æ¸…é™¤ä¸Šä¼ å›¾çš„èƒŒæ™¯è‰²ï¼Œè¯·ç¨ç­‰...");
       } else {
-        this.clearbg_link().prev().text("ÕıÔÚÊ¶±ğÉÏ´«Í¼µÄÑÕÉ«£¬ÇëÉÔµÈ...");
+        this.clearbg_link().prev().text("æ­£åœ¨è¯†åˆ«ä¸Šä¼ å›¾çš„é¢œè‰²ï¼Œè¯·ç¨ç­‰...");
       }
       this.clearbg_link().prev().addClass("fontGreen");
       this.clearbg_link().hide();
@@ -1050,17 +1117,17 @@ DesignEditorDialog.prototype = {
     }
 
     var colors = this.design.get_image_colors(side);
-    var content = "", print_method = "ÈÈ×ªÓ¡", print_price = 15;//TODO price?
+    var content = "", print_method = "çƒ­è½¬å°", print_price = 15;//TODO price?
     if (colors.length == 0) {
-      content = "ÏµÍ³ÔİÊ±ÎŞ·¨Ê¶±ğÄúµÄÍ¼°¸ÑÕÉ«";
+      content = "ç³»ç»Ÿæš‚æ—¶æ— æ³•è¯†åˆ«æ‚¨çš„å›¾æ¡ˆé¢œè‰²";
     } else {
-      content = "ÏµÍ³¼ì²âµ½ÄúµÄÍ¼°¸ÖĞ¹²ÓĞ" + colors.length + "¸öÑÕÉ«£¬·Ö±ğÊÇ";
+      content = "ç³»ç»Ÿæ£€æµ‹åˆ°æ‚¨çš„å›¾æ¡ˆä¸­å…±æœ‰" + colors.length + "ä¸ªé¢œè‰²ï¼Œåˆ†åˆ«æ˜¯";
       for (var x in colors) {
         content += '<span class="blocks" style="background-color:#' + colors[x]
         + '"></span>';
       }
       if (colors.length < 10) {
-        print_method = "Ë¿ÍøÓ¡";
+        print_method = "ä¸ç½‘å°";
         print_price = colors.length
       }
     }
@@ -1071,8 +1138,8 @@ DesignEditorDialog.prototype = {
     this.printint_price().parent().show();
     this.printint_price().parents(".cost").show();
     if (bgcolor != "") {
-      content = 'ÏµÍ³¼ì²âµ½ÄúµÄÍ¼°¸±³¾°É«ÊÇ<span class="blocks"'
-      + 'style="background-color:#' + bgcolor + '"></span>£¬ĞèÒªÇå³ıÂğ£¿';
+      content = 'ç³»ç»Ÿæ£€æµ‹åˆ°æ‚¨çš„å›¾æ¡ˆèƒŒæ™¯è‰²æ˜¯<span class="blocks"'
+      + 'style="background-color:#' + bgcolor + '"></span>ï¼Œéœ€è¦æ¸…é™¤å—ï¼Ÿ';
       this.clearbg_link().show();
     } else {
       content ="";
@@ -1091,7 +1158,10 @@ DesignEditorDialog.prototype = {
     // set shirt
     var shirt_dom = this.get_shirt_dom();
     var shirt_img = SampleShirts.get_shirt_img(shirt, color, side);
-    $(shirt_dom).css("background", "url(" + shirt_img + ") no-repeat transparent");
+    var get_shirt_img_name = SampleShirts.get_shirt_img_name(shirt, color, side);
+    //$(shirt_dom).css("background", "url(" + shirt_img + ") no-repeat transparent");
+    $(shirt_dom).attr("src", shirt_img);
+    $('#shirtUrl').val(get_shirt_img_name);
 
     // set frame
     var shirt_size = SampleShirts.get_shirt_size(shirt, color, side);
@@ -1383,6 +1453,9 @@ DesignEditorDialog.prototype = {
         }
       }
     });
+  },
+  change_bg: function() {
+    this.set_sample_shirt();
   }
 };
 
@@ -1675,9 +1748,9 @@ ShirtChooseControl.prototype = {
     // TODO
     $("input[name=data\\[pick_colors\\]]").click(function() {
       if ($(this).attr("checked")) {
-        _this.commit_button().text("Ñ¡ÔñÑÕÉ«");
+        _this.commit_button().text("é€‰æ‹©é¢œè‰²");
       } else {
-        _this.commit_button().text("ÉèÖÃ¼Û¸ñ");
+        _this.commit_button().text("è®¾ç½®ä»·æ ¼");
       }
     });
 
@@ -1814,7 +1887,7 @@ ShirtChooseControl.prototype = {
   },
   commit: function() {
     if (this.shirt_lists().find("input[type=checkbox]:checked").length == 0) {
-      alert("ÇëÑ¡Ôñµ×ÉÀ£¡"); // TODO
+      alert("è¯·é€‰æ‹©åº•è¡«ï¼"); // TODO
       return false;
     }
     this.commit_button().parents("form").submit();
@@ -1829,9 +1902,9 @@ var ColorChooseControl = function(pic_path, design) {
 ColorChooseControl.prototype = {
   tabs: function(side) {
     if (arguments.length > 0) {
-      return $(".nav li[side=" + side + "]");
+      return $(".nav1 li[side=" + side + "]");
     }
-    return $(".nav li");
+    return $(".nav1 li");
   },
   product_lists: function() {
     return $(".listbox li");
@@ -1888,7 +1961,7 @@ ColorChooseControl.prototype = {
   },
   commit: function() {
     if (this.product_lists().find("input[type=checkbox]:checked").length == 0) {
-      alert("ÄúÃ»ÓĞÑ¡ÔñÉÌÆ·£¡"); // TODO
+      alert("æ‚¨æ²¡æœ‰é€‰æ‹©å•†å“ï¼"); // TODO
       return false;
     }
     this.commit_button().parents("form").submit();
@@ -1904,9 +1977,9 @@ var SettingControl = function(pic_path, design) {
 SettingControl.prototype = {
   tabs: function(side) {
     if (arguments.length > 0) {
-      return $(".nav li[side=" + side + "]");
+      return $(".nav1 li[side=" + side + "]");
     }
-    return $(".nav li");
+    return $(".nav1 li");
   },
   product_lists: function() {
     return $(".listbox li");
@@ -2028,8 +2101,8 @@ SettingControl.prototype = {
         profit = max - cost;
         total = max + printing;
         profit = profit.toFixed(1);
-        $(this).children(".borcolr").text("±¾¿îÉÌÆ·³ıÓ¡»¨ÍâµÄÊÛ¼Û²»ÄÜ³¬¹ı" + max
-          + "Ôª£¬ÄúµÄÊµ¼ÊÊÕÒæ½«Îª"+ profit + "Ôª");
+        $(this).children(".borcolr").text("æœ¬æ¬¾å•†å“é™¤å°èŠ±å¤–çš„å”®ä»·ä¸èƒ½è¶…è¿‡" + max
+          + "å…ƒï¼Œæ‚¨çš„å®é™…æ”¶ç›Šå°†ä¸º"+ profit + "å…ƒ");
         $(this).children(".borcolr").show();
       } else {
         $(this).children(".borcolr").empty();
@@ -2044,7 +2117,7 @@ SettingControl.prototype = {
     this.check();
     var profit = $.trim(this.profit_input().val());
     if (profit == "" || isNaN(parseInt(profit))) {
-      alert("ÇëÉèÖÃÊÕÒæ£¡");
+      alert("è¯·è®¾ç½®æ”¶ç›Šï¼");
       return false;
     }
 

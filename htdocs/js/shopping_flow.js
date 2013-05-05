@@ -591,6 +591,12 @@ function checkConsignee(frm)
     msg.push(address_not_null);
   }
 
+  if (frm.elements['sign_building'] && Utils.isEmpty(frm.elements['sign_building'].value))
+  {
+    err = true;
+    msg.push(class_not_null);
+  }
+
   if (frm.elements['zipcode'] && frm.elements['zipcode'].value.length > 0 && (!Utils.isNumber(frm.elements['zipcode'].value)))
   {
     err = true;

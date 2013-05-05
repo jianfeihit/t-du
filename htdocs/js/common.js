@@ -119,11 +119,9 @@ function addToCartResponse(result)
 /* *
  * 添加商品到收藏夹
  */
-function collect(goodsId,callback)
+function collect(goodsId)
 {
-  
-  callback = callback || collectResponse;
-  Ajax.call('user.php?act=collect', 'id=' + goodsId, callback, 'GET', 'JSON');
+  Ajax.call('user.php?act=collect', 'id=' + goodsId, collectResponse, 'GET', 'JSON');
 }
 
 /* *
