@@ -61,10 +61,10 @@
 							</a>
 						</div>
 					</td>
-					<td class="toprice"><span>1*99.0=99</span> 元</td>
+					<td class="toprice"><span>{$goods.goods_number}*{$goods.goods_price}={$goods.subtotal}</span></td>
 					<td>
 						<p>
-							<a class="hui del" href="#" piid="397611">删除</a>
+							<a class="hui del" href="#" rec_id="{$goods.rec_id}">删除</a>
 						</p>
 					</td>
 				</tr>
@@ -72,7 +72,7 @@
 			</table>
 			<div class="myShopBox">
 				<div class="right">
-					共 <strong id="total_qnt">1</strong> 件商品，商品总金额 <strong id="total_price">99</strong>元 <a class="butLarge commits" href="flow.php?step=cart_receiver">去结算</a>
+					共 <strong id="total_qnt">{$total.real_goods_count}</strong> 件商品，商品总金额 <strong id="total_price">{$total.goods_price}</strong> <a class="butLarge commits" href="flow.php?step=cart_deliver">去结算</a>
 				</div>
 				<input name="all" type="checkbox" checked="checked" /> 全选
 			</div>
@@ -80,9 +80,13 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
-		});
-		$(document).ready(function() {
+			Cart.init("http://pic.teeker.com/");
+			ld = new LoginDialog($(".logindig"), $(".plslogin"));
+			if (typeof __login_callback__ != 'undefined' && __login_callback__ != null) {
+			ld.callback = __login_callback__;
+			}
+			ld.init(); 
+			
 		    var vcart = new ViewCart();
 		    vcart.init();
 		    vcart.set_login_check(function(callback) {
@@ -98,6 +102,7 @@
 		        location.reload();
 		      };
 		    }
+		
 		  });
 	</script>
 	<!-- #BeginLibraryItem "/library/page_footer.lbi" -->
