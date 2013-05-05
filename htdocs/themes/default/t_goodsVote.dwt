@@ -93,7 +93,7 @@
             #container{
                 width: 980px;
                 margin: 0 auto;
-                padding: 40px 20px;
+                padding: 20px 20px;
             }
             .normal-deal-list .item .vote{
                 float: right;
@@ -112,7 +112,9 @@
             <!-- Jumbotron -->
             <div class="jumbotron">
                 <p class="lead">
-                     <img src="/images/vote_banner_main.jpg" class="img-polaroid">
+                     <!-- <img src="/images/vote_banner_main.jpg" class="img-polaroid"> -->
+                     <img src="themes/default/v2/home_banner.jpg" width="980" class="img-polaroid">
+                     
                 </p>
             </div>
 
@@ -243,7 +245,7 @@
                             
                             var res = eval('(' + res +')');
 
-                            
+
 
                             alert(res.message);
                             
