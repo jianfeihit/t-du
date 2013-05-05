@@ -7,9 +7,9 @@ ViewCart.prototype = {
   table: function() {
     return $(".myShopTable");
   },
-  del_links: function(piid) {
+  del_links: function(rec_id) {
     if (arguments.length > 0) {
-      return this.table().find(".del[piid=" + piid + "]");
+      return this.table().find(".del[rec_id=" + rec_id + "]");
     }
     return this.table().find(".del");
   },
@@ -111,7 +111,7 @@ ViewCart.prototype = {
       }
       _this.refresh();
     });
-
+    // 从购物车中删除
     this.del_links().click(function(e) {
       e.preventDefault();
       if (_this.stop_click) {
@@ -120,15 +120,13 @@ ViewCart.prototype = {
       if (!confirm("确定从购物车中删除该商品？")) {
         return;
       }
-      var piid = $(this).attr("piid");
+      var rec_id = $(this).attr("rec_id");
       var del_dom = this;
       var prd_dom = $(this).parents("tr");
-      var store_id = $(prd_dom).attr("sid");
-      var aid = $(prd_dom).attr("aid");
-      _this.update(store_id, aid, piid, 0, function() {
+      _this.update(rec_id, 0, function() {
         $(del_dom).remove();
         $(prd_dom).find(".number input").each(function() {
-          if ($(this).attr("piid") == piid) {
+          if ($(this).attr("rec_id") == rec_id) {
             $(this).parents(".number").remove();
           }
         });
@@ -223,23 +221,18 @@ ViewCart.prototype = {
       url: url,
       type: 'post',
       async: true,
-      dataType: 'json',
+      dataType: 'text',
       success: function(r) {
-    	alert(r);
-        if (r.status) {
-          if (callback != undefined) {
-            callback();
+    	  if (callback != undefined) {
+              callback();
           }
-          _this.refresh();
+    	  location.reload();
           if (Cart != undefined) {
-            Cart.qnt();
+              Cart.qnt();
           }
-        } else {
-        }
-        _this.enable();
+           _this.enable();
       },
       error: function(jqXHR, textStatus, errorThrown){
-      // TODO
     	  alert(errorThrown);
       }
     });
@@ -617,29 +610,29 @@ DeliveryInfo.prototype = {
     }
     var di = {};
     di.consignee = this.get_consignee();
-    di.address_1 = this.get_province().id;
-    di.address_2 = this.get_city().id;
-    di.address_3 = this.get_district().id;
+    di.province = this.get_province().text;
+    di.city = this.get_city().text;
+    di.district = this.get_district().text;
     di.address = this.get_address();
     di.zipcode = this.get_zipcode();
-    di.mobile = this.get_mobile();
-    di.phone = this.get_phone();
+    di.tel = this.get_mobile();
+    di.mobile = this.get_phone();
     di.email = this.get_email();
-    di.id = this.delivery_id;
+    di.address_id = this.delivery_id;
     $.ajax({
-      url: "/orders/add_delivery_info/",
+      url: "/flow.php?step=cart_deliver",
       data: di,
       type: 'POST',
       dataType: 'json',
       async: false,
       success: function(data){
         if (callback != undefined) {
-          di.address = data.address;
+//          di.address = data.address;
           callback(data, di);
         }
       },
       error: function(jqXHR, textStatus, errorThrown){
-      // TODO
+    	  alert(textStatus);
       }
     });
   }
