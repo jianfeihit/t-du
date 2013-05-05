@@ -153,24 +153,19 @@ if ($action == 'default')
 
 if ($action == 'add_new_product')
 {
-    $format = '{left:%d;top:%d;width:%d;height:%d;}';
-
-    sscanf($_POST['imgCss'], $format, $left, $top, $width, $height);
-
-    combine_logo($left, $top, $width, $height, ltrim($_POST['imgUrl'], '/'), $_POST['shirtUrl']);
-
     $userid = $_SESSION['user_id'];
 
     $max_id = $db->getOne("SELECT MAX(goods_id) + 1 FROM ".$ecs->table('goods'));
 
-    $original_img = reformat_image_name('goods', $max_id, "upload/combine_logo.png", 'source');
+    if (!empty($_POST['imgFrontUrl']))
+    {
+        $front_image = combine_logo($max_id, $_POST['imgFrontCss'], ltrim($_POST['imgFrontUrl'], '/'), $_POST['shirtUrl'], 'f');
+    }
 
-    // original logo
-    $imgUrlTmp = ltrim($_POST['imgUrl'], '/');
-    $gallery_thumb = reformat_image_name('gallery_thumb', $max_id, $imgUrlTmp, 'source');
-    $sql = "INSERT INTO " . $ecs->table('goods_gallery') . " (goods_id, img_url, img_desc, thumb_url, img_original) " .
-            "VALUES ('$max_id', '$gallery_thumb', '', '$gallery_thumb', '$gallery_thumb')";
-    $db->query($sql);
+    if (!empty($_POST['imgBackUrl']))
+    {
+        $back_image = combine_logo($max_id, $_POST['imgBackCss'], ltrim($_POST['imgBackUrl'], '/'), $_POST['shirtUrl'], 'b');
+    }
 
     $goods_sn = generate_goods_sn($max_id);
 
@@ -182,18 +177,18 @@ if ($action == 'add_new_product')
 
     $goods_name = $_POST['goods_name'];
     $goods_name_style = "+";
-    $shop_price = $_POST['shop_price'];
+    $shop_price = 30;
     $market_price = $shop_price * 1.5;
     $is_promote = 0;
     $promote_price = 0;
-    $goods_img = $original_img;
-    $goods_thumb = $original_img;
-    $original_img = $original_img;
+    $goods_img = $front_image;
+    $goods_thumb = $front_image;
+    $original_img = $front_image;
     $keywords = "";
     $goods_brief = "";
-    $seller_note = $_POST['imgCss'];
+    $seller_note = "";
     $goods_weight = 0;
-    $goods_number = $_POST['goods_number'];
+    $goods_number = 50;
     $warn_number = 0;
     $integral = 0;
     $give_integral = 0;
@@ -226,18 +221,23 @@ if ($action == 'add_new_product')
 
 }
 
-function combine_logo($left, $top, $width, $height, $img_src, $shirtUrl) {
+function combine_logo($gid, $img_css, $img_src, $shirtUrl, $side) {
 
-    $left = $left + 100;
-    $top = $top + 75;
+    $format = '{\"left\":%d,\"top\":%d,\"width\":%d,\"height\":%d}';
+
+    sscanf($img_css, $format, $left, $top, $width, $height);
+
+    $left = $left + 102;
+    $top = $top + 80;
 
     $size = getimagesize($img_src);
     $original_width = $size[0];
     $original_height = $size[1];
 
-    $dest = imagecreatefrompng($shirtUrl);
-    $src = imagecreatefrompng($img_src);
+    $shirt_image = 'tshirt/' . $shirtUrl . '_' . $side . '.png';
 
+    $dest = imagecreatefrompng($shirt_image);
+    $src = imagecreatefrompng($img_src);
     $newImg = imagecreatetruecolor($width, $height);
     imagealphablending($newImg, false);
     imagesavealpha($newImg, true);
@@ -249,7 +249,23 @@ function combine_logo($left, $top, $width, $height, $img_src, $shirtUrl) {
     imagesavealpha($dest, true);
     imagecopy($dest, $newImg, $left, $top, 0, 0, $width, $height);
 
-    imagepng($dest, "upload/combine_logo.png");
+    $tmpfile = "upload/combine_logo" . $gid .".png";
+
+    imagepng($dest, $tmpfile);
+
+    $format_name = reformat_image_name('goods', $gid, $tmpfile, 'source');
+    //Gallery
+    $sql = "INSERT INTO " . $GLOBALS['ecs']->table('goods_gallery') . " (goods_id, img_url, img_desc, thumb_url, img_original) " .
+            "VALUES ('$gid', '$format_name', '', '$format_name', '$format_name')";
+    $GLOBALS['db']->query($sql);
+
+    //Gallery
+    $gallery_thumb = reformat_image_name('goods', $gid, $img_src, 'source');
+    $sql = "INSERT INTO " . $GLOBALS['ecs']->table('goods_gallery') . " (goods_id, img_url, img_desc, thumb_url, img_original) " .
+            "VALUES ('$gid', '$gallery_thumb', '$img_css', '$gallery_thumb', '$gallery_thumb')";
+    $GLOBALS['db']->query($sql);
+
+    return $format_name;
 }
 
 
