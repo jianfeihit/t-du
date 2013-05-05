@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="themes/default/css/front.css" rel="stylesheet" type="text/css" />
+{insert_scripts files='jquery-1.9.0.min.js,jquery-ui-1.10.2.js'} 
+<!-- fancy -->
+<link rel="stylesheet" type="text/css" href="js/fancy/jquery.fancybox.css">
+<script type="text/javascript" src="js/fancy/jquery.fancybox.js"></script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="incContent">
+    <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+
+  <div class="userCenter clearfix">
+    <!--left start-->
+      <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem -->
+    <!--left end-->
+
+    <!--right start-->
+      <div class="rightcontent">
+          <div class="incPadBox">
+        <dl class="findBox clearfix">
+          <dt><a href='user.php?act=add_consignee' id="fancy" data-fancybox-type="iframe" data-type="add_consignee_box" class="buthui new">添加常用收货人</a></dt>
+        </dl>
+    
+         
+            <script type="text/javascript">
+
+            $(document).ready(function () {
+          
+              // 详情页弹框逻辑
+              console.log($("#fancy"));
+              $("#fancy").fancybox({
+                maxWidth  : 1000,
+                maxHeight : 800,
+                fitToView : false,
+                width   : '80%',
+                height    : '80%',
+                autoSize  : false,
+                closeClick  : false,
+                openEffect  : 'none',
+                closeEffect : 'none'
+              });
+               
+            });
+            </script>
+     <table border="0" cellpadding="0" cellspacing="0" class="tableStyle thback">
+              <tr>
+                <th>序号</th>
+                <th>{$lang.consignee_name}</th>
+                <th>{$lang.phone}</th>
+                <th>{$lang.detailed_address}</th>
+                <th>{$lang.postalcode}</th>
+                <th>{$lang.email_address}</th>
+                <th>操作</th>
+              </tr>
+              <!-- {foreach from=$consignee_list item=consignee key=sn} -->
+              <script type="text/javascript">
+              </script>
+                <tr>
+                  <td>{$sn}</td>
+                  <td>{$consignee.consignee}</td>
+                  <td>{$consignee.tel}</td>
+                  <td>{$consignee.address}</td>
+                  <td>{$consignee.zipcode}</td>
+                  <td>{$consignee.email}</td>
+                  <td>
+                    <a href='user.php?act=drop_consignee&id={$consignee.address_id}'  class="blue" onclick="return confirm(&#039;确定要删除吗？&#039;);">删除</a>              
+                  </td>
+                </tr>
+              <!-- {/foreach} -->
+            </table>
+        </div>     
+
+
+    </div>
+  </div>
+</div>
+  <!--right end-->
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+{foreach from=$lang.clips_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+</html>
