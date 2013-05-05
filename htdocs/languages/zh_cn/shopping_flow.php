@@ -68,10 +68,6 @@ $_LANG['goods_fittings'] = '商品相关配件';
 $_LANG['parent_name'] = '相关商品：';
 $_LANG['remark_package'] = '礼包';
 
-// add by jianfeihit start
-$_LANG['add_goods_cart'] = '商品已成功加入购物车';
-// add by jianfeihit end
-
 /* 优惠活动 */
 $_LANG['favourable_name'] = '活动名称：';
 $_LANG['favourable_period'] = '优惠期限：';
@@ -110,6 +106,7 @@ $_LANG['flow_js']['city_not_null'] = '请您选择收货人所在城市！';
 $_LANG['flow_js']['district_not_null'] = '请您选择收货人所在区域！';
 $_LANG['flow_js']['invalid_email'] = '您输入的邮件地址不是一个合法的邮件地址。';
 $_LANG['flow_js']['address_not_null'] = '收货人的详细地址不能为空！';
+$_LANG['flow_js']['class_not_null'] = '班级不能为空！';
 $_LANG['flow_js']['tele_not_null'] = '电话不能为空！';
 $_LANG['flow_js']['shipping_not_null'] = '请您选择配送方式！';
 $_LANG['flow_js']['payment_not_null'] = '请您选择支付方式！';
@@ -127,10 +124,10 @@ $_LANG['city_district'] = '城市/地区';
 $_LANG['email_address'] = '电子邮件地址';
 $_LANG['detailed_address'] = '详细地址';
 $_LANG['postalcode'] = '邮政编码';
-$_LANG['phone'] = '电话';
-$_LANG['mobile'] = '手机';
-$_LANG['backup_phone'] = '手机';
-$_LANG['sign_building'] = '标志建筑';
+$_LANG['phone'] = '手机';
+$_LANG['mobile'] = '电话';
+$_LANG['backup_phone'] = '电话';
+$_LANG['sign_building'] = '班级';
 $_LANG['deliver_goods_time'] = '最佳送货时间';
 $_LANG['default'] = '默认';
 $_LANG['default_address'] = '默认地址';
