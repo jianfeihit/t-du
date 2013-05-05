@@ -693,10 +693,10 @@ var Cart = {
     this.pic_path = pic_path;
     var _this = this;
     var b = $("#header .iconShop");
-    this.qnt();
-    $(b).children("a").mouseover(function(){
-      _this.detail();
-    });
+//    this.qnt();
+//    $(b).children("a").mouseover(function(){
+//      _this.detail();
+//    });
   },
   show: function(qnt, detail) {
     var b = $("#header .iconShop");
