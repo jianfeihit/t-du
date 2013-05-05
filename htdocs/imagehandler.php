@@ -52,7 +52,7 @@ $palette = detectColors($img, $num, 1);
 $count = count($palette);
 $colors = ''; 
 foreach($palette as $color) { 
-  $colors .= '<li class="colorBlock" style="background-color:#' . $color . '; width: 20px; height: 20px; margin: 0 5px;"></li>';   
+  $colors .= '<li class="colorBlock" style="background-color:#' . $color . ';"></li>';   
 } 
 if (empty($colors)) {
   $colors = '';
