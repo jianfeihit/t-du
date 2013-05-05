@@ -228,7 +228,7 @@ ul.pthumbs li a.zoomThumbActive {
                     //     itemSpan.html(++num);
                     // });
                                         
-                    $.ajax('user.php?act=collect&id=' + goods_id, {
+                    $.ajax('index.php?act=add_like&goods_id=' + goods_id, {
                         success:function(res){
                             
                             var res = eval('(' + res +')');
