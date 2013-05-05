@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0022)http://www.teeker.com/ -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>T-DU-你的T恤云工厂！上传创意，自定时间内售出超过10件产品，服务大品牌的工厂即刻为你生产！</title>
+<link href="http://www.teeker.com/favicon.ico" type="image/x-icon" rel="icon" />
+<link href="http://www.teeker.com/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+<meta name="keywords" content="T-DU,云工厂,文化衫,设计师,团购,创意,印染,印花,征订,定制,品牌,平台,T恤衫,Polo衫,圆领衫,帽衫,卫衣,毕业衫,院衫,会衫,班服,校服,版衫,站衫,队服" />
+<meta name="description" content="t-du.com是一个服务圈子和圈子文化，为圈子提供文化衫征订、定制的电子商务平台，致力于帮助您更美、更准、更快地将自己的圈子文化符号和内涵穿到身上，穿到学校，穿到公司，穿回家。百万件品牌文化衫库存，全球顶级印染设备，充分满足您的多款式、多档次、多颜色定制需求！" />
+<link rel="stylesheet" type="text/css" href="./themes/default/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="./themes/default/css/front.css" />
+<link rel="stylesheet" type="text/css" href="./themes/default/css/ext.css" />
+<link rel="stylesheet" type="text/css" href="./themes/default/css/index_item.css" />
+<link rel="stylesheet" type="text/css" href="js/fancy/jquery.fancybox.css" />
+<script type="text/javascript" src="js/fancy/jquery.fancybox.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="./themes/default/js/order.js"></script>
+<script type="text/javascript" src="./themes/default/js/cart.js"></script>
+<script type="text/javascript" src="./themes/default/js/region.js"></script>
+</head>
+<body>
+	<!-- #BeginLibraryItem "/library/page_header.lbi" -->
+	<!-- #EndLibraryItem -->
+	<div class="incContent">
+		<p class="myShop02">02确认订单信息</p>
+		<div class="myShopSure">
+			<h5>确认收货人</h5>
+			<dl class="formBox">
+				<dt>
+					<em>*</em>收货人姓名：
+				</dt>
+				<dd>
+					<input type="text" size="25" name="consignee"><em class="hide">请填写收货人姓名！</em>
+				</dd>
+				<dt>
+					<em>*</em>地区：
+				</dt>
+				<dd>
+					<select id="provinces" name="province">
+						<option value="0">请选择</option>
+						<option value="2">北京</option>
+						<option value="3">安徽</option>
+						<option value="4">福建</option>
+						<option value="5">甘肃</option>
+						<option value="6">广东</option>
+						<option value="7">广西</option>
+						<option value="8">贵州</option>
+						<option value="9">海南</option>
+						<option value="10">河北</option>
+						<option value="11">河南</option>
+						<option value="12">黑龙江</option>
+						<option value="13">湖北</option>
+						<option value="14">湖南</option>
+						<option value="15">吉林</option>
+						<option value="16">江苏</option>
+						<option value="17">江西</option>
+						<option value="18">辽宁</option>
+						<option value="19">内蒙古</option>
+						<option value="20">宁夏</option>
+						<option value="21">青海</option>
+						<option value="22">山东</option>
+						<option value="23">山西</option>
+						<option value="24">陕西</option>
+						<option value="25">上海</option>
+						<option value="26">四川</option>
+						<option value="27">天津</option>
+						<option value="28">西藏</option>
+						<option value="29">新疆</option>
+						<option value="30">云南</option>
+						<option value="31">浙江</option>
+						<option value="32">重庆</option>
+						<option value="3512">台湾</option>
+						<option value="3516">香港</option>
+						<option value="3519">澳门</option>
+					</select> <select id="cities" name="city">
+						<option value="0">请选择</option>
+					</select> <select id="districts" name="district">
+						<option value="0">请选择</option>
+					</select> <em class="hide">请选择地区！</em>
+				</dd>
+				<dt>
+					<em>*</em>详细地址：
+				</dt>
+				<dd>
+					<span></span><input type="text" name="address" size="40"><em class="hide">请填写详细地址！</em>
+				</dd>
+				<dt>邮编：</dt>
+				<dd>
+					<input type="text" size="25" name="zipcode"><em class="hide">无效的邮编！</em>
+				</dd>
+				<dt>
+					<em>*</em>手机：
+				</dt>
+				<dd>
+					<input type="text" size="25" name="mobile"><em class="hide">请填写手机号码！</em><em class="hide">无效的手机号码！</em>
+				</dd>
+				<dt>固定电话：</dt>
+				<dd>
+					<input type="text" size="25" name="phone"><em class="hide">无效的电话号码！</em>
+				</dd>
+				<dt>
+					<em>*</em>E-mail：
+				</dt>
+				<dd>
+					<input type="text" size="40" name="email"><em class="hide">请填写邮箱地址！</em><em class="hide">无效的邮箱地址！</em>
+				</dd>
+				<dt>&nbsp;</dt>
+				<dd>
+					<a href="#" class="but">确认</a>
+				</dd>
+			</dl>
+		</div>
+		<div>
+			<a class="blue" href="/orders/view_cart">返回购物车</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					var delivery = new DeliveryInfo($(".formBox"));
+					delivery.init();
+					$(".formBox .but").click(function(e) {
+						e.preventDefault();
+						delivery.save(function(data) {
+							if (data.result == 'success') {
+								window.location.href='flow.php?step=cart_confirm';
+							} else {
+								var hint = "";
+								for ( var i in data.errors) {
+									hint += data.errors[i] + "\n";
+								}
+								alert(hint);
+							}
+						});
+					});
+
+					Cart.init("http://localhost/");
+					ld = new LoginDialog($(".logindig"), $(".plslogin"));
+					if (typeof __login_callback__ != 'undefined'
+							&& __login_callback__ != null) {
+						ld.callback = __login_callback__;
+					}
+					ld.init()
+				});
+	</script>
+	<!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+	<!-- #EndLibraryItem -->
+</body>
+</html>
