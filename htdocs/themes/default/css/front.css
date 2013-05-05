@@ -87,7 +87,7 @@ a.buthui:hover{color:#0caceb;}
 #header{width:980px;margin:0 auto;height:31px;line-height:31px;padding:0 20px}
 #header li{line-height: 31px;}
 #header .subNav{float:right;color:#fff;}
-#header .subNav li{float:left;padding-right:13px;margin-left:12px;background:url(./v2/top_line.gif) no-repeat right center;position:relative;z-index:20;}
+#header .subNav li{float:left;padding-right:13px;margin-left:12px;background:url(../v2/top_line.gif) no-repeat right center;position:relative;z-index:20;}
 #header .subNav li a{color:#fff;}
 #header .subNav li a:hover{color:#fff;}
 #header .subNav li .blue{color:#0CACEB;margin-right:5px;}
@@ -819,7 +819,7 @@ s.productList .incBox4rows dd p{margin-bottom:5px;}
 .layer .SingleSett dd input{border:1px solid #abadb3;height:20px;width:50px;margin-right:5px;}
 .layer .SingleSett dd p{color:#7e7e7e;}
 .layer .SingleSett dd strong{display:block;margin-bottom:3px;font-weight:normal;}
-.layer .shoppingCart h6{height:87px;line-height:87px;padding-left:256px;font-size:18px;background:url(../v2/icon.png) #f6f6f6 no-repeat -169px -66px;margin-bottom:13px;}
+.layer .shoppingCart h6{height:87px;line-height:87px;font-size:18px;background:url(../v2/icon.png) #f6f6f6 no-repeat -169px -66px;margin-bottom:13px;text-align:center;}
 .layer .shoppingCart strong{border-bottom:1px dashed #d7d4d4;padding-bottom:5px;display:block;margin:0 33px;font-weight:normal;margin-bottom:30px;}
 .layer .shoppingCart dl{width:569px;border-bottom:1px dashed #d7d4d4;margin:0 33px 20px;padding-bottom:35px;height:auto;overflow:hidden;}
 .layer .shoppingCart dt{width:68px;height:68px;position:relative;float:left;margin-left:15px;display:inline;}

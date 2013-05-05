@@ -19,9 +19,9 @@
     <dl>
       <dt><img width="66" height="66" src="http://pic.teeker.com/products/1794_577_front_130424160210_70x70.jpg" class="yourimg"/></dt>
       <dd class="yourp">
-      {foreach from=$goods key=k item=value}
+      <!-- {foreach from=$goods key=k item=value}
         <span>key={$k}:value={$value}</span><br/>
-        {/foreach} 
+        {/foreach}  -->
         <span>{$goods.goods_name}</span>
         <ul>
         <li>订单数量:{$goods.goods_number}</li>
@@ -29,7 +29,7 @@
       </dd>
     </dl>
     {/foreach}
-    <p><a href="flow.php?step=checkout" class="but settle">去购物车结算</a><a href="./" class="blue continue">&lt;&lt;继续购物</a></p>
+    <p><a href="flow.php?step=cart_detail" target="_parent" class="but settle">去购物车结算</a><a href="./" class="blue continue">&lt;&lt;继续购物</a></p>
   </div>
 </div>
 <script type="text/javascript">
