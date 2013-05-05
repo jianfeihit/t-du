@@ -7,8 +7,8 @@
         <title>
             T-DU-你的T恤云工厂！上传创意，自定时间内售出超过10件产品，服务大品牌的工厂即刻为你生产！
         </title><!-- TODO -->
-        <link href="http://www.teeker.com/favicon.ico" type="image/x-icon" rel="icon">
-        <link href="http://www.teeker.com/favicon.ico" type="image/x-icon" rel="shortcut icon">
+       <!--  <link href="http://www.teeker.com/favicon.ico" type="image/x-icon" rel="icon">
+        <link href="http://www.teeker.com/favicon.ico" type="image/x-icon" rel="shortcut icon"> -->
         <meta name="keywords" content="T-DU,云工厂,文化衫,设计师,团购,创意,印染,印花,征订,定制,品牌,平台,T恤衫,Polo衫,圆领衫,帽衫,卫衣,毕业衫,院衫,会衫,班服,校服,版衫,站衫,队服">
         <meta name="description" content="t-du.com是一个服务圈子和圈子文化，为圈子提供文化衫征订、定制的电子商务平台，致力于帮助您更美、更准、更快地将自己的圈子文化符号和内涵穿到身上，穿到学校，穿到公司，穿回家。百万件品牌文化衫库存，全球顶级印染设备，充分满足您的多款式、多档次、多颜色定制需求！">
        <!-- <script type="text/javascript" charset="utf-8" async="" src="./teeker_index_files/lxb.js"></script>-->
@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="./themes/default/css/index_item.css">
 
         {* 包含脚本文件 *}
-        {insert_scripts files='jquery-1.9.0.min.js,cart.js,jquery-ui-1.10.2.js'}  
+        {insert_scripts files='jquery-1.9.0.min.js,jquery-ui-1.10.2.js'}  
 
       <!-- fancy -->
       <link rel="stylesheet" type="text/css" href="js/fancy/jquery.fancybox.css">
@@ -106,6 +106,8 @@
                     </li>
                 </ul> -->
             </div>
+
+
             <div id="content" class="normal-deal-list cf">
 
                  <!--{foreach from=$best_goods item=goods name=goods}-->
@@ -122,7 +124,7 @@
 
 
                     <div class="cover">
-                        <a  href="{$goods.url}" data-fancybox-type="iframe" data-type="detail"><img width="306" height="189" alt="{$goods.name}" src="{$goods.thumb}"  ></a>
+                        <a  href="{$goods.url}" data-fancybox-type="iframe" data-type="detail"><img width="306" height="306" alt="{$goods.name}" src="{$goods.thumb}"  ></a>
                     </div>
                     <h3>
                         <a target="_blank" href="{$goods.url}" title="{$goods.name}" data-fancybox-type="iframe" data-type="detail"><span class="xtitle">{$goods.name}</span> <span class="short-title"></span></a>
@@ -150,18 +152,6 @@
 
 
                 <!--{/foreach}-->
-                
-                
-                
-               
-               
-               
-               
-
-
-
-
-               
             </div>
             
         </div><script type="text/javascript">
@@ -389,115 +379,7 @@
 //         });
         </script>
       
-        <div style="display: none; z-index: 1000; outline: 0px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all dialogc" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-1">
-            <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-                <span class="ui-dialog-title" id="ui-dialog-title-1">&nbsp;</span><a href="http://www.teeker.com/#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
-            </div>
-            <div class="layer layerSize2 logindig hide ui-dialog-content ui-widget-content" style="display: block;">
-                <div class="loginBox clearfix">
-                    <div class="left">
-                        <ul class="clearfix tabs">
-                            <li>
-                                <a href="http://www.teeker.com/mylogin" class="current">登录</a>
-                            </li>
-                            <li>
-                                <a href="http://www.teeker.com/myregister">注册</a>
-                            </li>
-                        </ul>
-                        <dl class="clearfix mylogin" style="display: block;">
-                            <dt>
-                                帐号：
-                            </dt>
-                            <dd>
-                                <input class="userSytle" name="user" type="text" value="用户名 或 邮箱" autocomplete="off">
-                            </dd>
-                            <dt>
-                                密码：
-                            </dt>
-                            <dd>
-                                <input class="userSytle" name="pwd" type="password" autocomplete="off">
-                            </dd>
-                            <dt class="hide">
-                                验证码：
-                            </dt>
-                            <dd class="hide">
-                                <input class="yzmSytle" name="verify_code" type="text" value="验证码" autocomplete="off"><img src="./teeker_index_files/verify_image" width="129" height="46"><a class="blue" href="http://www.teeker.com/#" id="newverify">看不清？换一张</a>
-                            </dd>
-                            <dt>
-                                &nbsp;
-                            </dt>
-                            <dd class="marTop18">
-                                <input name="auto_login" type="checkbox" value="1">下次自动登录
-                            </dd>
-                            <dt>
-                                &nbsp;
-                            </dt>
-                            <dd>
-                                <a class="butLarge loginb" href="http://www.teeker.com/#">登录</a><a href="http://www.teeker.com/users/retrieve_password/getcode/" id="forgotpwd">忘记密码，找回？</a>
-                            </dd>
-                        </dl>
-                        <dl class="clearfix myregister" style="display: none;">
-                            <dt>
-                                邮箱：
-                            </dt>
-                            <dd>
-                                <input class="userSytle" name="email" type="text" autocomplete="off">
-                            </dd>
-                            <dt>
-                                用户名：
-                            </dt>
-                            <dd>
-                                <input class="userSytle" name="username" type="text" value="2-30个字符，支持中文" autocomplete="off">
-                            </dd>
-                            <dt>
-                                密码：
-                            </dt>
-                            <dd>
-                                <input class="userSytle" name="pwd" type="password" value="" autocomplete="off">
-                            </dd>
-                            <dt>
-                                确认密码：
-                            </dt>
-                            <dd>
-                                <input class="userSytle" name="repwd" type="password" autocomplete="off">
-                            </dd>
-                            <dt class="hide">
-                                验证码：
-                            </dt>
-                            <dd class="hide">
-                                <input class="yzmSytle" name="verify_code" type="text" autocomplete="off"><img src="./teeker_index_files/verify_image" width="129" height="46"><a class="blue" href="http://www.teeker.com/#" id="newverify2">看不清？换一张</a>
-                            </dd>
-                            <dt>
-                                &nbsp;
-                            </dt>
-                            <dd class="marTop18">
-                                <input name="agreement" type="checkbox" checked="checked">同意<a class="blue" target="_blank" href="http://www.teeker.com/help/user_agreement">注册协议</a>
-                            </dd>
-                            <dt>
-                                &nbsp;
-                            </dt>
-                            <dd>
-                                <a class="butLarge registerb" href="http://www.teeker.com/#">注册</a>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="right">
-                        <p class="font14">
-                            您也可以使用合作网站账号登录
-                        </p>
-                        <p style="margin-top:20px;">
-                            <a href="http://www.teeker.com/users/connect/weibo"><img src="./teeker_index_files/connect_weibo_logo.png"></a>
-                        </p>
-                        <p style="margin-top:20px;">
-                            <a href="http://www.teeker.com/users/connect/renren"><img src="./teeker_index_files/connect_renren_logo.png"></a>
-                        </p>
-                        <p style="margin-top:20px;">
-                            <a href="http://www.teeker.com/users/connect/tencent"><img src="./teeker_index_files/connect_tqq_logo.png"></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
 
         {insert_scripts files='common.js'}
          <!-- Baidu Button START -->

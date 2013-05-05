@@ -9,16 +9,43 @@
         <link rel="shortcut icon" href="favicon.ico" />
         <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
+        <link rel="stylesheet" type="text/css" href="./themes/default/css/front.css">
+        <link rel="stylesheet" type="text/css" href="./themes/default/css/ext.css">
+
         <style type="text/css">
             body {
-                padding-top: 20px;
-                padding-bottom: 60px;
+              /*  padding-top: 20px;
+                padding-bottom: 60px;*/
+            }
+            li {
+                line-height: 31px;
             }
             /* Custom container */
             .container {
-                margin: 0 auto;
-                max-width: 1000px;
+               
+
+                width: 980px;
+                margin: 23px auto 100px;
+                position: relative;
+                padding: 0 20px;
             }
+
+            .itMyUpBox {
+                border: 1px solid #f0f0f0;
+                height: auto;
+                overflow: hidden;
+                position: relative;
+                background-color: #FFF;
+                padding: 20px;
+                }
+
+                .itMyUpBox td{
+                    padding-right: 10px;
+                }
+                .row-fluid [class*="span"]:first-child {
+                    border-right: 1px solid #ededed;
+                }
+
             .container > hr {
                 margin: 60px 0;
             }
@@ -78,22 +105,46 @@
             .blocks {
                 cursor: pointer;
                 margin-top: 0px;
+				margin-left: 10px;
                 border: 1px solid #E7E7E7;
                 width: 16px;
                 height: 16px;
                 display: inline-block;
+            }
+            ul, ol, li {
+                list-style-type: none;
+                margin: 0 0 10px 0px;
+            }
+            .colorBlock {
+                width: 20px;
+                height: 20px;
+                margin: 0 5px;
+                border: 1px solid #E7E7E7;
+            }
+            .colorBlock:hover {
+                cursor: pointer;
+            }
+            .shirtBlock {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #E7E7E7;
+                cursor: pointer;
             }
         </style>
 
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui-1.10.2.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap-datepicker.js"></script>
     <style type="text/css">
         input, textarea, select, button {
             font-size: 12px;
         }
         img {
             border-style: none;
+        }
+        img[src="about:blank"] {
+            visibility: hidden;
         }
         em {
             font-style: normal;
@@ -120,13 +171,23 @@
             width: 400px;
             height: 400px;
         }
+
         #imgBoard {
             position: absolute;
-            border: #CCC 1px dashed;
+            border: Transparent 1px dashed;
             width: 200px;
-            height: 280px;
-            top: 85px;
-            left: 108px;
+            height: 300px;
+            top: 75px;
+            left: 110px;
+        }
+
+        #imgBoard:hover {
+            position: absolute;
+            border: #7E7E7E 1px dashed;
+            width: 200px;
+            height: 300px;
+            top: 75px;
+            left: 110px;
         }
         #imgCut {
             margin: 0;
@@ -151,6 +212,37 @@
         .pointer {
             cursor: pointer;
         }
+        .imghover {
+            border: #7E7E7E 1px dashed;
+        }
+        #imgTarget {
+            width: 100%;
+            height: 100%;
+        }
+		#editord ul {
+			float: left;
+		}
+		#editord p {
+			float: right;
+		}
+		.nav1 li {
+			float: left;
+			display: inline;
+			margin-right: 8px;
+			border: 1px solid #DDD;
+			background: #EBEBEB;
+			width: 44px;
+			text-align: center;
+		}
+		.nav1 .current {
+			background: none;
+		}
+		a {
+			color: #7E7E7E;
+			text-decoration: none;
+			text-align: center;
+			cursor: pointer;
+		}
     </style>
 
         <!-- uploadify -->
@@ -163,14 +255,35 @@
             var sysW = 100;
             var sysH = 140;
             var cleared = false;
+
+            function GetCurrentSide() {
+                var side = $('.nav1 .current').attr('side');
+                return side;
+            }
+            function GetImageCss() {
+                var side = GetCurrentSide();
+                var cssStr = '';
+                if (side == 'front') {
+                    cssStr = $('#imgFrontCss').val();
+                } else {
+                    cssStr = $('#imgBackCss').val();
+                }
+                return $.parseJSON(cssStr);
+            }
             function RecordImageCss() {
-                var css = '{' + 'left:' + $("#left").val() + ';top:' + $("#top").val() + ';width:' + $("#width").val() + ';height:' + $("#height").val() + ';}';
-                $('#imgCss').val(css);
+                var css = '{' + '"left":' + $("#left").val() + ',"top":' + $("#top").val() + ',"width":' + $("#width").val() + ',"height":' + $("#height").val() + '}';
+
+                var side = GetCurrentSide();
+                if (side == 'front') {
+                    $('#imgFrontCss').val(css);
+                } else {
+                    $('#imgBackCss').val(css);
+                }
             }
             function SmartPos(pos) {
                 var frame = $("#imgBoard");
                 var design = $("#imgCut");
-            
+
                 var css = SmartPosition.pos(pos, design, frame);
                 if (css.top < 0) {
                     css = { left: css.left };
@@ -181,18 +294,25 @@
                 } else {
                     design.css(css);
                 }
-            
+
                 temp_top = design.offset().top - frame.offset().top;
                 temp_left = design.offset().left - frame.offset().left;
-            
+                
                 $("#left").val(temp_left);
                 $("#top").val(temp_top);
                 RecordImageCss();
             }
             function SetPostImage(file, sf, w, h) {
                 $('#clearColor').hide();
-                $('#imgUrl').val(sf);
-            
+                cleared = false;
+
+                var side = GetCurrentSide();
+                if (side == 'front') {
+                    $('#imgFrontUrl').val(sf);
+                } else {
+                    $('#imgBackUrl').val(sf);
+                }
+
                 $('#imgTarget').attr('src', sf);
                 var rate = w / h;
                 var width = $("#imgBoard").width() / 4 * 3;
@@ -200,26 +320,38 @@
                 if (w < width && h < height) {
                     width = w;
                     height = h;
-                }
-                if (rate > 1) {
-                    height = Math.round(width / rate);
                 } else {
-                    width = Math.round(height * rate);
-                }
-            
+					if (rate = 1) {
+						width = width;
+						height = width;
+					} else if (rate > 1) {
+						height = Math.round(width / rate);
+					} else {
+						width = Math.round(height * rate);
+					}
+				}
+                
                 $("#imgCut").width(width).height(height);
                 $("#width").val(width);
                 $("#height").val(height);
                 SmartPos("center");
-                
+                $("#imgBoard").hover(function() {
+                    $("#imgTarget").addClass("imghover");
+                }, function() {
+                    $("#imgTarget").removeClass("imghover");
+                });
+
                 $('#fup').find('#fup-button').css("background-image", "url(" + UploadWrapper.ButtonImage2 + ")");
+
                 RecordImageCss();
-            
+                detectImageColor(sf);
+            }
+            function detectImageColor(sf) {
                 $.ajax({
-                    data: {FilePath: sf, ColorNum: 2},
+                    data: { FilePath: sf, ColorNum: 2 },
                     url: '/imagehandler.php',
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         if (data) {
                             var splits = data.split('|');
                             if (splits.length == 2) {
@@ -227,9 +359,10 @@
                                 var info = splits[1];
                                 $('#color').show();
                                 $('#colorNum').html(num);
-                                if (num != 0 && !cleared) {
+                                $('#colorInfo').html('');
+                                if (num != 0) {
                                     $('#colorInfo').html(info);
-                                    $('.colorBlock').click(function() {
+                                    $('.colorBlock').click(function () {
                                         var color = $(this).css('background-color');
                                         $('#clearTarget').css('background-color', color);
                                         $('#clearColor').show();
@@ -242,8 +375,8 @@
                     }
                 });
             }
-            function RGB2Hex(rgb){
-                var re = rgb.replace(/(?:\(|\)|rgb|RGB)*/g,"").split(",");//利用正则表达式去掉多余的部分
+            function RGB2Hex(rgb) {
+                var re = rgb.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(","); //利用正则表达式去掉多余的部分
                 var hexColor = "#";
                 var hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
                 for (var i = 0; i < 3; i++) {
@@ -261,13 +394,15 @@
                 return hexColor;
             }
             function clearPictureBg() {
-                var sf = $('#imgUrl').val();
+                var side = GetCurrentSide();
+                var target = side == 'front' ? $('#imgFrontUrl') : $('#imgBackUrl');
+                var sf = target.val();
                 var color = RGB2Hex($('#clearTarget').css("background-color"));
                 $.ajax({
-                    data: {FilePath: sf, Color: color},
+                    data: { FilePath: sf, Color: color },
                     url: '/imagehandler3.php',
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         if (data == "0") {
                             // fail
                             return;
@@ -275,110 +410,111 @@
                         cleared = true;
                         var splits = data.split(":");
                         if (splits.length >= 2 && splits[0] == "1") {
-                          $('#imgTarget').attr('src', splits[1]);
-                          $('#imgUrl').val(splits[1]);
+                            $('#imgTarget').attr('src', splits[1]);
+                            target.val(splits[1]);
+                            $('#clearColor').hide();
+                            $('#color').hide();
                         }
                     }
                 });
             }
-            $(function() {
-                var uploader = new UploadWrapper("fup", "fqa", SetPostImage);
-                uploader.init();
-            
-                $("#imgCut").draggable({
-                    containment : $("#imgBoard"), 
-                    drag : function () {
-                        $("#width").val($("#imgCut").width());
-                        $("#height").val($("#imgCut").height());
-                    
-                        temp_top = $(this).offset().top - $("#imgBoard").offset().top;
-                        temp_left = $(this).offset().left - $("#imgBoard").offset().left;
-                    
-                        $("#left").val(temp_left);
-                        $("#top").val(temp_top);
-                        RecordImageCss();
-                    }, 
-                    stop : function () {
-                    }
-                });
-            
-                $("#imgCut").resizable({
-                    containment : $("#imgBoard"), 
-                    aspectRatio : true, 
-                    minWidth : 50, 
-                    minHeight : 50, 
-                    resize : function () {
-                        $("#width").val($("#imgCut").width());
-                        $("#height").val($("#imgCut").height());
-                    
-                        temp_top = $(this).offset().top - $("#imgBoard").offset().top;
-                        temp_left = $(this).offset().left - $("#imgBoard").offset().left;
-                    
-                        $("#left").val(temp_left);
-                        $("#top").val(temp_top);
-                        RecordImageCss();
-                    }, 
-                    stop : function (e, ui) {
-                    }
-                });
-            });
-        
-            function changeImg(url) {
-                var bigimg = document.getElementById("faceImg"); 
-                if (bigimg) {
-                    bigimg.src = url;
-                    $('#shirtUrl').val(url.substring(20));
+            function changeButtonImage(has) {
+                if (has) {
+                    $('#fup').find('#fup-button').css("background-image", "url(" + UploadWrapper.ButtonImage2 + ")");
+                } else {
+                    $('#fup').find('#fup-button').css("background-image", "url(" + UploadWrapper.ButtonImage1 + ")");
                 }
             }
+            function setResizeable() {
+                $("#imgCut").resizable({
+                    containment: $("#imgBoard"),
+                    aspectRatio: true,
+                    resize: function () {
+                        $("#width").val($("#imgCut").width());
+                        $("#height").val($("#imgCut").height());
+
+                        temp_top = $(this).offset().top - $("#imgBoard").offset().top;
+                        temp_left = $(this).offset().left - $("#imgBoard").offset().left;
+
+                        $("#left").val(temp_left);
+                        $("#top").val(temp_top);
+                        RecordImageCss();
+                    },
+                    stop: function (e, ui) {
+                    }
+                });
+            }
+            function setDraggable() {
+                $("#imgCut").draggable({
+                    containment: $("#imgBoard"),
+                    drag: function () {
+                        $("#width").val($("#imgCut").width());
+                        $("#height").val($("#imgCut").height());
+
+                        temp_top = $(this).offset().top - $("#imgBoard").offset().top;
+                        temp_left = $(this).offset().left - $("#imgBoard").offset().left;
+
+                        $("#left").val(temp_left);
+                        $("#top").val(temp_top);
+                        RecordImageCss();
+                    },
+                    stop: function () {
+                    }
+                });
+            }
+            function setImageListener() {
+                $('#faceImg').on('load', function () {
+                    var side = GetCurrentSide();
+                    var url = side == 'front' ? $('#imgFrontUrl') : $('#imgBackUrl');
+                    var css = side == 'front' ? $('#imgFrontCss') : $('#imgBackCss');
+                    var has = url.val() != '';
+                    changeButtonImage(has);
+
+                    var target = $('#imgTarget');
+                    var cut = $("#imgCut");
+                    if (!has) {
+                        target.attr('src', 'about:blank');
+                        $('#color').hide();
+                    } else {
+                        target.attr('src', url.val());
+                        var css = GetImageCss();
+                        cut.css(css);
+                        detectImageColor(url.val());
+                    }
+                });
+            }
+            $(function () {
+                var uploader = new UploadWrapper("fup", "fqa", SetPostImage);
+                uploader.init();
+				var editor = new DesignEditorDialog("", {
+					"dialog_id": "editord",
+					"fup_id": "fup",
+					"fqa_id": "fqa"
+				});
+				editor.init(true);
+
+                setDraggable();
+                setResizeable();
+                setImageListener();
+            });
         </script>
     </head>
     <body>
+        <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
         <div class="container">
-            <ul class="nav nav-pills pull-right">
-                <li>{$denglu_top_logo}</li>
-                <li><font id="ECS_MEMBERZONE">{* 根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+           
+            
 
-                    <!--{if $navigator_list.top}-->
-                    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} --> <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
-
-                    <!-- {if !$smarty.foreach.nav_top_list.last} -->|
-                    <!-- {/if} -->
-                    <!-- {/foreach} -->
-                    <div class="topNavR"></div>
-                    <!-- {/if} -->
-                </li>
-            </ul>
-            <div class="masthead">
-                 <h2>T-DU </h2> <h4 class="muted">- 来自清华的个性定制品平台！</h4>
-
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <ul class="nav">
-                                <li><a href="/">首页</a>
-
-                                </li>
-                                <li><a href="/t_about.php">关于T-du</a>
-
-                                </li>
-                                <li><a href="/category.php?id=1">T-du活动</a>
-
-                                </li>
-                                <li><a href="/goodsVote.php?id=3">班衫评选</a>
-
-                                </li>
-                                <li class="active"><a href="/message.php">发布</a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.navbar -->
+            <!-- Jumbotron -->
+           <!--  <div class="jumbotron">
+                <p class="lead">
+                     <img src="/images/t_du_process.png" class="img-polaroid">
+                </p>
             </div>
-
+ -->
             <!-- Example row of columns -->
-            <div class="row-fluid">
+            <div class="row-fluid itMyUpBox">
 
                 <div class="span6"> 
                     <form action="message.php?act=add_new_product" method="POST" enctype="multipart/form-data" name="good_data" id="add_form">
@@ -391,21 +527,26 @@
                                 </tr>
 
                                 <tr>
-                                    <td>预计征订量</td>
+                                    <td>手机号码</td>
                                     <td>
-                                        <select name="goods_number">
-                                            <option value="50" selected="selected">50</option>
-                                            <option value="200">200</option>
-                                        </select>
+                                        <input name="mobile_phone" id="mobile_phone" type="text" class="inputBg" size="30" />
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td >预计价格</td>
+                                    <td>截至时间</td>
                                     <td>
-                                        <select name="shop_price">
-                                            <option value="39" selected="selected">39</option>
-                                            <option value="35">35</option>
+                                        <input name="deadline" id="deadline" type="text" class="datepicker" size="30" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>预计征订量</td>
+                                    <td>
+                                        <select id="goods_number" name="goods_number">
+                                            <option value="0-50" selected="selected">0-50</option>
+                                            <option value="50-200">50-200</option>
+                                            <option value="200以上">200以上</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -416,44 +557,81 @@
                                         <textarea name="goods_desc" id="goods_desc" cols="50" rows="10" wrap="virtual" style="border:1px solid #ccc;"></textarea>
                                     </td>
                                 </tr> 
+
+                                <tr>
+                                    <td >参与方式</td>     
+                                    <td>
+                                        <label class="radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="只参与投票" checked>只参与投票
+                                        </label>
+
+                                        <label class="radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="参与投票并制作">参与投票并制作
+                                        </label>
+
+                                        <label class="radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="只制作">只制作
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                 <tr>
+                                    <td >是否支持代付</td>     
+                                    <td>
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="ownerPay" id="ownerPay" value="否" >是否支持代付
+                                        </label>                                       
+                                    </td>
+                                </tr>
+
+
+
                                 <tr>
                                     <td align="right">&nbsp;</td>
                                     <td>
-                                        <input type="hidden" id="imgUrl" name="imgUrl" value="" />
-                                        <input type="hidden" id="shirtUrl" name="shirtUrl" value="tshirt/1_f.png" />
-                                        <input type="hidden" id="imgCss" name="imgCss" value="" />
+                                        <input type="hidden" id="imgFrontUrl" name="imgFrontUrl" value="" />
+                                        <input type="hidden" id="imgBackUrl" name="imgBackUrl" value="" />
+                                        <input type="hidden" id="shirtUrl" name="shirtUrl" value="1" />
+                                        <input type="hidden" id="imgFrontCss" name="imgFrontCss" value="" />
+                                        <input type="hidden" id="imgBackCss" name="imgBackCss" value="" />
                                         <a class="btn" onClick="javascript: submitform()">提交</a>
                                     </td>
                                 </tr>
+
                             </table>
                         </form>
-                        <img src="/images/price.png" class="img-polaroid">
+                        <h5>预计价格（具体价格会后续联系）</h5>
+                        <!-- <img src="/images/price.png" class="img-polaroid" style="margin-top:5px;"> -->
+                        <br/>
+                        <a href="/images/layer_table_img2.gif" style="margin-top:10px;" TARGET="_blank">尺码说明</a>
+                        <br/>
+                        <a href="/images/layer_table_img3.gif" style="margin-top:10px;" TARGET="_blank">尺寸选择建议</a>
                 </div>
 
                 <div class="span6">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <table id="editord" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td>
-                                <div style="margin-left:30px">
+                                <div style="margin-left: 20px;">
+                                    <h6>友情提示，使用透明底色PNG效果更佳，拖动图片修改位置，拉伸图片右下角调整大小！</h6>
                                     <input type="file" name="fup" id="fup" />
                                     <div id="fqa"></div>
-                                    <img src="/tshirt/1_f.png" alt="" class="pointer" onclick="changeImg(this.src)" width="30" />
-                                    <img src="/tshirt/2_f.png" alt="" class="pointer" onclick="changeImg(this.src)" width="30" />
-                                    <img src="/tshirt/3_f.png" alt="" class="pointer" onclick="changeImg(this.src)" width="30" />
-                                    <img src="/tshirt/4_f.png" alt="" class="pointer" onclick="changeImg(this.src)" width="30" />
-                                    <img src="/tshirt/5_f.png" alt="" class="pointer" onclick="changeImg(this.src)" width="30" />
+									<p style="display:none;">预览底衫<select class="shirts" style="width: 100px;display:none;"></select></p>
+									<ul class="nav1">
+										<li side="front" class=""><a href="#">正面</a></li>
+										<li side="back" class="current"><a href="#">背面</a></li>
+									</ul>
                                 </div>
-
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <div id="box">
                                     <div id="imgBox">
-                                        <img id="faceImg" src="/tshirt/1_f.png" border="0" />
+                                        <img class="bgbox" id="faceImg" src="/tshirt/2_f.png" border="0" />
                                         <div id="imgBoard">
                                             <div id="imgCut">
-                                                <img id="imgTarget" src="" width="100%" height="100%" style="border:1px dotted #545565;"/>
+                                                <img id="imgTarget" src="about:blank" />
                                             </div>
                                         </div>
                                     </div>
@@ -463,22 +641,22 @@
                         <tr>
                             <td>
                                 <div style="margin-left:30px; margin-top:10px">
-                                    <p class="bit">
+                                    <div class="bit">
                                         <span>智能选位</span>
                                         <span class="location"><a title="中心" onclick="javascript:SmartPos('center');">中心</a></span>
                                         <span class="location1"><a title="左胸" onclick="javascript:SmartPos('chest');">左胸</a></span>
                                         <span class="marLet18">居中</span>
                                         <span class="location2"><a title="水平居中" onclick="javascript:SmartPos('hmiddle');">水平居中</a></span>
                                         <span class="location3"><a title="垂直居中" onclick="javascript:SmartPos('vmiddle');">垂直居中</a></span>
-                                    </p>
-                                    <p id="color" class="bit" style="display: none;">
+                                    </div>
+                                    <div id="color" class="bit" style="display: none;">
                                         <span>系统检测到您的图案中共有<span id="colorNum"></span>个颜色：
                                             <span id="colorInfo"></span>
                                         </span>
-                                    </p>
+                                    </div>
                                     <br />
                                     <div id="clearColor" style="display: none;">
-                                        <span>需要清除您选择的背景色<li id="clearTarget" style="width: 20px; height: 20px; margin: 0 5px;"></li>吗？
+                                        <span>需要清除您选择的背景色吗？<li id="clearTarget" class="colorBlock" style="width: 20px; height: 20px; margin: 0 5px;"></li>
                                             <a onclick="javascript:clearPictureBg();">清除背景色</a></span>
                                     </div>
                                     <div id="data" style="display: none;">
@@ -492,50 +670,80 @@
                         </tr>
                     </table>
                 </div>
-
-        
             </div>
-            <hr>
-            <div class="footer">
-                <p>&copy; t-du.com 2013</p>
-            </div>
+          
+          
         </div>
         <!-- /container -->
+
+         <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
         {insert_scripts files='utils.js'}
         <script type="text/javascript">
-        function submitform()
-        {            
-            var g_name = $('#goods_name').val();
-            var g_desc = $('#goods_desc').val();
-            var g_logo = $('#imgUrl').val();
 
-            var msg_err = '';
+            $(function(e){
+                $('.datepicker').datepicker({
+                    format: 'mm-dd-yyyy'
+                 });
 
-            if(g_name.length == 0)
-            {
-                msg_err += "请输入标题" + '\n';
+                $('#ownerPay').click(function(e){
+
+                    if(this.checked){
+                        $(this).val('是');
+                    }else{
+                        $(this).val('否');
+                    }
+
+                });
+
+            });
+
+
+            function submitform() {
+                var g_name = $('#goods_name').val();
+                var g_desc = $('#goods_desc').val();
+                var mobile = $('#mobile_phone').val();
+                var g_logo = $('#imgFrontUrl').val() + ',' + $('#imgBackUrl').val();
+
+                var msg_err = '';
+
+                if (g_name.length == 0) {
+                    msg_err += "请输入标题" + '\n';
+                }
+
+                if (g_desc.length == 0) {
+                    msg_err += "请输入内容" + '\n'
+                }
+
+                if (g_logo.length == 0) {
+                    msg_err += "请选择图片" + '\n'
+                }
+
+                if (mobile.length == 0) {
+                    msg_err += "请输入手机号码" + '\n'
+                }
+
+                if (msg_err.length > 0) {
+                    alert(msg_err);
+                }
+                else {
+                    alert("发布成功，请耐心等待审核通过。");
+                    
+                    var name = '活动名称：' + g_name;
+                    var m = '手机号码：' + mobile;
+                    var d = '截至时间：' + $('#deadline').val();
+                    var n = '征订量：' + $('#goods_number :selected').val();
+                    var v = '参与方式：' + $(':input:radio:checked').val();
+                    var v1 = '是否支持代付：' + $('#ownerPay').val();
+                    var t = '活动内容：' + g_desc; 
+
+
+
+                    var msg = name + '\n <br />' + m + '\n <br />' + d + '\n <br />' + n + '\n <br />' + t + '\n <br />' + v  + '\n <br />' + v1;
+                    
+                    $('#goods_desc').val(msg);
+                    document.forms['add_form'].submit();
+                }
             }
-
-            if(g_desc.length == 0)
-            {
-                msg_err += "请输入内容" + '\n'
-            }
-
-            if(g_logo.length == 0)
-            {
-                msg_err += "请选择图片" + '\n'
-            }
-
-            if (msg_err.length > 0) 
-            {
-                alert(msg_err);
-            } 
-            else
-            {
-                alert("发布成功，请耐心等待审核通过。");
-                document.forms['add_form'].submit();
-            }
-        }
         </script>
     </body>
 
