@@ -3,6 +3,20 @@
 
 <h5>使用新收货地址</h5>
 <form action="user.php" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+            <script type="text/javascript">
+              region.isAdmin = false;
+              {foreach from=$lang.flow_js item=item key=key}
+              var {$key} = "{$item}";
+              {/foreach}
+              {literal}
+              onload = function() {
+                if (!document.all)
+                {
+                  document.forms['theForm'].reset();
+                }
+              }
+              {/literal}
+            </script>
   <dl class="newAddress">
     <dt><em>*</em>{$lang.country_province}：</dt>
     <dd>
@@ -52,7 +66,7 @@
       <dt>{$lang.phone}：</dt>
       <dd><input name="tel" type="text" class="inputBg" id="tel_{$sn}" value="" />
       {$lang.require_field}</dd>
-      <dt">{$lang.backup_phone}：</dt>
+      <dt>{$lang.backup_phone}：</dt>
       <dd><input name="mobile" type="text" class="inputBg" id="mobile_{$sn}" value="" /></dd>
   
       <dt>{$lang.sign_building}：</dt>

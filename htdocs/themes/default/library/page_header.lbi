@@ -6,13 +6,14 @@
                 <li class="active"><a href="/">首页</a>
 
                 </li>
+
+                </li>
+                <li><a href="/category.php?id=1">所有商品</a>
+                </li>
+
+                <li><a href="/goodsVote.php?id=3">T-du活动</a>
+
                 <li><a href="/t_about.php">关于T-du</a>
-
-                </li>
-                <li><a href="/category.php?id=1">T-du活动</a>
-
-                </li>
-                <li><a href="/goodsVote.php?id=3">班衫评选</a>
 
                 </li>
                 <li class="backoff"><a href="/message.php" class="blue">发布</a>
@@ -21,11 +22,9 @@
             </ul>
 
             <ul class="subNav">
-                <li id="userdit">请<a class="blue plslogin" href="http://www.teeker.com/#">登录</a>&nbsp;[<a href="http://www.teeker.com/users/register">注册</a>]&nbsp;
+                <li id="userdit">请<a class="blue plslogin" href="user.php?act=login">登录</a>&nbsp;[<a href="user.php?act=register">注册</a>]&nbsp;
                 </li>
-                <li>
-                    <a href="http://www.teeker.com/stores/main">我的店铺</a>
-                </li>
+              
                 <li class="iconShop">
                     <a href="http://www.teeker.com/orders/view_cart">购物车<span>0</span>件</a>
                 </li>

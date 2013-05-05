@@ -4,22 +4,15 @@
   <ul class="myList">
         <li><a href="user.php?act=order_list"{if $action eq 'order_list'|| $action eq 'order_detail'}class="current"{/if}> 我的订单</a></li>
         <li><a href="user.php?act=address_list"{if $action eq 'address_list'}class="curs"{/if}>我的常用收货人</a></li>
-        <li><a href="http://www.teeker.com/activities/mygroups/delivery">我负责的统一发货</a></li>
-        <li><a href="http://www.teeker.com/activities/mygroups/pay">我负责的线下收款</a></li>
   </ul>
-  <h5>店铺中心</h5>
+  <h5>商家中心</h5>
   <ul class="myList">
-        <li><a href="http://www.teeker.com/stores/mystore">我的店铺</a></li>
-        <li><a href="http://www.teeker.com/designs/mydesigns">我的设计图案</a></li>
-        <li><a href="http://www.teeker.com/activities/mylaunchs">我的主题销售</a></li>
-        <!--
-    <li><a href="/samples/mysamples" >我的样衣</a></li>
-    -->
+        <li><a href="user.php?act=faqi"{if $action eq 'faqi'}class="current"{/if}>我发布的商品</a></li>
   </ul>
+
   <h5>我的账户</h5>
   <ul class="myList">
         <li><a href="user.php?act=profile"{if $action eq 'profile'}class="current"{/if}> 编辑个人资料</a></li>
         <li><a href="user.php?act=modify_passwd"{if $action eq 'modify_passwd'}class="current"{/if}>修改密码</a></li>
-        <li><a href="http://www.teeker.com/users/validate_email">验证邮箱</a></li>
   </ul>
 	</div>
