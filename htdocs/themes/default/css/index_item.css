@@ -224,7 +224,7 @@ overflow: hidden;
 .normal-deal-list .item .cover {
 position: relative;
 width: 312px;
-height: 189px;
+height: 305px;
 overflow: hidden;
 }
 
@@ -239,7 +239,7 @@ display: block;
 .normal-deal-list .item h3 {
 margin: 10px 0 5px;
 width: 312px;
-height: 71px;
+height: 32px;
 overflow: hidden;
 }
 

@@ -85,22 +85,51 @@ function addTimeStamp(url){
   return url;  
 };  
 
-function cartOpen(url,goodsId){
+function cartOpen(url,goodsId)
+{
+
   var goods        = new Object();
+
   var spec_arr     = new Array();
+
   var fittings_arr = new Array();
+
   var number       = 1;
+
   var formBuy      = document.forms['ECS_FORMBUY'];
+
   var quick        = 0;
+
+
+
   // 检查是否有商品规格 
-  if (formBuy){
+
+  if (formBuy)
+
+  {
+
     spec_arr = getSelectedAttributes(formBuy);
-    if (formBuy.elements['number']){
+
+
+
+    if (formBuy.elements['number'])
+
+    {
+
       number = formBuy.elements['number'].value;
+
     }
+
+
+
     quick = 1;
+
   }
+
+
+
   goods.quick    = quick;
+
   goods.spec     = spec_arr;
 
   goods.goods_id = goodsId;
