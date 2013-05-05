@@ -33,8 +33,8 @@ $not_login_arr =
 array('login','act_login','register','act_register','act_edit_password','get_password','send_pwd_email','password', 'signin', 'add_tag', 'collect', 'return_to_cart', 'logout', 'email_list', 'validate_email', 'send_hash_mail', 'order_query', 'is_registered', 'check_email','clear_history','qpassword_name', 'get_passwd_question', 'check_answer');
 
 /* 显示页面的action列表 */
-$ui_arr = array('register', 'login', 'profile', 'order_list', 'order_detail', 'address_list', 'collection_list',
-'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking', 'account_raply',
+$ui_arr = array('register', 'login', 'profile', 'order_list', 'order_detail', 'address_list','collection_list','faqi',
+'message_list', 'tag_list', 'get_password', 'reset_password', 'booking_list', 'add_booking','account_raply','modify_passwd',
 'account_deposit', 'account_log', 'account_detail', 'act_account', 'pay', 'default', 'bonus', 'group_buy', 'group_buy_detail', 'affiliate', 'comment_list','validate_email','track_packages', 'transform_points','qpassword_name', 'get_passwd_question', 'check_answer');
 
 /* 未登录处理 */
@@ -90,6 +90,7 @@ if (in_array($action, $ui_arr))
     $smarty->assign('lang',       $_LANG);
 }
 
+/*
 //用户中心欢迎页
 if ($action == 'default')
 {
@@ -107,7 +108,7 @@ if ($action == 'default')
     $smarty->assign('prompt',      get_user_prompt($user_id));
     $smarty->display('user_clips.dwt');
 }
-
+*/
 /* 显示会员注册界面 */
 if ($action == 'register')
 {
@@ -798,8 +799,8 @@ elseif ($action == 'act_add_bonus')
     }
 }
 
-/* 查看订单列表 */
-elseif ($action == 'order_list')
+/* 查看订单列表 同时也是默认首页 */
+elseif ($action == 'default' || $action == 'order_list')
 {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
 
@@ -815,6 +816,7 @@ elseif ($action == 'order_list')
     $smarty->assign('merge',  $merge);
     $smarty->assign('pager',  $pager);
     $smarty->assign('orders', $orders);
+    $smarty->assign('action','order_list');
     $smarty->display('user_transaction.dwt');
 }
 
@@ -822,13 +824,13 @@ elseif ($action == 'order_list')
 elseif ($action == 'faqi')
 {
     include_once(ROOT_PATH . 'includes/lib_transaction.php');
-
     $sql = "SELECT * FROM " .$ecs->table('goods'). " WHERE userid = '$user_id'";
     
     $events = $db->getAll($sql);
 
     $smarty->assign('orders', $events);
-    $smarty->display('faqi2.dwt');
+    $smarty->assign('action','faqi');
+    $smarty->display('user_transaction.dwt');
 }
 
 
@@ -978,7 +980,7 @@ elseif ($action == 'address_list')
     $smarty->assign('currency_format',  $_CFG['currency_format']);
     $smarty->assign('integral_scale',   $_CFG['integral_scale']);
     $smarty->assign('name_of_region',   array($_CFG['name_of_region_1'], $_CFG['name_of_region_2'], $_CFG['name_of_region_3'], $_CFG['name_of_region_4']));
-    $smarty->display('user_transaction.dwt');
+    $smarty->display('t_address_list.dwt');
 }
 
 /* 添加/编辑收货地址的处理 */
@@ -2772,5 +2774,77 @@ elseif ($action == 'act_transform_ucenter_points')
 elseif ($action == 'clear_history')
 {
     setcookie('ECS[history]',   '', 1);
+}
+else if($action == 'add_consignee')
+{
+    include_once(ROOT_PATH . 'includes/lib_transaction.php');
+    include_once(ROOT_PATH . 'languages/' .$_CFG['lang']. '/shopping_flow.php');
+    $smarty->assign('lang',  $_LANG);
+
+    /* 取得国家列表、商店所在国家、商店所在国家的省列表 */
+    $smarty->assign('country_list',       get_regions());
+    $smarty->assign('shop_province_list', get_regions(1, $_CFG['shop_country']));
+
+    /* 获得用户所有的收货人信息 */
+    $consignee_list = get_consignee_list($_SESSION['user_id']);
+    /*
+    if (count($consignee_list) < 5 && $_SESSION['user_id'] > 0)
+    {
+        // 如果用户收货人信息的总数小于5 则增加一个新的收货人信息
+        $consignee_list[] = array('country' => $_CFG['shop_country'], 'email' => isset($_SESSION['email']) ? $_SESSION['email'] : '');
+    }
+    */
+    $smarty->assign('consignee_list', $consignee_list);
+
+    //取得国家列表，如果有收货人列表，取得省市区列表
+    foreach ($consignee_list AS $region_id => $consignee)
+    {
+        $consignee['country']  = isset($consignee['country'])  ? intval($consignee['country'])  : 0;
+        $consignee['province'] = isset($consignee['province']) ? intval($consignee['province']) : 0;
+        $consignee['city']     = isset($consignee['city'])     ? intval($consignee['city'])     : 0;
+
+        $province_list[$region_id] = get_regions(1, $consignee['country']);
+        $city_list[$region_id]     = get_regions(2, $consignee['province']);
+        $district_list[$region_id] = get_regions(3, $consignee['city']);
+    }
+
+    /* 获取默认收货ID */
+    $address_id  = $db->getOne("SELECT address_id FROM " .$ecs->table('users'). " WHERE user_id='$user_id'");
+    //赋值于模板
+    $smarty->assign('real_goods_count', 1);
+    $smarty->assign('shop_country',     $_CFG['shop_country']);
+    $smarty->assign('shop_province',    get_regions(1, $_CFG['shop_country']));
+    $smarty->assign('province_list',    $province_list);
+    $smarty->assign('address',          $address_id);
+    $smarty->assign('city_list',        $city_list);
+    $smarty->assign('district_list',    $district_list);
+    $smarty->assign('currency_format',  $_CFG['currency_format']);
+    $smarty->assign('integral_scale',   $_CFG['integral_scale']);
+    $smarty->assign('name_of_region',   array($_CFG['name_of_region_1'], $_CFG['name_of_region_2'], $_CFG['name_of_region_3'], $_CFG['name_of_region_4']));
+    $smarty->assign('sn',0);
+    $smarty->display('t_add_consignee.dwt');
+
+}
+else if($action == 'get_goods_sale_info')
+{
+    include_once(ROOT_PATH . 'includes/lib_transaction.php');
+    if(!isset($_REQUEST['goods_id']) || empty($_REQUEST['goods_id'])) {
+        echo 'error_page : goods_id is null!';
+        return false;
+    }
+    $goods_id = $_REQUEST['goods_id'];
+    /* 商品购买记录 */
+    $sql = 'SELECT u.user_name, og.goods_number, FROM_UNIXTIME(oi.add_time) as add_time,oi.pay_status, IF(oi.order_status IN (2, 3, 4), 0, 1) AS order_status ' .
+            'FROM ' . $ecs->table('order_info') . ' AS oi LEFT JOIN ' . $ecs->table('users') . ' AS u ON oi.user_id = u.user_id, ' . $ecs->table('order_goods') . ' AS og ' .
+            'WHERE oi.order_id = og.order_id AND ' . time() . ' - oi.add_time < 2592000 AND og.goods_id = ' . $goods_id . ' ORDER BY oi.add_time DESC';
+    $bought_notes = $db->getAll($sql);
+    //对付款状态进行判断
+    
+    foreach ($bought_notes as $key => $val) {
+        $bought_notes[$key]['pay_status'] = get_pay_status_chn($val['pay_status']);
+    }
+    $smarty->assign('bought_notes',$bought_notes);
+    $smarty->assign('action','get_goods_sale_info');
+    $smarty->display('user_transaction.dwt');
 }
 ?>
