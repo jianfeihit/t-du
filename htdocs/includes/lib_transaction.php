@@ -1161,4 +1161,18 @@ function deleteRepeat($array){
     }
     return $array;
 }
+function get_pay_status_chn($pay_status) {
+    include_once(ROOT_PATH . 'includes/inc_constant.php'); 
+    if($pay_status == PS_PAYED) {
+        return '付款完成';
+    } else if($pay_status == PS_PAYING) {
+        return '付款中';
+    } else if($pay_status == PS_UNPAYED) {
+        return '未付款';
+    } else if($pay_status == PS_OWNER_PAY) {
+        return '商家代付';
+    } 
+    return '未知的付款方式';
+    
+}
 ?>

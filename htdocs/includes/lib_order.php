@@ -1009,7 +1009,8 @@ function cart_weight_price($type = CART_GENERAL_GOODS)
  * @param   integer $parent     基本件
  * @return  boolean
  */
-function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0){
+function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
+{
     $GLOBALS['err']->clean();
     $_parent_id = $parent;
 
@@ -1026,23 +1027,29 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0){
             " AND g.is_delete = 0";
     $goods = $GLOBALS['db']->getRow($sql);
 
-    if (empty($goods)){
+    if (empty($goods))
+    {
         $GLOBALS['err']->add($GLOBALS['_LANG']['goods_not_exists'], ERR_NOT_EXISTS);
+
         return false;
     }
 
     /* 如果是作为配件添加到购物车的，需要先检查购物车里面是否已经有基本件 */
-    if ($parent > 0){
+    if ($parent > 0)
+    {
         $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('cart') .
                 " WHERE goods_id='$parent' AND session_id='" . SESS_ID . "' AND extension_code <> 'package_buy'";
-        if ($GLOBALS['db']->getOne($sql) == 0){
+        if ($GLOBALS['db']->getOne($sql) == 0)
+        {
             $GLOBALS['err']->add($GLOBALS['_LANG']['no_basic_goods'], ERR_NO_BASIC_GOODS);
+
             return false;
         }
     }
 
     /* 是否正在销售 */
-    if ($goods['is_on_sale'] == 0){
+    if ($goods['is_on_sale'] == 0)
+    {
         $GLOBALS['err']->add($GLOBALS['_LANG']['not_on_sale'], ERR_NOT_ON_SALE);
 
         return false;

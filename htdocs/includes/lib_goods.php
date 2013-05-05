@@ -199,7 +199,7 @@ function get_recommend_goods($type = '', $cats = '')
         $data = read_static_cache('recommend_goods');
         if ($data === false)
         {
-            $sql = 'SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote,b.brand_name,g.sort_order' .
+            $sql = 'SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote, b.brand_name,g.sort_order' .
                ' FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
                ' LEFT JOIN ' . $GLOBALS['ecs']->table('brand') . ' AS b ON b.brand_id = g.brand_id ' .
                ' WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.is_best = 1 OR g.is_new =1 OR g.is_hot = 1)'.
@@ -288,8 +288,7 @@ function get_recommend_goods($type = '', $cats = '')
         }
 
         //取出所有符合条件的商品数据，并将结果存入对应的推荐类型数组中
-        $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS
-        org_price, g.promote_price,g.purchase_num,g.like_num, ' .
+        $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, ' .
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
                 "promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, RAND() AS rnd " .
                 'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
@@ -329,8 +328,7 @@ function get_recommend_goods($type = '', $cats = '')
             $goods[$idx]['goods_img']    = get_image_path($row['goods_id'], $row['goods_img']);
             $goods[$idx]['url']          = build_uri('goods', array('gid' => $row['goods_id']), $row['goods_name']);
             $goods[$idx]['promote_end_date']        = local_date($GLOBALS['_CFG']['date_format'], $row['promote_end_date'] );
-            $goods[$idx]['purchase_num'] = $row['purchase_num'];
-            $goods[$idx]['like_num'] = $row['like_num'];
+
             if (in_array($row['goods_id'], $type_array['best']))
             {
                 $type_goods['best'][] = $goods[$idx];
@@ -521,7 +519,7 @@ function get_goods_info($goods_id)
             "WHERE g.goods_id = '$goods_id' AND g.is_delete = 0 " .
             "GROUP BY g.goods_id";
     $row = $GLOBALS['db']->getRow($sql);
-    //echo $sql;
+
     if ($row !== false)
     {
         /* 用户评论级别取整 */
@@ -616,7 +614,8 @@ function get_goods_info($goods_id)
  * @param   integer $goods_id
  * @return  array
  */
-function get_goods_properties($goods_id){
+function get_goods_properties($goods_id)
+{
     /* 对属性进行重新排序和分组 */
     $sql = "SELECT attr_group ".
             "FROM " . $GLOBALS['ecs']->table('goods_type') . " AS gt, " . $GLOBALS['ecs']->table('goods') . " AS g ".
@@ -641,14 +640,19 @@ function get_goods_properties($goods_id){
     $arr['spe'] = array();     // 规格
     $arr['lnk'] = array();     // 关联的属性
 
-    foreach ($res AS $row){
+    foreach ($res AS $row)
+    {
         $row['attr_value'] = str_replace("\n", '<br />', $row['attr_value']);
 
-        if ($row['attr_type'] == 0){
+        if ($row['attr_type'] == 0)
+        {
             $group = (isset($groups[$row['attr_group']])) ? $groups[$row['attr_group']] : $GLOBALS['_LANG']['goods_attr'];
+
             $arr['pro'][$group][$row['attr_id']]['name']  = $row['attr_name'];
             $arr['pro'][$group][$row['attr_id']]['value'] = $row['attr_value'];
-        }else{
+        }
+        else
+        {
             $arr['spe'][$row['attr_id']]['attr_type'] = $row['attr_type'];
             $arr['spe'][$row['attr_id']]['name']     = $row['attr_name'];
             $arr['spe'][$row['attr_id']]['values'][] = array(
@@ -726,7 +730,7 @@ function get_same_attribute_goods($attr)
  */
 function get_goods_gallery($goods_id)
 {
-    $sql = 'SELECT img_id, img_url, thumb_url, img_desc' .
+    $sql = 'SELECT img_id, img_url, thumb_url, img_desc,img_original' .
         ' FROM ' . $GLOBALS['ecs']->table('goods_gallery') .
         " WHERE goods_id = '$goods_id' LIMIT " . $GLOBALS['_CFG']['goods_gallery_number'];
     $row = $GLOBALS['db']->getAll($sql);
@@ -735,6 +739,7 @@ function get_goods_gallery($goods_id)
     {
         $row[$key]['img_url'] = get_image_path($goods_id, $gallery_img['img_url'], false, 'gallery');
         $row[$key]['thumb_url'] = get_image_path($goods_id, $gallery_img['thumb_url'], true, 'gallery');
+		$row[$key]['img_original'] = get_image_path($goods_id, $gallery_img['img_original'], true, 'gallery');
     }
     return $row;
 }
@@ -1492,11 +1497,4 @@ function get_products_info($goods_id, $spec_goods_attr_id)
     }
     return $return_array;
 }
-/*
-function update_like_num($goods_id)
-{
-    $sql = "SELECT like_num FROM ".$GLOBALS['ecs']->table('goods')."WHERE goods_id = ".$goods_id;
-    
-}
-*/
 ?>
