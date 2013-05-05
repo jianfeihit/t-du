@@ -288,7 +288,7 @@ function get_recommend_goods($type = '', $cats = '')
         }
 
         //取出所有符合条件的商品数据，并将结果存入对应的推荐类型数组中
-        $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, ' .
+        $sql = 'SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price,g.purchase_num,g.like_num, ' .
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price, ".
                 "promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, RAND() AS rnd " .
                 'FROM ' . $GLOBALS['ecs']->table('goods') . ' AS g ' .
@@ -328,7 +328,9 @@ function get_recommend_goods($type = '', $cats = '')
             $goods[$idx]['goods_img']    = get_image_path($row['goods_id'], $row['goods_img']);
             $goods[$idx]['url']          = build_uri('goods', array('gid' => $row['goods_id']), $row['goods_name']);
             $goods[$idx]['promote_end_date']        = local_date($GLOBALS['_CFG']['date_format'], $row['promote_end_date'] );
-
+            $goods[$idx]['purchase_num'] = $row['purchase_num'];
+            $goods[$idx]['like_num'] = $row['like_num'];
+            
             if (in_array($row['goods_id'], $type_array['best']))
             {
                 $type_goods['best'][] = $goods[$idx];
