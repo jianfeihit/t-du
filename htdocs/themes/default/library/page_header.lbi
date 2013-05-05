@@ -22,12 +22,10 @@
             </ul>
 
             <ul class="subNav">
-                <li id="userdit">请<a class="blue plslogin" href="user.php?act=login">登录</a>&nbsp;[<a href="user.php?act=register">注册</a>]&nbsp;
-                </li>
-              
-                <li class="iconShop">
-                    <a href="http://www.teeker.com/orders/view_cart">购物车<span>0</span>件</a>
-                </li>
+
+                 {* 根据用户id来调用member_info.lbi显示不同的界面  *}
+                    {insert name='member_info'}                    
+            
             </ul>
         </div>
 

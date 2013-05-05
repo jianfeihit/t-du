@@ -8,15 +8,22 @@
         <title>{$page_title}</title>
         <link rel="shortcut icon" href="favicon.ico" />
         <link href="../assets/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./themes/default/css/front.css">
         <style type="text/css">
             body {
-                padding-top: 20px;
-                padding-bottom: 60px;
+               /* padding-top: 20px;
+                padding-bottom: 60px;*/
             }
             /* Custom container */
             .container {
                 margin: 0 auto;
                 max-width: 1000px;
+                margin-top: 50px;
+                min-height: 400px;
+            }
+
+            .container h2{
+                background:url();
             }
             .container > hr {
                 margin: 60px 0;
@@ -85,71 +92,21 @@
             .row-fluid [class*="span"]:first-child {
                 margin-left: 20px;
             }
+
         </style>
     </head>
     
     <body>
+        <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
         <div class="container">
-            <ul class="nav nav-pills pull-right">
-                <li>{$denglu_top_logo}</li>
-                <li>{insert_scripts files='transport.js,utils.js'} <font id="ECS_MEMBERZONE">{* 根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
-
-                    <!--{if $navigator_list.top}-->
-                    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} --> 
-                    <a href="{$nav.url}" 
-                    <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->{$nav.name}</a>
-
-                    <!-- {if !$smarty.foreach.nav_top_list.last} -->|
-                    <!-- {/if} -->
-                    <!-- {/foreach} -->
-                    <div class="topNavR"></div>
-                    <!-- {/if} -->
-                </li>
-            </ul>
-            <div class="masthead">
-                 <h2>{$page_title} </h2> <h4 class="muted">- 来自清华的个性定制品平台！</h4>
-
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <ul class="nav">
-                                <li><a href="/">首页</a>
-
-                                </li>
-                                <li class="active"><a href="/t_about.php">关于T-du</a>
-                                </li>
-                                <li><a href="/category.php?id=1">T-du活动</a>
-
-                                </li>
-                                <li><a href="/goodsVote.php?id=3">班衫评选</a>
-
-                                </li>
-                                <li><a href="/message.php">发布</a>
-                                    <div class="tooltip fade top in" style="top: -30px; left: 625px; display: block;"><div class="tooltip-arrow" style="border-top-color: #fe596a;"></div><div class="tooltip-inner" style="background-color: #fe596a;">火热进行中</div></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.navbar -->
-            </div>
-
             <!-- Jumbotron -->
             <div class="hero-unit">
                 <h2>您好</h2>
                 <p>T-DU是来自清华的个性定制品平台！</p>
-                <p><a href="#" class="btn btn-info btn-mini">关注我们 »</a></p>
-            </div>
-            <hr>
-            <div class="footer">
-                <p>&copy; t-du.com 2013</p>
-                <p>联系方式：电话：18001178418；QQ：1592810759</p>
-                <p>欢迎关注：<a href="http://page.renren.com/601539882?id=601539882&ref=opensearch_normal" target="_blank">T度（人人网）</a>；<a href="http://weibo.com/tdegree?topnav=1&wvr=5&topsug=1" target="_blank">T度_TDU（新浪微博）</a></p>                
+                <p><a href="http://weibo.com/tdegree" class="btn btn-info btn-mini" target="_blank">关注我们 »</a></p>
             </div>
         </div>
-        <!-- /container -->
-        {insert_scripts files='common.js'}
-        <script src="../assets/js/jquery.js"></script>
+        <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
     </body>
 
 </html>

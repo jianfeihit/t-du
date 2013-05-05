@@ -41,7 +41,7 @@ ul.pthumbs li a.zoomThumbActive {
 				</ul>
 				<!-- {/if}-->
 				<p class="psmallimg">
-					<a href="{$goods.original_img}" class="jqzoom" title="triumph" rel="gal1"> <img id="goodImg" src="{$goods.goods_img}" title="triumph" width="319" height="319">
+					<a href="{$goods.original_img}" class="jqzoom" title="{$goods.goods_name}" rel="gal1"> <img id="goodImg" src="{$goods.goods_img}" title="{$goods.goods_name}" width="319" height="319">
 					</a>
 				</p>
 			</div>
@@ -83,10 +83,21 @@ ul.pthumbs li a.zoomThumbActive {
 		<div class="rightDe" style="position: relative; z-index: 1001;">
 			<form action="javascript:addToCart({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
 			<h3 class="pname">{$goods.goods_name}</h3>
+
+			<dl>
+				<dt class="padTop">
+					<strong>发起人：</strong>
+				</dt>
+				<dd class="author">
+					<font class="author">&nbsp;<!-- {if $goods.user_name} -->{$goods.user_name}<!-- {else} -->管理员<!-- {/if} --></font>
+				</dd>
+			</dl>
+
+
 			<!-- {if $cfg.show_marketprice} 市场价格-->
 			<dl>
 				<dt class="padTop">
-					<strong>T-du原价:</strong>
+					<strong>T-du原价：</strong>
 				</dt>
 				<dd class="market">
 					<font class="market">&nbsp;{$goods.market_price}</font>
@@ -96,7 +107,7 @@ ul.pthumbs li a.zoomThumbActive {
 			<!-- {/if} -->
 			<dl>
 				<dt class="padTop">
-					<strong>优惠价格:</strong>
+					<strong>优惠价格：</strong>
 				</dt>
 				<dd>
 					<!-- <font class="shop" id="ECS_SHOPPRICE"> {$goods.shop_price_formated}</font> -->
@@ -122,7 +133,7 @@ ul.pthumbs li a.zoomThumbActive {
 
 			</dl>
 			<dl>
-				<dt>订购数量：</dt>
+				<dt><strong>订购数量：</strong></dt>
 				<dd>
 					<ul class="number psizes">
 						<li><a href="javascript:void(0);"><input name="397611" value="0" type="text"><span class="minus"><img src="/themes/default/v2/click.png"></span><span class="plus"><img src="/themes/default/v2/click.png"></span></a>S&nbsp;:&nbsp;</li>

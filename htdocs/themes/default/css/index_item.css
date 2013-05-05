@@ -101,14 +101,16 @@ transition: color .2s;
 
 
 .normal-deal-list .item .buy {
+line-height: 26px;
+font-size: 14px;
 float: right;
-width: 83px;
-height: 33px;
+/*width: 83px;
+height: 33px;*/
 overflow: hidden;
-text-indent: -999px;
+/*text-indent: -999px;*/
 _text-indent: 0;
 _font-size: 0;
-background: url(http://s0.meituan.net/www/css/i/sp-deal.png?v=3) no-repeat;
+/*background: url(http://s0.meituan.net/www/css/i/sp-deal.png?v=3) no-repeat;*/
 }
 
 
@@ -224,7 +226,7 @@ overflow: hidden;
 .normal-deal-list .item .cover {
 position: relative;
 width: 312px;
-height: 305px;
+height: 306px;
 overflow: hidden;
 }
 

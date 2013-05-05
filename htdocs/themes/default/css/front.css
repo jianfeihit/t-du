@@ -108,7 +108,7 @@ a.buthui:hover{color:#0caceb;}
 #header .subNav li .but{background:#0caceb;color:#fff;padding:8px 24px;margin-top:26px;font-size:16px;}
 #header .subNav .iconShop {background:url(../v2/shop_car.png) no-repeat left center;padding-left:20px;padding-right:0;}
 #header .subNav .angle{background:url(../v2/top_angle.png) no-repeat right center;padding-right:13px;padding-left:10px;z-index:1;}
-#header .menuTop{float:left;}
+#header .menuTop{float:left;margin: 0}
 #header .menuTop li{ float:left;padding-right:18px;padding-left:0;margin-right:18px;margin-left:0;background:url(../v2/top_line.gif) no-repeat right center;color:#929395;}
 #header .menuTop li a{color:#fff;}
 #header .menuTop li a:hover{color:#fff;}
@@ -134,6 +134,7 @@ color: #0ba8e7;
 font-weight: bold;
 font-size: 38px;
 line-height: 38px;
+margin: 0;
 }
 #homeLogo h1 span{
 	color: #7e7e7e;
@@ -1533,6 +1534,10 @@ a.lookbut:hover{color:#fff;}
 	padding-top: 14px; 
 	text-decoration: line-through ;
 }
+.layer .rightDe .author{
+	padding-top: 14px; 
+	
+}
 .layer .rightDe .shop{
 	color: #fe596a;	
 	font-size: 32px;
@@ -1561,4 +1566,8 @@ margin-left: 10px;
 margin-left: -20px;
 margin-top: -5px;
 
+}
+.f4_b {
+color: #0ba8e7;
+font-weight: bold;
 }

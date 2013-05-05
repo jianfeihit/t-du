@@ -88,16 +88,29 @@ if ($act == 'cat_rec')
     $result['content'] = $smarty->fetch('library/recommend_' . $rec_array[$rec_type] . '.lbi');
     die($json->encode($result));
 }
-/*
+
 //商品喜欢功能点击,ajax请求
 if($act == 'add_like') {
     //没有加商品id,非法请求
-    if(!isset($_POST['goods_id']) || empty($_POST['goods_id'])) {
-        return false;
+    if(!isset($_GET['goods_id']) || empty($_GET['goods_id'])) {
+        $result = array(
+            'error' => 1,
+            'message' => '喜欢失败,id为空',
+        );
+        echo json_encode($result);
+        return;
     }
-    return update_like_num($_POST['goods_id']);
+    $goods_id = $_GET['goods_id'];
+    $sql='UPDATE '.$ecs->table('goods').' SET like_num = like_num+1 WHERE goods_id='.$goods_id;
+    $db->query($sql);
+    $result = array(
+        'error' => 0,
+        'message' => '成功喜欢',
+    );
+    echo json_encode($result);
+    return;
 }
-*/
+
 /*------------------------------------------------------ */
 //-- 判断是否存在缓存，如果存在则调用缓存，反之读取相应内容
 /*------------------------------------------------------ */

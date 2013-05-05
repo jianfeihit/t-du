@@ -134,7 +134,7 @@
 
 
                     <div class="cover">
-                        <a  href="{$goods.url}" data-fancybox-type="iframe" data-type="detail"><img width="306" height="306" alt="{$goods.name}" src="{$goods.goods_thumb}"  ></a>
+                        <a  href="{$goods.url}" data-fancybox-type="iframe" data-type="detail"><img width="306" height="304" alt="{$goods.name}" src="{$goods.goods_thumb}"  ></a>
                     </div>
                     <h3>
                         <a target="_blank" href="{$goods.url}" title="{$goods.name}" data-fancybox-type="iframe" data-type="detail"><span class="xtitle">{$goods.name}</span> <span class="short-title"></span></a>
@@ -165,93 +165,10 @@
             </div>
 
 
-                <ul class="thumbnails" style="display: none">
-                    <!--{foreach from=$goods_list item=goods}-->
-                    <li class="span4">
-                        <div class="thumbnail">
-                            <a href="{$goods.url}">
-                                <img data-src="holder.js/280x276" style="width: 280px; height: 276px;" src="{$goods.goods_thumb}">
-                            </a>
-                            <div class="caption">
-                                <h3>{$goods.name}</h3>
-
-                                <p>特价：<span class="label label-important">{$goods.shop_price}</span></p>
-                                <p>票数：<span id="vote_{$goods.goods_id}" class="label">{$goods.votes}</span></p>
-                                  
-
-                                <p>
-                                    <a class="btn btn-small" onclick="submit_vote({$goods.goods_id})" href="javascript:void(0);">投票</a>
-                                </p>
-
-                               <!--  <p>
-                                    <table width="500" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td width="80">
-                                                    <script type="text/javascript" charset="utf-8">
-                                                        (function () {
-                                                            var _w = 90,
-                                                                _h = 24;
-                                                            var param = {
-                                                                url: location.href,
-                                                                type: '2',
-                                                                count: '1',
-                                                                /**是否显示分享数，1显示(可选)*/
-                                                                appkey: '',
-                                                                /**您申请的应用appkey,显示分享来源(可选)*/
-                                                                title: '',
-                                                                /**分享的文字内容(可选，默认为所在页面的title)*/
-                                                                pic: '',
-                                                                /**分享图片的路径(可选)*/
-                                                                ralateUid: '',
-                                                                /**关联用户的UID，分享微博会@该用户(可选)*/
-                                                                language: 'zh_cn',
-                                                                /**设置语言，zh_cn|zh_tw(可选)*/
-                                                                rnd: new Date().valueOf()
-                                                            }
-                                                            var temp = [];
-                                                            for (var p in param) {
-                                                                temp.push(p + '=' + encodeURIComponent(param[p] || ''))
-                                                            }
-                                                            document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="' + _w + '" height="' + _h + '"></iframe>')
-                                                        })();
-                                                    </script>
-                                                </td>
-                                                <td><a name="xn_share" type="button" href="#">分享到人人</a>
-
-                                                    <script src="http://static.connect.renren.com/js/share.js" type="text/javascript"></script>
-                                                </td>
-                                            </tr>
-                                    </table>
-                                </p> -->
-                            </div>
-                        </div>
-                    </li>
-                    <!--{/foreach}-->
-                </ul>
+                
             </div>
 
-            <!-- #BeginLibraryItem "/library/pages.lbi" -->
-            <form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
-              <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
-                <!--{foreach from=$pager.search key=key item=item}-->
-                <input type="hidden" name="{$key}" value="{$item}" />
-                <!--{/foreach}-->
-                <select name="page" id="page" onchange="selectPage(this)">
-                {html_options options=$pager.array selected=$pager.page}
-                </select>
-              </div>
-            </form>
-            <script type="Text/Javascript" language="JavaScript">
-            <!--
-            {literal}
-            function selectPage(sel)
-            {
-              sel.form.submit();
-            }
-            {/literal}
-            //-->
-            </script>
-             <!-- #EndLibraryItem -->
+
 
             
         </div>
@@ -321,10 +238,12 @@
                     //     itemSpan.html(++num);
                     // });
                                         
-                    $.ajax('user.php?act=collect&id=' + goods_id, {
+                    $.ajax('index.php?act=add_lik&goods_id=' + goods_id, {
                         success:function(res){
                             
                             var res = eval('(' + res +')');
+
+                            
 
                             alert(res.message);
                             

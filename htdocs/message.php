@@ -154,9 +154,7 @@ if ($action == 'default')
 if ($action == 'add_new_product')
 {
     $userid = $_SESSION['user_id'];
-
     $max_id = $db->getOne("SELECT MAX(goods_id) + 1 FROM ".$ecs->table('goods'));
-
     if (!empty($_POST['imgFrontUrl']))
     {
         $front_image = combine_logo($max_id, $_POST['imgFrontCss'], ltrim($_POST['imgFrontUrl'], '/'), $_POST['shirtUrl'], 'f');
@@ -166,9 +164,7 @@ if ($action == 'add_new_product')
     {
         $back_image = combine_logo($max_id, $_POST['imgBackCss'], ltrim($_POST['imgBackUrl'], '/'), $_POST['shirtUrl'], 'b');
     }
-
     $goods_sn = generate_goods_sn($max_id);
-
     $catgory_id = 4;
     $brand_id = 0;// New event
 
@@ -215,8 +211,10 @@ if ($action == 'add_new_product')
             " '$warn_number', '$integral', '$give_integral', '$is_best', '$is_new', '$is_hot', '$is_on_sale', '$is_alone_sale', $is_shipping, ".
             " '$goods_desc', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$rank_integral', '$suppliers_id', '$userid')";
 
+    echo "sql = ".$sql;
+    exit();
     $db->query($sql);
-
+    echo 'wo le ge qu!!!';
     header("Location: /message.php");
 
 }
@@ -235,7 +233,6 @@ function combine_logo($gid, $img_css, $img_src, $shirtUrl, $side) {
     $original_height = $size[1];
 
     $shirt_image = 'tshirt/' . $shirtUrl . '_' . $side . '.png';
-
     $dest = imagecreatefrompng($shirt_image);
     $src = imagecreatefrompng($img_src);
     $newImg = imagecreatetruecolor($width, $height);
@@ -251,6 +248,7 @@ function combine_logo($gid, $img_css, $img_src, $shirtUrl, $side) {
 
     $tmpfile = "upload/combine_logo" . $gid .".png";
 
+    echo "tmpfile = ".$tmpfile."\n";
     imagepng($dest, $tmpfile);
 
     $format_name = reformat_image_name('goods', $gid, $tmpfile, 'source');

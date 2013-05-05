@@ -2834,17 +2834,27 @@ else if($action == 'get_goods_sale_info')
     }
     $goods_id = $_REQUEST['goods_id'];
     /* 商品购买记录 */
-    $sql = 'SELECT u.user_name, og.goods_number, FROM_UNIXTIME(oi.add_time) as add_time,oi.pay_status, IF(oi.order_status IN (2, 3, 4), 0, 1) AS order_status ' .
+    $sql = 'SELECT oi.order_id, u.user_name, og.goods_number, FROM_UNIXTIME(oi.add_time) as add_time,oi.pay_status, IF(oi.order_status IN (2, 3, 4), 0, 1) AS order_status ' .
             'FROM ' . $ecs->table('order_info') . ' AS oi LEFT JOIN ' . $ecs->table('users') . ' AS u ON oi.user_id = u.user_id, ' . $ecs->table('order_goods') . ' AS og ' .
             'WHERE oi.order_id = og.order_id AND ' . time() . ' - oi.add_time < 2592000 AND og.goods_id = ' . $goods_id . ' ORDER BY oi.add_time DESC';
     $bought_notes = $db->getAll($sql);
     //对付款状态进行判断
     
     foreach ($bought_notes as $key => $val) {
-        $bought_notes[$key]['pay_status'] = get_pay_status_chn($val['pay_status']);
+        $bought_notes[$key]['pay_status_ch'] = get_pay_status_chn($val['pay_status']);
     }
     $smarty->assign('bought_notes',$bought_notes);
     $smarty->assign('action','get_goods_sale_info');
     $smarty->display('user_transaction.dwt');
+}
+else if($action == 'update_pay_status_to_finish')
+{
+    if(!isset($_REQUEST['order_id']) || empty($_REQUEST['order_id'])) {
+        echo 'false';
+    }
+    $order_id = $_REQUEST['order_id'];
+    $sql = 'UPDATE '.$ecs->table('order_info').' SET pay_status = 2 WHERE order_id = '.$order_id;
+    $result = $db->query($sql);
+    echo 'true';
 }
 ?>

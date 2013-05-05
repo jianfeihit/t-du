@@ -622,7 +622,6 @@ function checkConsignee(frm)
     err = true;
     msg.push(mobile_invaild);
   }
-
   if (err)
   {
     message = msg.join("\n");

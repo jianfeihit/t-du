@@ -1,8 +1,14 @@
 <link href="themes/default/css/front.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body{
+    background:url();
+}
+</style>
 <div class="layer layerSize hide" id="addressd">
 
 <h5>使用新收货地址</h5>
-<form action="user.php" method="post" name="theForm" onsubmit="return checkConsignee(this)">
+{insert_scripts files='utils.js,transport.js,region.js,shopping_flow.js'}
+
             <script type="text/javascript">
               region.isAdmin = false;
               {foreach from=$lang.flow_js item=item key=key}
@@ -17,6 +23,8 @@
               }
               {/literal}
             </script>
+
+<form action="user.php" method="post" name="theForm" onsubmit="return checkConsignee(this)">
   <dl class="newAddress">
     <dt><em>*</em>{$lang.country_province}：</dt>
     <dd>

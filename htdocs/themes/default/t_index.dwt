@@ -14,6 +14,7 @@
        <!-- <script type="text/javascript" charset="utf-8" async="" src="./teeker_index_files/lxb.js"></script>-->
         
 </script>
+        <link href="../assets/css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="./themes/default/css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="./themes/default/css/front.css">
         <link rel="stylesheet" type="text/css" href="./themes/default/css/ext.css">
@@ -124,16 +125,19 @@
 
 
                     <div class="cover">
-                        <a  href="{$goods.url}" data-fancybox-type="iframe" data-type="detail"><img width="306" height="306" alt="{$goods.name}" src="{$goods.thumb}"  ></a>
+                        <a  href="{$goods.url}" data-fancybox-type="iframe" data-type="detail"><img width="306" height="304" alt="{$goods.name}" src="{$goods.thumb}"  ></a>
                     </div>
                     <h3>
                         <a target="_blank" href="{$goods.url}" title="{$goods.name}" data-fancybox-type="iframe" data-type="detail"><span class="xtitle">{$goods.name}</span> <span class="short-title"></span></a>
                     </h3>
                     <p class="detail">
-                        <a rel="nofollow" class="buy" hidefocus="true" target="_blank" href="{$goods.url}" data-fancybox-type="iframe" data-type="detail">去看看</a> <em class="price num">{$goods.shop_price}</em> <!-- <span class="bypast">门店价 <span class="num"><span>¥</span>120</span></span> -->
+                        <a rel="nofollow" class="buy btn btn-info" hidefocus="true" target="_blank" href="{$goods.url}" data-fancybox-type="iframe" data-type="detail" >订购</a> <em class="price num">{$goods.shop_price}</em> 
+                         <!-- {if $goods.promote_end_date} -->
+                         <span class="bypast">截止日期：<span class="num">{$goods.promote_end_date}</span></span>
+                         <!-- {/if} -->
                     </p>
                     <div class="total">
-                        <a href="javascript:viod(0);" class="like" data-id="{$goods.goods_id}">喜欢（<span>{$goods.like_num}</span>）</a>
+                        <a href="javascript:viod(0);" class="like" data-id="{$goods.id}">喜欢（<span>{$goods.like_num}</span>）</a>
                         <div class="share">
                           <!-- Baidu Button BEGIN -->
                           <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
@@ -314,7 +318,7 @@
                     //     itemSpan.html(++num);
                     // });
                                         
-                    $.ajax('user.php?act=collect&id=' + goods_id, {
+                    $.ajax('index.php?act=add_like&goods_id=' + goods_id, {
                         success:function(res){
                             
                             var res = eval('(' + res +')');
@@ -333,6 +337,8 @@
                     });
                 });
               });
+
+
 
 
             // 详情页弹框逻辑

@@ -134,23 +134,52 @@
           <div class="incPadBox">
           <h6 class="marall1">购买详情</h6>
           <table border="0" cellpadding="0" cellspacing="0" class="tableStyle thback">
-
           <tr>
             <th>购买者</th>
             <th>数量</th>
             <th>购买时间</th>
             <th>付款状态</th>
+            <th>操作</th>
           </tr>
           <!--{foreach from=$bought_notes item=item}-->
           <tr>
             <td>{$item.user_name}</td>
             <td>{$item.goods_number}</td>
             <td>{$item.add_time}</td>
-            <td>{$item.pay_status}</td>
-
+            <td>{$item.pay_status_ch}</td>
+            <!--{if $item.pay_status==3}-->
+            <td>
+            <a class='pay_by_owner' data="{$item.order_id}" href="javascript:void">确认代付<a>
+            </td>
+            <!-- {else} -->
+            <td>&nbsp;</td>
+            <!--{/if}-->
         </tr>
           <!--{/foreach}-->
-        </table>
+    </table>
+    <script type="text/javascript">
+        $(".pay_by_owner").click(function(){
+            var me = this;
+            $.ajax({
+                url: "/user.php?act=update_pay_status_to_finish",
+                data: "order_id="+$(me).attr('data'),
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                success: function(data){
+                    if(data == 'false') {
+                        alert('代付失败,可能是系统问题');
+                    } else {
+                        alert('代付成功');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(textStatus);
+                }
+            });
+ 
+        });
+    </script>
     <!--{/if}-->
      <!--购买详情页面 end-->
 
