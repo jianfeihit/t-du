@@ -22,6 +22,6 @@
 
 {if $user_info}
 <li class="iconShop">
-    <a href="http://www.teeker.com/orders/view_cart">购物车<span >0</span>件</a>
+    <a href="flow.php?step=cart_detail">购物车<span >0</span>件</a>
 </li>
 {/if}

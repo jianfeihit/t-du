@@ -138,11 +138,11 @@
 
 					Cart.init("http://localhost/");
 					ld = new LoginDialog($(".logindig"), $(".plslogin"));
-					if (typeof __login_callback__ != 'undefined'
+					/*if (typeof __login_callback__ != 'undefined'
 							&& __login_callback__ != null) {
 						ld.callback = __login_callback__;
 					}
-					ld.init()
+					ld.init() */
 				});
 	</script>
 	<!-- #BeginLibraryItem "/library/page_footer.lbi" -->
