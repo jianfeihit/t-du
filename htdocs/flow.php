@@ -1794,6 +1794,8 @@ elseif ($_REQUEST ['step'] == 'done') {
 	$smarty->assign ( 'fittings_list', $fittings_list );
 	
 	$smarty->display ( 't_cart_detail.dwt' );
+} elseif ($_REQUEST ['step'] == 'cart_nologin') {
+	$smarty->display ( 't_cart_nologin.dwt' );
 } else {
 	/* 标记购物流程为普通商品 */
 	$_SESSION ['flow_type'] = CART_GENERAL_GOODS;
