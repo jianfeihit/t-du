@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="./themes/default/css/ext.css" />
 <link rel="stylesheet" type="text/css" href="./themes/default/css/index_item.css" />
 <link rel="stylesheet" type="text/css" href="js/fancy/jquery.fancybox.css" />
-<script type="text/javascript" src="js/fancy/jquery.fancybox.js"></script>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="js/fancy/jquery.fancybox.js"></script>
 <script type="text/javascript" src="./themes/default/js/order.js"></script>
 <script type="text/javascript" src="./themes/default/js/cart.js"></script>
 <script type="text/javascript" src="./themes/default/js/region.js"></script>
@@ -113,7 +113,7 @@
 			</dl>
 		</div>
 		<div>
-			<a class="blue" href="/orders/view_cart">返回购物车</a>
+			<a class="blue" href="flow.php?step=cart_detail">返回购物车</a>
 		</div>
 	</div>
 	<script type="text/javascript">

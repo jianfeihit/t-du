@@ -14,17 +14,17 @@
 <link rel="stylesheet" type="text/css" href="./themes/default/css/ext.css" />
 <link rel="stylesheet" type="text/css" href="./themes/default/css/index_item.css" />
 <link rel="stylesheet" type="text/css" href="js/fancy/jquery.fancybox.css" />
-<script type="text/javascript" src="js/fancy/jquery.fancybox.js"/>
-<script type="text/javascript" src="/js/jquery.min.js"/></script><!-- 
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/fancy/jquery.fancybox.js"></script> 
 <script type="text/javascript" src="./themes/default/js/order.js"></script>
-<script type="text/javascript" src="./themes/default/js/cart.js"></script> -->
+<script type="text/javascript" src="./themes/default/js/cart.js"></script>
 </head>
 <body>
 	<!-- #BeginLibraryItem "/library/page_header.lbi" -->
 	<!-- #EndLibraryItem -->
 	<div class="incContent">
 		<p class="myShop01">01我的购物车</p>
-		<form id="OrderConfirmConsigneeForm" method="GET" action="flow.php?step=cart_nologin" accept-charset="utf-8" >
+		<form id="OrderConfirmConsigneeForm" method="GET" action="flow.php" accept-charset="utf-8" >
 			<div style="display: none;">
 				<input type="hidden" name="step" value="cart_deliver" />
 			</div>
@@ -72,7 +72,12 @@
 			</table>
 			<div class="myShopBox">
 				<div class="right">
-					共 <strong id="total_qnt">{$total.real_goods_count}</strong> 件商品，商品总金额 <strong id="total_price">{$total.goods_price}</strong> <a class="butLarge commits" href="flow.php?step=cart_deliver" data-fancybox-type="iframe" data-type="detail">去结算</a>
+					共 <strong id="total_qnt">{$total.real_goods_count}</strong>件商品，商品总金额 <strong id="total_price">{$total.goods_price}</strong>
+					{if $haslogin eq "0"}
+					<a id="go" class="butLarge" data-fancybox-type="iframe" href="flow.php?step=cart_nologin" >去结算</a>
+					{else}
+					<a id="go" class="butLarge" href="flow.php?step=cart_deliver" >去结算</a>
+					{/if}
 				</div>
 				<input name="all" type="checkbox" checked="checked" /> 全选
 			</div>
@@ -80,36 +85,15 @@
 	</div>
 	<script type="text/javascript" async>
 		$(document).ready(function() {
-			//Cart.init("http://localhost/");
-			// ld = new LoginDialog($(".logindig"), $(".plslogin"));
-			// if (typeof __login_callback__ != 'undefined' && __login_callback__ != null) {
-			// ld.callback = __login_callback__;
-			// }
-			// ld.init(); 
-			
-			//var vcart = new ViewCart();
-			//vcart.init();
-		    /* 
-		    
-		    vcart.set_login_check(function(callback) {
-		      /* if (LoginDialog.check()){
-		        callback();
-		      } else {
-		        //ld.set_login_callback(callback);
-		        //ld.open();
-		      } 
-		    });
-		    if (Cart != undefined) {
-		      Cart.update_callback = function() {
-		        location.reload();
-		      };
-		    } */
-			$("a[data-type=detail]").fancybox({
+			Cart.init("http://localhost/");
+			var vcart = new ViewCart();
+			vcart.init();
+			$("#go").fancybox({
 	              maxWidth  : 1070,
 	              maxHeight : 800,
 	              fitToView : false,
 	              width   : '90%',
-	              height    : '80%',
+	              height    : '100%',
 	              autoSize  : false,
 	              closeClick  : false,
 	              openEffect  : 'none',
