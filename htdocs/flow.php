@@ -1760,11 +1760,13 @@ elseif ($_REQUEST ['step'] == 'done') {
 	$smarty->assign ( 'shopping_money', sprintf ( $_LANG ['shopping_money'], $cart_goods ['total'] ['goods_price'] ) );
 	$smarty->assign ( 'market_price_desc', sprintf ( $_LANG ['than_market_price'], $cart_goods ['total'] ['market_price'], $cart_goods ['total'] ['saving'], $cart_goods ['total'] ['save_rate'] ) );
 	
+	$smarty->assign ( 'haslogin', '0' );
 	// 显示收藏夹内的商品
 	if ($_SESSION ['user_id'] > 0) {
 		require_once (ROOT_PATH . 'includes/lib_clips.php');
 		$collection_goods = get_collection_goods ( $_SESSION ['user_id'] );
 		$smarty->assign ( 'collection_goods', $collection_goods );
+		$smarty->assign ( 'haslogin', '1' );
 	}
 	
 	/* 取得优惠活动 */
